@@ -1,0 +1,734 @@
+/* CandyItemSlot & CandyLevelTile styles */
+
+/* ==========================================================================
+   CSS Variables & Tokens fallback
+   ========================================================================== */
+.candy-item-slot,
+.candy-level-tile {
+  --slot-outline: var(--candy-outline, var(--candy-primary-shadow, #12427a));
+  --slot-radius: var(--candy-radius-md, 18px);
+  --slot-font: var(--candy-font-family, sans-serif);
+  --slot-focus: var(--candy-focus, #1761d1);
+  --slot-shimmer-color: rgba(255, 255, 255, 0.45);
+}
+
+/* ==========================================================================
+   Base ItemSlot Root
+   ========================================================================== */
+.candy-item-slot {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  vertical-align: middle;
+  box-sizing: border-box;
+  font-family: var(--slot-font);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: default;
+  transition:
+    transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 0.15s ease;
+}
+
+button.candy-item-slot,
+.candy-item-slot-interactive {
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   ItemSlot Tile (the actual rounded box)
+   ========================================================================== */
+.candy-item-slot-tile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border-style: solid;
+  border-color: var(--slot-outline);
+  border-radius: var(--slot-radius);
+  overflow: hidden;
+  background-color: var(--candy-surface-alt, #f8fafc);
+  color: var(--candy-text, #173d5d);
+  transition:
+    transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.15s ease,
+    border-color 0.15s ease,
+    filter 0.15s ease;
+}
+
+/* Sizing variants for Tile */
+.candy-item-slot-sm .candy-item-slot-tile {
+  width: 48px;
+  height: 48px;
+  border-width: 3px;
+  border-radius: var(--candy-radius-sm, 10px);
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -2px 0 rgba(18, 66, 122, 0.12),
+    0 3px 0 var(--candy-panel-shadow, #cbdde9);
+}
+
+.candy-item-slot-md .candy-item-slot-tile {
+  width: 64px;
+  height: 64px;
+  border-width: 3.5px;
+  border-radius: var(--candy-radius-md, 18px);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.75),
+    inset 0 -2.5px 0 rgba(18, 66, 122, 0.14),
+    0 4px 0 var(--candy-panel-shadow, #cbdde9);
+}
+
+.candy-item-slot-lg .candy-item-slot-tile {
+  width: 80px;
+  height: 80px;
+  border-width: 4px;
+  border-radius: var(--candy-radius-lg, 24px);
+  box-shadow:
+    inset 0 2.5px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -3px 0 rgba(18, 66, 122, 0.16),
+    0 5px 0 var(--candy-panel-shadow, #cbdde9);
+}
+
+.candy-item-slot-xl .candy-item-slot-tile {
+  width: 96px;
+  height: 96px;
+  border-width: 4.5px;
+  border-radius: var(--candy-radius-xl, 30px);
+  box-shadow:
+    inset 0 3px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -3.5px 0 rgba(18, 66, 122, 0.18),
+    0 6px 0 var(--candy-panel-shadow, #cbdde9);
+}
+
+/* ==========================================================================
+   Rarity Themes (Common / Rare / Epic / Legendary / Mythic)
+   ========================================================================== */
+
+/* Common */
+.candy-item-slot-common .candy-item-slot-tile {
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    var(--candy-track, #eaf0f8) 100%
+  );
+  color: var(--candy-text, #173d5d);
+}
+
+/* Rare (Blue) */
+.candy-item-slot-rare .candy-item-slot-tile {
+  background: linear-gradient(
+    180deg,
+    #f0f7ff 0%,
+    var(--candy-blue-light, #eaf2ff) 40%,
+    #cce0ff 100%
+  );
+  border-color: var(--candy-blue-dark, #0f4494);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -2.5px 0 rgba(15, 68, 148, 0.22),
+    0 4px 0 var(--candy-panel-shadow, #cbdde9);
+  color: var(--candy-blue-dark, #0f4494);
+}
+
+/* Epic (Purple) */
+.candy-item-slot-epic .candy-item-slot-tile {
+  background: linear-gradient(
+    180deg,
+    #faf5ff 0%,
+    var(--candy-purple-light, #f2edfc) 40%,
+    #dec9f9 100%
+  );
+  border-color: var(--candy-purple-dark, #5b3fa3);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -2.5px 0 rgba(91, 63, 163, 0.22),
+    0 4px 0 var(--candy-panel-shadow, #cbdde9);
+  color: var(--candy-purple-dark, #5b3fa3);
+}
+
+/* Legendary (Yellow / Gold) with Shimmer */
+.candy-item-slot-legendary .candy-item-slot-tile {
+  background: linear-gradient(
+    180deg,
+    #fffdf0 0%,
+    var(--candy-yellow-light, #fff8dd) 40%,
+    #ffe382 100%
+  );
+  border-color: var(--candy-yellow-shadow, #8a5700);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -2.5px 0 rgba(138, 87, 0, 0.25),
+    0 4px 0 var(--candy-panel-shadow, #cbdde9);
+  color: var(--candy-yellow-shadow, #8a5700);
+}
+
+/* Mythic (Pink / Magenta) with Shimmer */
+.candy-item-slot-mythic .candy-item-slot-tile {
+  background: linear-gradient(
+    180deg,
+    #fff5f8 0%,
+    var(--candy-pink-light, #ffedf4) 40%,
+    #ffc0d7 100%
+  );
+  border-color: var(--candy-pink-shadow, #8f2652);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -2.5px 0 rgba(143, 38, 82, 0.25),
+    0 4px 0 var(--candy-panel-shadow, #cbdde9);
+  color: var(--candy-pink-shadow, #8f2652);
+}
+
+/* ==========================================================================
+   Shimmer Animation for Legendary & Mythic
+   ========================================================================== */
+.candy-item-slot-shimmer {
+  position: absolute;
+  inset: -100%;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    var(--slot-shimmer-color) 50%,
+    transparent 65%
+  );
+  transform: translateX(-100%);
+  animation: candySlotShimmer 3.2s infinite ease-in-out;
+  z-index: 1;
+}
+
+.candy-item-slot-mythic .candy-item-slot-shimmer {
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.5) 45%,
+    rgba(255, 200, 240, 0.6) 52%,
+    transparent 70%
+  );
+  animation-duration: 2.8s;
+}
+
+@keyframes candySlotShimmer {
+  0% {
+    transform: translateX(-100%) rotate(15deg);
+  }
+  40%,
+  100% {
+    transform: translateX(100%) rotate(15deg);
+  }
+}
+
+/* ==========================================================================
+   Icon & Content
+   ========================================================================== */
+.candy-item-slot-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 4px;
+  box-sizing: border-box;
+}
+
+.candy-item-slot-content img,
+.candy-item-slot-content svg {
+  max-width: 80%;
+  max-height: 80%;
+  object-fit: contain;
+  display: block;
+}
+
+/* ==========================================================================
+   Selected & Hover & Active states
+   ========================================================================== */
+.candy-item-slot-selected .candy-item-slot-tile {
+  transform: translateY(-3px);
+  border-color: var(--candy-yellow, #ffcb05);
+  box-shadow:
+    0 0 0 3px var(--candy-yellow, #ffcb05),
+    0 6px 14px rgba(255, 203, 5, 0.4),
+    inset 0 2px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -2.5px 0 rgba(18, 66, 122, 0.16);
+}
+
+.candy-item-slot-interactive:hover:not(:disabled):not(.candy-item-slot-disabled)
+  .candy-item-slot-tile {
+  filter: brightness(1.06);
+}
+
+.candy-item-slot-interactive:active:not(:disabled):not(
+    .candy-item-slot-disabled
+  )
+  .candy-item-slot-tile {
+  transform: translateY(2px);
+  filter: brightness(0.92);
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.5),
+    inset 0 2px 4px rgba(0, 0, 0, 0.15),
+    0 1px 0 var(--candy-panel-shadow, #cbdde9);
+}
+
+.candy-item-slot-selected.candy-item-slot-interactive:active:not(:disabled):not(
+    .candy-item-slot-disabled
+  )
+  .candy-item-slot-tile {
+  transform: translateY(0);
+}
+
+/* Focus Visible */
+.candy-item-slot:focus-visible {
+  outline: none;
+}
+
+.candy-item-slot:focus-visible .candy-item-slot-tile {
+  outline: 3px solid var(--slot-focus);
+  outline-offset: 3px;
+}
+
+/* ==========================================================================
+   Disabled & Locked states
+   ========================================================================== */
+.candy-item-slot:disabled,
+.candy-item-slot-disabled,
+.candy-item-slot[aria-disabled="true"] {
+  opacity: 0.55;
+  filter: grayscale(0.25);
+  cursor: not-allowed;
+  pointer-events: auto;
+}
+
+.candy-item-slot:disabled .candy-item-slot-tile,
+.candy-item-slot-disabled .candy-item-slot-tile {
+  transform: none;
+}
+
+/* Locked Overlay */
+.candy-item-slot-locked-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(18, 66, 122, 0.42);
+  backdrop-filter: blur(1.5px);
+  color: #ffffff;
+}
+
+.candy-item-slot-lock-svg {
+  width: 44%;
+  height: 44%;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
+}
+
+/* ==========================================================================
+   Count Badge (bottom-right)
+   ========================================================================== */
+.candy-item-slot-count {
+  position: absolute;
+  right: 3px;
+  bottom: 3px;
+  z-index: 4;
+  font-family: var(--slot-font);
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 1;
+  padding: 2px 5px;
+  border-radius: var(--candy-radius-full, 9999px);
+  background: var(--candy-outline, #12427a);
+  color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+}
+
+.candy-item-slot-sm .candy-item-slot-count {
+  font-size: 9px;
+  padding: 1px 3px;
+  border-width: 1px;
+  right: 2px;
+  bottom: 2px;
+}
+
+.candy-item-slot-lg .candy-item-slot-count {
+  font-size: 13px;
+  padding: 2.5px 6px;
+}
+
+.candy-item-slot-xl .candy-item-slot-count {
+  font-size: 14px;
+  padding: 3px 8px;
+}
+
+/* ==========================================================================
+   Badge (top-right)
+   ========================================================================== */
+.candy-item-slot-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  z-index: 6;
+  font-family: var(--slot-font);
+  font-weight: 700;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.candy-item-slot-badge-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--candy-radius-full, 9999px);
+  background: var(--candy-pink, #f780ae);
+  border: 2px solid var(--candy-surface, #ffffff);
+  box-shadow: 0 2px 4px rgba(143, 38, 82, 0.4);
+}
+
+.candy-item-slot-badge-pill {
+  font-size: 10px;
+  line-height: 1.1;
+  padding: 2px 6px;
+  border-radius: var(--candy-radius-full, 9999px);
+  background: var(--candy-pink, #f780ae);
+  color: #ffffff;
+  border: 1.5px solid var(--candy-surface, #ffffff);
+  box-shadow: 0 2px 4px rgba(143, 38, 82, 0.35);
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   Label (Bottom text)
+   ========================================================================== */
+.candy-item-slot-label {
+  margin-top: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--candy-text, #173d5d);
+  text-align: center;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.candy-item-slot-sm .candy-item-slot-label {
+  font-size: 11px;
+  margin-top: 3px;
+}
+
+.candy-item-slot-lg .candy-item-slot-label {
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+.candy-item-slot-xl .candy-item-slot-label {
+  font-size: 15px;
+  margin-top: 7px;
+}
+
+/* ==========================================================================
+   CandyLevelTile
+   ========================================================================== */
+.candy-level-tile {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  box-sizing: border-box;
+  font-family: var(--slot-font);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  transition:
+    transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 0.15s ease;
+}
+
+.candy-level-tile:disabled,
+.candy-level-tile-disabled {
+  opacity: 0.55;
+  filter: grayscale(0.25);
+  cursor: not-allowed;
+}
+
+.candy-level-tile-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border-style: solid;
+  border-color: var(--slot-outline);
+  border-radius: var(--slot-radius);
+  overflow: hidden;
+  transition:
+    transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.15s ease,
+    border-color 0.15s ease;
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    var(--candy-blue-light, #eaf2ff) 100%
+  );
+  color: var(--candy-blue-dark, #0f4494);
+}
+
+/* Sizing for LevelTile */
+.candy-level-tile-sm .candy-level-tile-tile {
+  width: 52px;
+  height: 52px;
+  border-width: 3px;
+  border-radius: var(--candy-radius-sm, 10px);
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -2px 0 rgba(18, 66, 122, 0.15),
+    0 3px 0 var(--candy-panel-shadow, #cbdde9);
+}
+
+.candy-level-tile-md .candy-level-tile-tile {
+  width: 68px;
+  height: 68px;
+  border-width: 3.5px;
+  border-radius: var(--candy-radius-md, 18px);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -2.5px 0 rgba(18, 66, 122, 0.16),
+    0 4px 0 var(--candy-panel-shadow, #cbdde9);
+}
+
+.candy-level-tile-lg .candy-level-tile-tile {
+  width: 84px;
+  height: 84px;
+  border-width: 4px;
+  border-radius: var(--candy-radius-lg, 24px);
+  box-shadow:
+    inset 0 2.5px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -3px 0 rgba(18, 66, 122, 0.18),
+    0 5px 0 var(--candy-panel-shadow, #cbdde9);
+}
+
+.candy-level-tile-xl .candy-level-tile-tile {
+  width: 100px;
+  height: 100px;
+  border-width: 4.5px;
+  border-radius: var(--candy-radius-xl, 30px);
+  box-shadow:
+    inset 0 3px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -3.5px 0 rgba(18, 66, 122, 0.2),
+    0 6px 0 var(--candy-panel-shadow, #cbdde9);
+}
+
+/* Number text */
+.candy-level-tile-number {
+  font-family: var(--candy-font-display, var(--slot-font));
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--candy-blue-dark, #0f4494);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+  margin-top: -2px;
+}
+
+.candy-level-tile-sm .candy-level-tile-number {
+  font-size: 17px;
+}
+
+.candy-level-tile-lg .candy-level-tile-number {
+  font-size: 28px;
+}
+
+.candy-level-tile-xl .candy-level-tile-number {
+  font-size: 34px;
+}
+
+/* Current State (pulsing and golden bright) */
+.candy-level-tile-current .candy-level-tile-tile {
+  background: linear-gradient(
+    180deg,
+    #fffdf2 0%,
+    var(--candy-yellow-light, #fff8dd) 40%,
+    #ffd859 100%
+  );
+  border-color: var(--candy-yellow-shadow, #8a5700);
+  box-shadow:
+    0 0 0 3px var(--candy-yellow, #ffcb05),
+    0 4px 12px rgba(255, 203, 5, 0.45),
+    inset 0 2px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -2.5px 0 rgba(138, 87, 0, 0.22);
+  animation: candyLevelPulse 2s infinite ease-in-out;
+}
+
+.candy-level-tile-current .candy-level-tile-number {
+  color: var(--candy-yellow-shadow, #8a5700);
+}
+
+@keyframes candyLevelPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow:
+      0 0 0 3px var(--candy-yellow, #ffcb05),
+      0 4px 10px rgba(255, 203, 5, 0.35),
+      inset 0 2px 0 rgba(255, 255, 255, 0.9),
+      inset 0 -2.5px 0 rgba(138, 87, 0, 0.22);
+  }
+  50% {
+    transform: scale(1.04);
+    box-shadow:
+      0 0 0 5px var(--candy-yellow, #ffcb05),
+      0 6px 16px rgba(255, 203, 5, 0.55),
+      inset 0 2px 0 rgba(255, 255, 255, 0.9),
+      inset 0 -2.5px 0 rgba(138, 87, 0, 0.22);
+  }
+}
+
+/* Locked Level */
+.candy-level-tile-locked .candy-level-tile-tile {
+  background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
+  border-color: var(--candy-track, #cbd5e1);
+  color: var(--candy-text-muted, #64748b);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+  cursor: not-allowed;
+}
+
+.candy-level-tile-locked .candy-level-tile-number {
+  display: none;
+}
+
+/* Selected State */
+.candy-level-tile-selected .candy-level-tile-tile {
+  transform: translateY(-3px);
+  border-color: var(--candy-yellow, #ffcb05);
+  box-shadow:
+    0 0 0 3px var(--candy-yellow, #ffcb05),
+    0 6px 14px rgba(255, 203, 5, 0.4),
+    inset 0 2px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* Hover & Active */
+.candy-level-tile:hover:not(:disabled):not(.candy-level-tile-locked)
+  .candy-level-tile-tile {
+  filter: brightness(1.06);
+}
+
+.candy-level-tile:active:not(:disabled):not(.candy-level-tile-locked)
+  .candy-level-tile-tile {
+  transform: translateY(2px);
+  filter: brightness(0.92);
+}
+
+.candy-level-tile:focus-visible {
+  outline: none;
+}
+
+.candy-level-tile:focus-visible .candy-level-tile-tile {
+  outline: 3px solid var(--slot-focus);
+  outline-offset: 3px;
+}
+
+/* Stars Container */
+.candy-level-tile-stars {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  margin-top: 4px;
+}
+
+.candy-level-tile-star {
+  width: 14px;
+  height: 14px;
+  display: block;
+  transition: transform 0.15s ease;
+}
+
+.candy-level-tile-sm .candy-level-tile-star {
+  width: 10px;
+  height: 10px;
+  gap: 1px;
+}
+
+.candy-level-tile-lg .candy-level-tile-star {
+  width: 18px;
+  height: 18px;
+  gap: 3px;
+}
+
+.candy-level-tile-xl .candy-level-tile-star {
+  width: 22px;
+  height: 22px;
+  gap: 4px;
+}
+
+.candy-level-tile-star-filled {
+  fill: var(--candy-yellow, #ffcb05);
+  filter: drop-shadow(0 1px 1px rgba(138, 87, 0, 0.4));
+}
+
+.candy-level-tile-star-empty {
+  fill: rgba(18, 66, 122, 0.22);
+}
+
+/* ==========================================================================
+   Dark Mode Support
+   ========================================================================== */
+
+[data-theme="dark"] .candy-item-slot-common .candy-item-slot-tile {
+  background: linear-gradient(180deg, #243547 0%, #152433 100%);
+  color: #eaf0f8;
+}
+
+[data-theme="dark"] .candy-item-slot-count {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+[data-theme="dark"] .candy-item-slot-label {
+  color: #eaf0f8;
+}
+
+[data-theme="dark"] .candy-level-tile-tile {
+  background: linear-gradient(180deg, #1b3552 0%, #0d2138 100%);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .candy-level-tile-number {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .candy-level-tile-locked .candy-level-tile-tile {
+  background: linear-gradient(180deg, #1a2530 0%, #0f171f 100%);
+}
+
+/* ==========================================================================
+   Prefers Reduced Motion
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .candy-item-slot,
+  .candy-item-slot-tile,
+  .candy-level-tile,
+  .candy-level-tile-tile,
+  .candy-item-slot-shimmer,
+  .candy-level-tile-current .candy-level-tile-tile {
+    animation: none;
+    transition: none;
+    transform: none;
+  }
+}

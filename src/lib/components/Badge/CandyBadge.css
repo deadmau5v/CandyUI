@@ -1,0 +1,87 @@
+/* Badge Colors */
+.candy-badge-pink {
+  --accent: var(--candy-pink);
+  --accent-shadow: var(--candy-pink-shadow);
+  --accent-text: var(--candy-pink-text);
+}
+.candy-badge-blue {
+  --accent: var(--candy-primary, var(--candy-blue));
+  --accent-shadow: var(--candy-primary-shadow, var(--candy-blue-shadow));
+  --accent-text: var(--candy-primary-text, var(--candy-blue-text));
+}
+.candy-badge-green {
+  --accent: var(--candy-green);
+  --accent-shadow: var(--candy-green-shadow);
+  --accent-text: var(--candy-green-text);
+}
+.candy-badge-yellow {
+  --accent: var(--candy-yellow);
+  --accent-shadow: var(--candy-yellow-shadow);
+  --accent-text: var(--candy-yellow-text);
+  --candy-badge-highlight: rgba(255, 255, 255, 0.75);
+  --candy-badge-shade: rgba(0, 0, 0, 0.22);
+}
+.candy-badge-orange {
+  --accent: var(--candy-orange);
+  --accent-shadow: var(--candy-orange-shadow);
+  --accent-text: var(--candy-orange-text);
+}
+.candy-badge-purple {
+  --accent: var(--candy-purple);
+  --accent-shadow: var(--candy-purple-shadow);
+  --accent-text: var(--candy-purple-text);
+}
+.candy-badge-choco {
+  --accent: var(--candy-choco);
+  --accent-shadow: var(--candy-choco-shadow);
+  --accent-text: var(--candy-choco-text);
+}
+.candy-badge-cream {
+  --accent: var(--candy-cream);
+  --accent-shadow: var(--candy-cream-shadow);
+  --accent-text: var(--candy-cream-text);
+  --candy-badge-highlight: rgba(255, 255, 255, 0.75);
+  --candy-badge-shade: rgba(0, 0, 0, 0.22);
+}
+.candy-badge-dark {
+  --accent: var(--candy-dark);
+  --accent-shadow: var(--candy-dark-shadow);
+  --accent-text: var(--candy-dark-text);
+}
+.candy-badge-ghost {
+  --accent: var(--candy-track);
+  --accent-shadow: var(--candy-outline);
+  --accent-text: var(--candy-text);
+}
+
+.candy-badge {
+  --candy-badge-highlight: rgba(255, 255, 255, 0.45);
+  --candy-badge-shade: rgba(0, 0, 0, 0.16);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-family: var(--candy-font-family);
+  font-weight: 600;
+  border-radius: var(--candy-radius-full);
+  border: 1.5px solid var(--candy-outline);
+  background: var(--accent);
+  color: var(--accent-text);
+  box-shadow:
+    inset 0 1.5px 0 var(--candy-badge-highlight),
+    inset 0 -1.5px 0 var(--candy-badge-shade);
+  white-space: nowrap;
+  user-select: none;
+}
+.candy-badge-sm {
+  font-size: 11px;
+  padding: 2px 8px;
+}
+.candy-badge-md {
+  font-size: 13px;
+  padding: 3px 12px;
+}
+.candy-badge-lg {
+  font-size: 15px;
+  padding: 5px 16px;
+}

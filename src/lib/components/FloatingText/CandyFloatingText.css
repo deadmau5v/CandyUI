@@ -1,0 +1,33 @@
+/* Floating Text */
+.candy-floating-text {
+  position: absolute;
+  font-family: var(--candy-font-family);
+  font-weight: 700;
+  font-size: 24px;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  animation: candyFloatUp 1s ease-out forwards;
+  z-index: 2000;
+}
+
+@keyframes candyFloatUp {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -65px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Keep the completion event used to remove transient reward text. */
+  .candy-floating-text {
+    animation: candyFadeIn 1ms linear;
+  }
+}

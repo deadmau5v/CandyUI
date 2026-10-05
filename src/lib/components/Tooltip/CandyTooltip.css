@@ -1,0 +1,32 @@
+/* Tooltip */
+.candy-tooltip {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--candy-surface);
+  color: var(--candy-text);
+  border: 2px solid var(--candy-outline);
+  border-radius: var(--candy-radius-sm);
+  padding: 6px 12px;
+  font: 500 13px var(--candy-font-family);
+  white-space: nowrap;
+  box-shadow: 0 3px 0 var(--candy-panel-shadow);
+  z-index: 100;
+  pointer-events: none;
+  animation: candyFadeIn 0.12s ease;
+}
+
+@keyframes candyFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .candy-tooltip {
+    animation: none;
+  }
+}

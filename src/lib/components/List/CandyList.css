@@ -1,0 +1,706 @@
+/* ==========================================================================
+   CandyUI - CandyList, CandyListItem & CandyDivider
+   Toy-like, juicy web-game list components with bold navy outlines.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   CandyList - Root Container
+   -------------------------------------------------------------------------- */
+.candy-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-family: var(--candy-font-family);
+  color: var(--candy-text, #173d5d);
+}
+
+/* Variant: plain (continuous card container with internal rows) */
+.candy-list-plain {
+  background: var(--candy-surface, #ffffff);
+  border: 2.5px solid var(--candy-outline, var(--candy-primary-shadow, #12427a));
+  border-radius: var(--candy-radius-lg, 24px);
+  box-shadow:
+    0 4px 0 var(--candy-panel-shadow, #cbdde9),
+    inset 0 2px 0 rgba(255, 255, 255, 0.9);
+  overflow: hidden;
+}
+
+.candy-list-plain > .candy-list-item {
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+}
+
+.candy-list-plain > .candy-list-item:not(:last-child),
+.candy-list-plain.candy-list-divided > .candy-list-item:not(:last-child) {
+  border-bottom: 2px solid var(--candy-track, #eaf0f8);
+}
+
+/* Variant: card (distinct toy-like bubble cards per item) */
+.candy-list-card {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.candy-list-card.candy-list-xs {
+  gap: 6px;
+}
+.candy-list-card.candy-list-sm {
+  gap: 8px;
+}
+.candy-list-card.candy-list-md {
+  gap: 10px;
+}
+.candy-list-card.candy-list-lg {
+  gap: 14px;
+}
+.candy-list-card.candy-list-xl {
+  gap: 18px;
+}
+
+.candy-list-card > .candy-list-item {
+  background: var(--candy-surface, #ffffff);
+  border: 2.5px solid var(--candy-outline, var(--candy-primary-shadow, #12427a));
+  border-radius: var(--candy-radius-md, 18px);
+  box-shadow:
+    0 4px 0 var(--candy-panel-shadow, #cbdde9),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1.5px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* Variant: ranked (Leaderboard layout with top-3 festive podium colors) */
+.candy-list-ranked {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.candy-list-ranked.candy-list-xs {
+  gap: 6px;
+}
+.candy-list-ranked.candy-list-sm {
+  gap: 8px;
+}
+.candy-list-ranked.candy-list-md {
+  gap: 10px;
+}
+.candy-list-ranked.candy-list-lg {
+  gap: 14px;
+}
+.candy-list-ranked.candy-list-xl {
+  gap: 18px;
+}
+
+.candy-list-ranked > .candy-list-item {
+  background: var(--candy-surface, #ffffff);
+  border: 2.5px solid var(--candy-outline, var(--candy-primary-shadow, #12427a));
+  border-radius: var(--candy-radius-md, 18px);
+  box-shadow:
+    0 4px 0 var(--candy-panel-shadow, #cbdde9),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1.5px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* --------------------------------------------------------------------------
+   Ranked Podium Rows (Gold, Silver, Bronze)
+   Support both explicit [data-rank="X"] and index inference :nth-of-type(X)
+   -------------------------------------------------------------------------- */
+/* Rank 1 - Champion Gold */
+.candy-list-ranked > .candy-list-item[data-rank="1"],
+.candy-list-ranked > .candy-list-item:nth-of-type(1) {
+  background: linear-gradient(
+    135deg,
+    #fffef5 0%,
+    var(--candy-yellow-light, #fff8dd) 100%
+  );
+  border-color: var(--candy-yellow, #ffcb05);
+  box-shadow:
+    0 4px 0 var(--candy-yellow-shadow, #8a5700),
+    inset 0 2px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1.5px 0 rgba(138, 87, 0, 0.12);
+}
+
+/* Rank 2 - Silver */
+.candy-list-ranked > .candy-list-item[data-rank="2"],
+.candy-list-ranked > .candy-list-item:nth-of-type(2) {
+  background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+  border-color: #94a9ba;
+  box-shadow:
+    0 4px 0 #647b8c,
+    inset 0 2px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1.5px 0 rgba(0, 0, 0, 0.08);
+}
+
+/* Rank 3 - Bronze */
+.candy-list-ranked > .candy-list-item[data-rank="3"],
+.candy-list-ranked > .candy-list-item:nth-of-type(3) {
+  background: linear-gradient(
+    135deg,
+    #fffdfa 0%,
+    var(--candy-orange-light, #fff2e5) 100%
+  );
+  border-color: var(--candy-orange, #ff9f43);
+  box-shadow:
+    0 4px 0 var(--candy-orange-shadow, #8a3c00),
+    inset 0 2px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1.5px 0 rgba(138, 60, 0, 0.12);
+}
+
+/* --------------------------------------------------------------------------
+   Rank Badges - Drawn with CSS, no external components
+   -------------------------------------------------------------------------- */
+.candy-list-item-rank-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--candy-font-family);
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  border-radius: var(--candy-radius-full);
+  flex-shrink: 0;
+  user-select: none;
+  box-sizing: border-box;
+  background: var(--candy-track, #eaf0f8);
+  color: var(--candy-text-muted, #536e82);
+  border: 2px solid var(--candy-panel-shadow, #cbdde9);
+  box-shadow:
+    0 2px 0 var(--candy-panel-shadow, #cbdde9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: transform 0.15s ease;
+}
+
+/* Rank 1 Badge (Gold) */
+.candy-list-item[data-rank="1"] .candy-list-item-rank-badge,
+.candy-list-ranked
+  > .candy-list-item:nth-of-type(1)
+  .candy-list-item-rank-badge {
+  background: linear-gradient(
+    180deg,
+    #ffea79 0%,
+    var(--candy-yellow, #ffcb05) 100%
+  );
+  color: #5a3a00;
+  border: 2.5px solid var(--candy-yellow-shadow, #8a5700);
+  box-shadow:
+    0 2.5px 0 var(--candy-yellow-shadow, #8a5700),
+    inset 0 2px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -1.5px 0 rgba(0, 0, 0, 0.15);
+}
+
+/* Rank 2 Badge (Silver) */
+.candy-list-item[data-rank="2"] .candy-list-item-rank-badge,
+.candy-list-ranked
+  > .candy-list-item:nth-of-type(2)
+  .candy-list-item-rank-badge {
+  background: linear-gradient(180deg, #ffffff 0%, #d8e2eb 100%);
+  color: #1a3248;
+  border: 2.5px solid #647b8c;
+  box-shadow:
+    0 2.5px 0 #647b8c,
+    inset 0 2px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1.5px 0 rgba(0, 0, 0, 0.12);
+}
+
+/* Rank 3 Badge (Bronze) */
+.candy-list-item[data-rank="3"] .candy-list-item-rank-badge,
+.candy-list-ranked
+  > .candy-list-item:nth-of-type(3)
+  .candy-list-item-rank-badge {
+  background: linear-gradient(
+    180deg,
+    #ffd7b8 0%,
+    var(--candy-orange, #ff9f43) 100%
+  );
+  color: #592500;
+  border: 2.5px solid var(--candy-orange-shadow, #8a3c00);
+  box-shadow:
+    0 2.5px 0 var(--candy-orange-shadow, #8a3c00),
+    inset 0 2px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -1.5px 0 rgba(0, 0, 0, 0.15);
+}
+
+/* --------------------------------------------------------------------------
+   CandyListItem - Row Item
+   -------------------------------------------------------------------------- */
+.candy-list-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  text-decoration: none;
+  outline: none;
+  transition: var(
+    --candy-transition,
+    transform 0.15s ease,
+    background-color 0.15s ease,
+    box-shadow 0.15s ease
+  );
+}
+
+/* Size Variants */
+.candy-list-item-xs {
+  min-height: 36px;
+  padding: 6px 10px;
+  font-size: 13px;
+  gap: 8px;
+}
+.candy-list-item-xs .candy-list-item-rank-badge {
+  width: 22px;
+  height: 22px;
+  font-size: 11px;
+}
+
+.candy-list-item-sm {
+  min-height: 42px;
+  padding: 8px 12px;
+  font-size: 14px;
+  gap: 10px;
+}
+.candy-list-item-sm .candy-list-item-rank-badge {
+  width: 26px;
+  height: 26px;
+  font-size: 12px;
+}
+
+.candy-list-item-md {
+  min-height: 52px;
+  padding: 12px 16px;
+  font-size: 16px;
+  gap: 12px;
+}
+.candy-list-item-md .candy-list-item-rank-badge {
+  width: 32px;
+  height: 32px;
+  font-size: 14px;
+}
+
+.candy-list-item-lg {
+  min-height: 64px;
+  padding: 16px 20px;
+  font-size: 18px;
+  gap: 14px;
+}
+.candy-list-item-lg .candy-list-item-rank-badge {
+  width: 38px;
+  height: 38px;
+  font-size: 16px;
+}
+
+.candy-list-item-xl {
+  min-height: 76px;
+  padding: 20px 24px;
+  font-size: 20px;
+  gap: 16px;
+}
+.candy-list-item-xl .candy-list-item-rank-badge {
+  width: 44px;
+  height: 44px;
+  font-size: 18px;
+}
+
+/* Sub-sections */
+.candy-list-item-leading {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.candy-list-item-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: 2px;
+}
+
+.candy-list-item-title {
+  font-family: var(--candy-font-family);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--candy-text, #173d5d);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.candy-list-item-desc {
+  font-size: 0.85em;
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--candy-text-muted, #536e82);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.candy-list-item-trailing {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+/* Interactive States */
+.candy-list-item-interactive {
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.candy-list-item-interactive:hover:not(.candy-list-item-disabled) {
+  filter: brightness(1.03);
+}
+
+.candy-list-card
+  > .candy-list-item-interactive:hover:not(.candy-list-item-disabled),
+.candy-list-ranked
+  > .candy-list-item-interactive:hover:not(.candy-list-item-disabled) {
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 0 var(--candy-panel-shadow, #cbdde9),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.95);
+}
+
+.candy-list-plain
+  > .candy-list-item-interactive:hover:not(.candy-list-item-disabled) {
+  background: var(--candy-surface-alt, #f8fafc);
+}
+
+/* Active Down Sink */
+.candy-list-item-interactive:active:not(.candy-list-item-disabled) {
+  transform: translateY(2px) scale(0.995);
+  filter: brightness(0.96);
+}
+
+.candy-list-card
+  > .candy-list-item-interactive:active:not(.candy-list-item-disabled),
+.candy-list-ranked
+  > .candy-list-item-interactive:active:not(.candy-list-item-disabled) {
+  transform: translateY(2px) scale(0.995);
+  box-shadow:
+    0 2px 0 var(--candy-panel-shadow, #cbdde9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* Focus-visible: Highlight outer ring, strictly no black borders */
+.candy-list-item-interactive:focus-visible {
+  outline: 3px solid var(--candy-focus, #1761d1);
+  outline-offset: 2px;
+  z-index: 2;
+}
+
+/* Highlight State (e.g. "My score" or current user) */
+.candy-list-item-highlight {
+  background: linear-gradient(
+    135deg,
+    #f2f7ff 0%,
+    var(--candy-blue-light, #eaf2ff) 100%
+  );
+  border-color: var(--candy-primary, #1761d1);
+  box-shadow:
+    0 4px 0 var(--candy-primary-shadow, #12427a),
+    inset 0 2px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1.5px 0 rgba(18, 66, 122, 0.12);
+}
+
+.candy-list-item-highlight .candy-list-item-title {
+  color: var(--candy-primary, #1761d1);
+  font-weight: 700;
+}
+
+/* Selected State */
+.candy-list-item-selected {
+  background: var(--candy-surface-alt, #f8fafc);
+  border-color: var(--candy-primary, #1761d1);
+  box-shadow:
+    inset 0 2px 4px rgba(18, 66, 122, 0.1),
+    0 2px 0 var(--candy-panel-shadow, #cbdde9);
+}
+
+/* Explicit Item Divider */
+.candy-list-item-divider {
+  border-bottom: 2px solid var(--candy-track, #eaf0f8);
+}
+
+/* Disabled State */
+.candy-list-item-disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  filter: grayscale(0.2);
+  pointer-events: none;
+  transform: none;
+}
+
+/* --------------------------------------------------------------------------
+   CandyDivider - Candy Horizontal / Vertical Separator
+   -------------------------------------------------------------------------- */
+.candy-divider {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  font-family: var(--candy-font-family);
+  color: var(--candy-text-muted, #536e82);
+  user-select: none;
+}
+
+.candy-divider-line {
+  background: var(--candy-panel-shadow, #cbdde9);
+  border-radius: var(--candy-radius-full);
+}
+
+/* Horizontal */
+.candy-divider-horizontal {
+  width: 100%;
+  flex-direction: row;
+  margin: 12px 0;
+}
+
+.candy-divider-horizontal .candy-divider-line {
+  height: 3px;
+  flex: 1 1 auto;
+}
+
+/* Vertical */
+.candy-divider-vertical {
+  height: auto;
+  min-height: 24px;
+  flex-direction: column;
+  display: inline-flex;
+  margin: 0 12px;
+  align-self: stretch;
+}
+
+.candy-divider-vertical .candy-divider-line {
+  width: 3px;
+  flex: 1 1 auto;
+}
+
+/* Dashed */
+.candy-divider-dashed.candy-divider-horizontal .candy-divider-line {
+  background: none;
+  border-top: 3px dashed var(--candy-panel-shadow, #cbdde9);
+  height: 0;
+  border-radius: 0;
+}
+
+.candy-divider-dashed.candy-divider-vertical .candy-divider-line {
+  background: none;
+  border-left: 3px dashed var(--candy-panel-shadow, #cbdde9);
+  width: 0;
+  border-radius: 0;
+}
+
+/* Center Content / Text */
+.candy-divider-content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1;
+  padding: 4px 12px;
+  background: var(--candy-surface, #ffffff);
+  border: 2px solid var(--candy-panel-shadow, #cbdde9);
+  border-radius: var(--candy-radius-full);
+  box-shadow:
+    0 2px 0 var(--candy-panel-shadow, #cbdde9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  white-space: nowrap;
+}
+
+.candy-divider-horizontal .candy-divider-content {
+  margin: 0 12px;
+}
+
+.candy-divider-vertical .candy-divider-content {
+  margin: 8px 0;
+}
+
+/* --------------------------------------------------------------------------
+   Dark Mode Support
+   -------------------------------------------------------------------------- */
+[data-theme="dark"] .candy-list-plain {
+  background: #1e293b;
+  border-color: #38bdf8;
+  box-shadow:
+    0 4px 0 #0f172a,
+    inset 0 2px 0 rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .candy-list-plain > .candy-list-item:not(:last-child) {
+  border-bottom-color: #334155;
+}
+
+[data-theme="dark"]
+  .candy-list-plain
+  > .candy-list-item-interactive:hover:not(.candy-list-item-disabled) {
+  background: #273549;
+}
+
+[data-theme="dark"] .candy-list-card > .candy-list-item,
+[data-theme="dark"] .candy-list-ranked > .candy-list-item {
+  background: #1e293b;
+  border-color: #475569;
+  box-shadow:
+    0 4px 0 #0f172a,
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .candy-list-item-title {
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .candy-list-item-desc {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .candy-list-item-rank-badge {
+  background: #334155;
+  color: #cbd5e1;
+  border-color: #475569;
+  box-shadow:
+    0 2px 0 #1e293b,
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .candy-list-ranked > .candy-list-item[data-rank="1"],
+[data-theme="dark"] .candy-list-ranked > .candy-list-item:nth-of-type(1) {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 203, 5, 0.15) 0%,
+    rgba(255, 180, 0, 0.08) 100%
+  );
+  border-color: #ffcb05;
+  box-shadow:
+    0 4px 12px rgba(255, 203, 5, 0.15),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.2);
+}
+[data-theme="dark"]
+  .candy-list-ranked
+  > .candy-list-item[data-rank="1"]
+  .candy-list-item-title,
+[data-theme="dark"]
+  .candy-list-ranked
+  > .candy-list-item:nth-of-type(1)
+  .candy-list-item-title {
+  color: #ffea79;
+}
+
+[data-theme="dark"] .candy-list-ranked > .candy-list-item[data-rank="2"],
+[data-theme="dark"] .candy-list-ranked > .candy-list-item:nth-of-type(2) {
+  background: linear-gradient(
+    135deg,
+    rgba(226, 232, 240, 0.14) 0%,
+    rgba(203, 213, 225, 0.06) 100%
+  );
+  border-color: #cbd5e1;
+  box-shadow:
+    0 4px 12px rgba(203, 213, 225, 0.12),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.2);
+}
+[data-theme="dark"]
+  .candy-list-ranked
+  > .candy-list-item[data-rank="2"]
+  .candy-list-item-title,
+[data-theme="dark"]
+  .candy-list-ranked
+  > .candy-list-item:nth-of-type(2)
+  .candy-list-item-title {
+  color: #f1f5f9;
+}
+
+[data-theme="dark"] .candy-list-ranked > .candy-list-item[data-rank="3"],
+[data-theme="dark"] .candy-list-ranked > .candy-list-item:nth-of-type(3) {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 159, 67, 0.15) 0%,
+    rgba(235, 120, 30, 0.08) 100%
+  );
+  border-color: #ff9f43;
+  box-shadow:
+    0 4px 12px rgba(255, 159, 67, 0.15),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.2);
+}
+[data-theme="dark"]
+  .candy-list-ranked
+  > .candy-list-item[data-rank="3"]
+  .candy-list-item-title,
+[data-theme="dark"]
+  .candy-list-ranked
+  > .candy-list-item:nth-of-type(3)
+  .candy-list-item-title {
+  color: #ffbe76;
+}
+
+[data-theme="dark"] .candy-list-item-highlight {
+  background: linear-gradient(135deg, #0e2748 0%, #173f75 100%);
+  border-color: #38bdf8;
+  box-shadow:
+    0 4px 0 #081d36,
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .candy-divider-line {
+  background: #334155;
+}
+
+[data-theme="dark"]
+  .candy-divider-dashed.candy-divider-horizontal
+  .candy-divider-line {
+  border-top-color: #334155;
+}
+
+[data-theme="dark"]
+  .candy-divider-dashed.candy-divider-vertical
+  .candy-divider-line {
+  border-left-color: #334155;
+}
+
+[data-theme="dark"] .candy-divider-content {
+  background: #1e293b;
+  border-color: #334155;
+  color: #94a3b8;
+  box-shadow:
+    0 2px 0 #0f172a,
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* --------------------------------------------------------------------------
+   Accessibility - Reduced Motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .candy-list,
+  .candy-list-item,
+  .candy-list-item-rank-badge {
+    transition: none;
+  }
+
+  .candy-list-item-interactive:hover,
+  .candy-list-item-interactive:active {
+    transform: none;
+  }
+}
+
+.candy-list-ranked > .candy-list-item[data-rank="1"] .candy-list-item-title,
+.candy-list-ranked > .candy-list-item:nth-of-type(1) .candy-list-item-title {
+  color: #633e00;
+}
+.candy-list-ranked > .candy-list-item[data-rank="2"] .candy-list-item-title,
+.candy-list-ranked > .candy-list-item:nth-of-type(2) .candy-list-item-title {
+  color: #1e3a5f;
+}
+.candy-list-ranked > .candy-list-item[data-rank="3"] .candy-list-item-title,
+.candy-list-ranked > .candy-list-item:nth-of-type(3) .candy-list-item-title {
+  color: #6d2d00;
+}

@@ -1,0 +1,64 @@
+{
+  "name": "candy-ui",
+  "version": "0.1.0",
+  "description": "Juicy, playful React WebGame UI component library styled with Fredoka",
+  "author": "CandyUI Team",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/candy-ui.cjs",
+  "module": "./dist/candy-ui.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/candy-ui.js",
+      "require": "./dist/candy-ui.cjs"
+    },
+    "./style.css": "./dist/candy-ui.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite apps/docs",
+    "dev:docs": "vite apps/docs",
+    "build:lib": "tsc && vite build -c vite.config.lib.ts",
+    "build:docs": "vite build apps/docs",
+    "build": "tsc && vite build -c vite.config.lib.ts && vite build apps/docs",
+    "preview": "vite preview apps/docs",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p apps/docs/tsconfig.json",
+    "palette": "node scripts/palette-shots.mjs",
+    "test:visual": "node scripts/visual-review.mjs",
+    "test:lib": "node scripts/library-smoke.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@esbuild/win32-x64": "^0.21.5",
+    "@playwright/test": "^1.63.0",
+    "@rolldown/pluginutils": "^1.0.1",
+    "@rollup/pluginutils": "^5.4.0",
+    "@rollup/rollup-win32-x64-msvc": "^4.24.0",
+    "@types/canvas-confetti": "^1.9.0",
+    "@types/node": "^22.10.1",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "canvas-confetti": "^1.9.4",
+    "esbuild": "^0.21.5",
+    "esbuild-wasm": "0.21.5",
+    "lucide-react": "^1.16.0",
+    "prettier": "^3.9.9",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "rollup": "^4.24.0",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11",
+    "vite-plugin-dts": "^4.3.0"
+  }
+}

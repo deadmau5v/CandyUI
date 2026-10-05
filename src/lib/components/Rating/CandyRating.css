@@ -1,0 +1,288 @@
+/* ==========================================================================
+   CandyRating & CandyStars
+   Juicy, chunky, playful candy game rating component
+   ========================================================================== */
+
+/* Size Variables */
+.candy-rating-xs {
+  --candy-rating-size: 18px;
+  --candy-rating-gap: 3px;
+}
+.candy-rating-sm {
+  --candy-rating-size: 24px;
+  --candy-rating-gap: 4px;
+}
+.candy-rating-md {
+  --candy-rating-size: 34px;
+  --candy-rating-gap: 6px;
+}
+.candy-rating-lg {
+  --candy-rating-size: 46px;
+  --candy-rating-gap: 8px;
+}
+.candy-rating-xl {
+  --candy-rating-size: 58px;
+  --candy-rating-gap: 10px;
+}
+
+/* Rating Root */
+.candy-rating {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--candy-rating-gap, 6px);
+  user-select: none;
+  touch-action: manipulation;
+  outline: none;
+  font-family: var(--candy-font-family);
+  vertical-align: middle;
+  padding: 4px 6px;
+  border-radius: var(--candy-radius-md, 18px);
+  transition:
+    transform 0.15s ease,
+    filter 0.15s ease;
+  box-sizing: border-box;
+}
+
+/* Keyboard Focus Visible */
+.candy-rating:focus-visible {
+  outline: 3px solid var(--candy-focus, #1761d1);
+  outline-offset: 3px;
+  border-radius: var(--candy-radius-md, 18px);
+}
+
+/* Disabled & ReadOnly States */
+.candy-rating-disabled {
+  opacity: 0.55;
+  filter: grayscale(0.2);
+  cursor: not-allowed;
+}
+
+.candy-rating-readonly {
+  cursor: default;
+}
+
+/* Individual Star Item */
+.candy-rating-star {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--candy-rating-size, 34px);
+  height: var(--candy-rating-size, 34px);
+  cursor: pointer;
+  transition:
+    transform 0.18s var(--candy-bounce, cubic-bezier(0.2, 0.8, 0.2, 1)),
+    filter 0.15s ease;
+  transform-origin: center center;
+}
+
+/* Interactive Hover & Active states */
+.candy-rating:not(.candy-rating-disabled):not(.candy-rating-readonly)
+  .candy-rating-star:hover {
+  transform: scale(1.14);
+  filter: brightness(1.06);
+}
+
+.candy-rating:not(.candy-rating-disabled):not(.candy-rating-readonly)
+  .candy-rating-star:active {
+  transform: translateY(2px) scale(0.95);
+  filter: brightness(0.96);
+}
+
+.candy-rating-disabled .candy-rating-star {
+  cursor: not-allowed;
+}
+
+.candy-rating-readonly .candy-rating-star {
+  cursor: default;
+}
+
+/* Star Internal Layering */
+.candy-rating-star-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.candy-rating-star-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.candy-rating-star-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+.candy-rating-star-fill-inner {
+  width: var(--candy-rating-size, 34px);
+  height: var(--candy-rating-size, 34px);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* SVG Rendering */
+.candy-rating-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+/* Pop/Bounce Animation for Newly Lit Stars */
+@keyframes candy-rating-bounce {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.36) rotate(-7deg);
+  }
+  65% {
+    transform: scale(0.92) rotate(3deg);
+  }
+  85% {
+    transform: scale(1.08) rotate(-1deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.candy-rating-star-bounce {
+  animation: candy-rating-bounce 0.38s
+    var(--candy-bounce, cubic-bezier(0.2, 0.8, 0.2, 1));
+}
+
+/* ==========================================================================
+   CandyStars (Level Settlement Display)
+   ========================================================================== */
+
+.candy-stars {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--candy-rating-gap, 5px);
+  user-select: none;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+.candy-stars-xs {
+  --candy-rating-size: 18px;
+  --candy-rating-gap: 3px;
+}
+.candy-stars-sm {
+  --candy-rating-size: 24px;
+  --candy-rating-gap: 4px;
+}
+.candy-stars-md {
+  --candy-rating-size: 34px;
+  --candy-rating-gap: 6px;
+}
+.candy-stars-lg {
+  --candy-rating-size: 46px;
+  --candy-rating-gap: 8px;
+}
+.candy-stars-xl {
+  --candy-rating-size: 58px;
+  --candy-rating-gap: 10px;
+}
+
+.candy-stars-star {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--candy-rating-size, 24px);
+  height: var(--candy-rating-size, 24px);
+  transform-origin: center center;
+}
+
+/* Triumphant Pop-in for Settlement Stars */
+@keyframes candy-stars-pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.25) rotate(-20deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.3) rotate(6deg);
+  }
+  80% {
+    transform: scale(0.94) rotate(-2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.candy-stars-star-animated.candy-stars-star-active {
+  animation: candy-stars-pop-in 0.45s
+    var(--candy-bounce, cubic-bezier(0.2, 0.8, 0.2, 1)) both;
+  animation-delay: calc(var(--candy-star-delay, 0) * 140ms + 50ms);
+}
+
+/* Arched Level Banner Layout */
+.candy-stars-arched .candy-stars-star:nth-child(2) {
+  transform: translateY(-5px) scale(1.15);
+}
+
+@keyframes candy-stars-pop-in-elevated {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px) scale(0.25) rotate(-20deg);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-5px) scale(1.4) rotate(6deg);
+  }
+  80% {
+    transform: translateY(-5px) scale(1.1) rotate(-2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-5px) scale(1.15) rotate(0deg);
+  }
+}
+
+.candy-stars-arched
+  .candy-stars-star:nth-child(
+    2
+  ).candy-stars-star-animated.candy-stars-star-active {
+  animation-name: candy-stars-pop-in-elevated;
+}
+
+/* Dark mode subtle adaptation */
+[data-theme="dark"] .candy-rating-star-empty {
+  filter: brightness(0.9);
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .candy-rating,
+  .candy-rating-star,
+  .candy-stars-star {
+    transition: none !important;
+    animation: none !important;
+  }
+  .candy-rating-star-bounce,
+  .candy-stars-star-animated.candy-stars-star-active {
+    animation: none !important;
+  }
+}

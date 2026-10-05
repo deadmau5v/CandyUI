@@ -1,0 +1,420 @@
+/* ==========================================================================
+   CandyTag & CandyTagGroup Component Styles
+   CandyUI - Casual Sweet Game Style
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Color Themes (CSS Custom Properties mapping)
+   -------------------------------------------------------------------------- */
+
+.candy-tag-pink {
+  --accent: var(--candy-pink, #f780ae);
+  --accent-light: var(--candy-pink-light, #ffedf4);
+  --accent-shadow: var(--candy-pink-shadow, #8f2652);
+  --accent-text: var(--candy-pink-text, #12427a);
+  --accent-text-soft: #8f2652;
+  --tag-highlight: rgba(255, 255, 255, 0.6);
+  --tag-shade: rgba(143, 38, 82, 0.25);
+}
+
+.candy-tag-blue {
+  --accent: var(--candy-primary, var(--candy-blue, #1761d1));
+  --accent-light: var(--candy-blue-light, #eaf2ff);
+  --accent-shadow: var(
+    --candy-primary-shadow,
+    var(--candy-blue-shadow, #12427a)
+  );
+  --accent-text: var(--candy-primary-text, var(--candy-blue-text, #ffffff));
+  --accent-text-soft: #0f4494;
+  --tag-highlight: rgba(255, 255, 255, 0.5);
+  --tag-shade: rgba(18, 66, 122, 0.35);
+}
+
+.candy-tag-green {
+  --accent: var(--candy-green, #70d997);
+  --accent-light: var(--candy-green-light, #eafaf0);
+  --accent-shadow: var(--candy-green-shadow, #194a2b);
+  --accent-text: var(--candy-green-text, #12427a);
+  --accent-text-soft: #194a2b;
+  --tag-highlight: rgba(255, 255, 255, 0.65);
+  --tag-shade: rgba(25, 74, 43, 0.22);
+}
+
+.candy-tag-yellow {
+  --accent: var(--candy-yellow, #ffcb05);
+  --accent-light: var(--candy-yellow-light, #fff8dd);
+  --accent-shadow: var(--candy-yellow-shadow, #8a5700);
+  --accent-text: var(--candy-yellow-text, #12427a);
+  --accent-text-soft: #8a5700;
+  --tag-highlight: rgba(255, 255, 255, 0.75);
+  --tag-shade: rgba(138, 87, 0, 0.25);
+}
+
+.candy-tag-orange {
+  --accent: var(--candy-orange, #ff9f43);
+  --accent-light: var(--candy-orange-light, #fff2e5);
+  --accent-shadow: var(--candy-orange-shadow, #8a3c00);
+  --accent-text: var(--candy-orange-text, #12427a);
+  --accent-text-soft: #8a3c00;
+  --tag-highlight: rgba(255, 255, 255, 0.65);
+  --tag-shade: rgba(138, 60, 0, 0.22);
+}
+
+.candy-tag-purple {
+  --accent: var(--candy-purple, #7955c7);
+  --accent-light: var(--candy-purple-light, #f2edfc);
+  --accent-shadow: var(--candy-purple-shadow, #47287d);
+  --accent-text: var(--candy-purple-text, #ffffff);
+  --accent-text-soft: #47287d;
+  --tag-highlight: rgba(255, 255, 255, 0.5);
+  --tag-shade: rgba(71, 40, 125, 0.35);
+}
+
+.candy-tag-choco {
+  --accent: var(--candy-choco, #8d5b3e);
+  --accent-light: var(--candy-choco-light, #f6eee8);
+  --accent-shadow: var(--candy-choco-shadow, #3b1d0b);
+  --accent-text: var(--candy-choco-text, #ffffff);
+  --accent-text-soft: #5e3720;
+  --tag-highlight: rgba(255, 255, 255, 0.45);
+  --tag-shade: rgba(59, 29, 11, 0.35);
+}
+
+.candy-tag-cream {
+  --accent: var(--candy-cream, #fff5db);
+  --accent-light: var(--candy-cream-light, #fffcf2);
+  --accent-shadow: var(--candy-cream-shadow, #665020);
+  --accent-text: var(--candy-cream-text, #12427a);
+  --accent-text-soft: #665020;
+  --tag-highlight: rgba(255, 255, 255, 0.85);
+  --tag-shade: rgba(102, 80, 32, 0.2);
+}
+
+.candy-tag-dark {
+  --accent: var(--candy-dark, #12427a);
+  --accent-light: var(--candy-dark-light, #e8eef4);
+  --accent-shadow: var(--candy-dark-shadow, #0a2749);
+  --accent-text: var(--candy-dark-text, #ffffff);
+  --accent-text-soft: #0a2749;
+  --tag-highlight: rgba(255, 255, 255, 0.4);
+  --tag-shade: rgba(10, 39, 73, 0.45);
+}
+
+.candy-tag-ghost {
+  --accent: var(--candy-track, #eaf0f8);
+  --accent-light: #f8fafc;
+  --accent-shadow: var(--candy-outline, #12427a);
+  --accent-text: var(--candy-text, #173d5d);
+  --accent-text-soft: var(--candy-text, #173d5d);
+  --tag-highlight: rgba(255, 255, 255, 0.8);
+  --tag-shade: rgba(18, 66, 122, 0.15);
+}
+
+.candy-tag-gray {
+  --accent: #9bb3c7;
+  --accent-light: #eef4f8;
+  --accent-shadow: #5a758d;
+  --accent-text: #12427a;
+  --accent-text-soft: #334e68;
+  --tag-highlight: rgba(255, 255, 255, 0.65);
+  --tag-shade: rgba(51, 78, 104, 0.22);
+}
+
+/* --------------------------------------------------------------------------
+   Base Tag Styles
+   -------------------------------------------------------------------------- */
+
+.candy-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--candy-font-family);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border-radius: var(--candy-radius-full, 9999px);
+  border: 2px solid var(--candy-outline, #12427a);
+  white-space: nowrap;
+  user-select: none;
+  box-sizing: border-box;
+  vertical-align: middle;
+  transition:
+    transform 0.15s ease,
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    opacity 0.15s ease;
+}
+
+/* --------------------------------------------------------------------------
+   Sizes (sm, md, lg)
+   -------------------------------------------------------------------------- */
+
+.candy-tag-sm {
+  height: 24px;
+  font-size: 12px;
+  padding: 0 8px;
+  gap: 4px;
+}
+
+.candy-tag-md {
+  height: 30px;
+  font-size: 13.5px;
+  padding: 0 12px;
+  gap: 6px;
+}
+
+.candy-tag-lg {
+  height: 36px;
+  font-size: 15px;
+  padding: 0 16px;
+  gap: 8px;
+}
+
+/* --------------------------------------------------------------------------
+   Variants (solid, soft, outline)
+   -------------------------------------------------------------------------- */
+
+/* Solid */
+.candy-tag-solid {
+  background: var(--accent);
+  color: var(--accent-text);
+  box-shadow:
+    inset 0 2px 0 var(--tag-highlight, rgba(255, 255, 255, 0.5)),
+    inset 0 -2px 0 var(--tag-shade, rgba(0, 0, 0, 0.16)),
+    0 2px 0 rgba(18, 66, 122, 0.12);
+}
+
+/* Soft */
+.candy-tag-soft {
+  background: var(--accent-light);
+  color: var(--accent-text-soft);
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -1.5px 0 var(--tag-shade, rgba(18, 66, 122, 0.1)),
+    0 2px 0 rgba(18, 66, 122, 0.08);
+}
+
+/* Outline */
+.candy-tag-outline {
+  background: var(--candy-surface, #ffffff);
+  color: var(--accent-text-soft);
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1.5px 0 rgba(18, 66, 122, 0.08),
+    0 2px 0 rgba(18, 66, 122, 0.08);
+}
+
+/* --------------------------------------------------------------------------
+   Inner Elements (Icon, Content, Close Button)
+   -------------------------------------------------------------------------- */
+
+.candy-tag-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.candy-tag-content {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.candy-tag-close-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: var(--candy-radius-full, 9999px);
+  padding: 1px;
+  margin-left: 2px;
+  color: inherit;
+  opacity: 0.75;
+  transition:
+    opacity 0.12s ease,
+    transform 0.12s ease,
+    background-color 0.12s ease;
+}
+
+.candy-tag-close-btn:hover {
+  opacity: 1;
+  transform: scale(1.15);
+  background-color: rgba(18, 66, 122, 0.12);
+}
+
+.candy-tag-close-btn:active {
+  transform: scale(0.95);
+}
+
+.candy-tag-close-btn:focus-visible {
+  outline: 2px solid var(--candy-focus, #1761d1);
+  outline-offset: 1px;
+  opacity: 1;
+}
+
+.candy-tag-close-icon {
+  width: 10px;
+  height: 10px;
+}
+
+.candy-tag-sm .candy-tag-close-icon {
+  width: 9px;
+  height: 9px;
+}
+
+.candy-tag-lg .candy-tag-close-icon {
+  width: 12px;
+  height: 12px;
+}
+
+/* --------------------------------------------------------------------------
+   Interactive States (Checkable, Closable, Hover, Active, Focus)
+   -------------------------------------------------------------------------- */
+
+.candy-tag-checkable,
+.candy-tag-closable {
+  cursor: pointer;
+}
+
+.candy-tag-checkable:hover,
+.candy-tag-closable:hover {
+  transform: translateY(-1.5px);
+  box-shadow:
+    inset 0 2px 0 var(--tag-highlight, rgba(255, 255, 255, 0.6)),
+    inset 0 -2px 0 var(--tag-shade, rgba(0, 0, 0, 0.2)),
+    0 3.5px 0 rgba(18, 66, 122, 0.18);
+}
+
+.candy-tag-checkable:active,
+.candy-tag-closable:active {
+  transform: translateY(1px);
+  box-shadow:
+    inset 0 1px 0 var(--tag-highlight, rgba(255, 255, 255, 0.3)),
+    inset 0 -1px 0 var(--tag-shade, rgba(0, 0, 0, 0.25)),
+    0 1px 0 rgba(18, 66, 122, 0.1);
+}
+
+/* Checkable Unchecked / Checked */
+.candy-tag-checkable[aria-pressed="false"].candy-tag-solid {
+  background: var(--candy-surface, #ffffff);
+  color: var(--candy-text, #173d5d);
+  opacity: 0.9;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1.5px 0 rgba(18, 66, 122, 0.08),
+    0 2px 0 rgba(18, 66, 122, 0.08);
+}
+
+.candy-tag-checkable[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--accent-text);
+  box-shadow:
+    inset 0 2px 0 var(--tag-highlight, rgba(255, 255, 255, 0.65)),
+    inset 0 -2px 0 var(--tag-shade, rgba(0, 0, 0, 0.22)),
+    0 2.5px 0 rgba(18, 66, 122, 0.2);
+}
+
+/* Focus Visible: never pure black #000, must use candy focus highlight */
+.candy-tag:focus-visible {
+  outline: 3px solid var(--candy-focus, #1761d1);
+  outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   Disabled State
+   -------------------------------------------------------------------------- */
+
+.candy-tag-disabled,
+.candy-tag[aria-disabled="true"] {
+  opacity: 0.5;
+  filter: grayscale(40%);
+  cursor: not-allowed;
+  pointer-events: none;
+  transform: none !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1),
+    0 1px 0 rgba(18, 66, 122, 0.05) !important;
+}
+
+/* --------------------------------------------------------------------------
+   CandyTagGroup Styles
+   -------------------------------------------------------------------------- */
+
+.candy-tag-group {
+  display: flex;
+}
+
+.candy-tag-group-wrap {
+  flex-wrap: wrap;
+}
+
+.candy-tag-group-nowrap {
+  flex-wrap: nowrap;
+}
+
+.candy-tag-group-gap-xs {
+  gap: 4px;
+}
+
+.candy-tag-group-gap-sm {
+  gap: 8px;
+}
+
+.candy-tag-group-gap-md {
+  gap: 12px;
+}
+
+.candy-tag-group-gap-lg {
+  gap: 16px;
+}
+
+.candy-tag-group-align-start {
+  align-items: flex-start;
+}
+
+.candy-tag-group-align-center {
+  align-items: center;
+}
+
+.candy-tag-group-align-end {
+  align-items: flex-end;
+}
+
+.candy-tag-group-align-baseline {
+  align-items: baseline;
+}
+
+/* --------------------------------------------------------------------------
+   Dark Mode Support
+   -------------------------------------------------------------------------- */
+
+[data-theme="dark"] .candy-tag-outline {
+  background: rgba(18, 66, 122, 0.25);
+}
+
+[data-theme="dark"] .candy-tag-checkable[aria-pressed="false"].candy-tag-solid {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--candy-primary-text, #ffffff);
+}
+
+/* --------------------------------------------------------------------------
+   Prefers Reduced Motion
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .candy-tag,
+  .candy-tag-close-btn {
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .candy-tag-checkable:hover,
+  .candy-tag-closable:hover,
+  .candy-tag-checkable:active,
+  .candy-tag-closable:active {
+    transform: none !important;
+  }
+}

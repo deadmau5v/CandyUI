@@ -1,0 +1,53 @@
+/* Modal */
+.candy-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgb(23 47 86 / 48%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 24px;
+  animation: candyFadeIn 0.15s ease-out;
+}
+
+.candy-modal-content {
+  animation: candyPopIn 0.2s ease-out;
+  max-width: 90vw;
+  max-height: calc(100dvh - 48px);
+  overflow: auto;
+  /* Top room for the ribbon that overhangs the panel edge (~38px) */
+  padding: 52px 20px 16px;
+  outline: none;
+}
+.candy-modal-content:focus,
+.candy-modal-content:focus-visible {
+  outline: none;
+}
+
+@keyframes candyPopIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes candyFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .candy-modal-overlay,
+  .candy-modal-content {
+    animation: none;
+  }
+}

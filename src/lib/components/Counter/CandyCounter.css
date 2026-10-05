@@ -1,0 +1,29 @@
+/* Counter */
+.candy-counter {
+  display: inline-flex;
+  align-items: center;
+  background: var(--candy-surface);
+  color: var(--candy-text);
+  border: 2px solid var(--candy-outline);
+  border-radius: var(--candy-radius-full);
+  padding: 4px 12px 4px 4px;
+  box-shadow: 0 3px 0 var(--candy-panel-shadow);
+  gap: 8px;
+  user-select: none;
+}
+.candy-counter-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--candy-radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--candy-outline);
+}
+.candy-counter-value {
+  font-family: var(--candy-font-family);
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--candy-text);
+  min-width: 48px;
+}

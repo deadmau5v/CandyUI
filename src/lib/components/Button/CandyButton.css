@@ -1,0 +1,338 @@
+/* Button Colors */
+.candy-btn-pink {
+  --accent: var(--candy-pink);
+  --accent-shadow: var(--candy-pink-shadow);
+  --accent-text: var(--candy-pink-text);
+}
+.candy-btn-blue {
+  --accent: var(--candy-primary, var(--candy-blue));
+  --accent-shadow: var(--candy-primary-shadow, var(--candy-blue-shadow));
+  --accent-text: var(--candy-primary-text, var(--candy-blue-text));
+}
+.candy-btn-green {
+  --accent: var(--candy-green);
+  --accent-shadow: var(--candy-green-shadow);
+  --accent-text: var(--candy-green-text);
+}
+.candy-btn-yellow {
+  --accent: var(--candy-yellow);
+  --accent-shadow: var(--candy-yellow-shadow);
+  --accent-text: var(--candy-yellow-text);
+  --candy-btn-highlight: rgba(255, 255, 255, 0.75);
+  --candy-btn-shade: rgba(0, 0, 0, 0.22);
+}
+.candy-btn-orange {
+  --accent: var(--candy-orange);
+  --accent-shadow: var(--candy-orange-shadow);
+  --accent-text: var(--candy-orange-text);
+}
+.candy-btn-purple {
+  --accent: var(--candy-purple);
+  --accent-shadow: var(--candy-purple-shadow);
+  --accent-text: var(--candy-purple-text);
+}
+.candy-btn-choco {
+  --accent: var(--candy-choco);
+  --accent-shadow: var(--candy-choco-shadow);
+  --accent-text: var(--candy-choco-text);
+}
+.candy-btn-cream {
+  --accent: var(--candy-cream);
+  --accent-shadow: var(--candy-cream-shadow);
+  --accent-text: var(--candy-cream-text);
+  --candy-btn-highlight: rgba(255, 255, 255, 0.75);
+  --candy-btn-shade: rgba(0, 0, 0, 0.18);
+}
+.candy-btn-dark {
+  --accent: var(--candy-dark);
+  --accent-shadow: var(--candy-dark-shadow);
+  --accent-text: var(--candy-dark-text);
+}
+.candy-btn-ghost {
+  --accent: var(--candy-track);
+  --accent-shadow: var(--candy-outline);
+  --accent-text: var(--candy-text);
+}
+
+/* Button root */
+.candy-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  font-family: var(--candy-font-family);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  text-align: center;
+  gap: 10px;
+  --candy-btn-highlight: rgba(255, 255, 255, 0.5);
+  --candy-btn-shade: rgba(0, 0, 0, 0.18);
+  --candy-effective-depth: var(--candy-btn-depth, 0px);
+  background: var(--accent, var(--candy-primary, var(--candy-blue)));
+  color: var(--accent-text, var(--candy-primary-text, #fff));
+  border: 4.5px solid var(--candy-outline);
+  border-radius: var(--candy-radius-full);
+  box-shadow:
+    0 var(--candy-effective-depth) 0 0
+      var(--accent-shadow, var(--candy-outline)),
+    inset 0 2px 0 var(--candy-btn-highlight),
+    inset 0 -2.5px 0 var(--candy-btn-shade);
+  transition:
+    var(--candy-transition),
+    filter 0.15s ease,
+    transform 0.1s ease;
+  padding: 0 28px;
+  min-height: 52px;
+  height: 52px;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+}
+
+.candy-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+.candy-btn:active:not(:disabled) {
+  filter: brightness(0.92);
+  transform: translateY(var(--candy-effective-depth));
+  box-shadow:
+    0 0 0 0 var(--accent-shadow, var(--candy-outline)),
+    inset 0 1.5px 0 var(--candy-btn-highlight),
+    inset 0 -1.5px 0 var(--candy-btn-shade);
+}
+
+.candy-btn:disabled,
+.candy-btn[aria-disabled="true"] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none !important;
+  --candy-btn-highlight: rgba(255, 255, 255, 0.25);
+  --candy-btn-shade: rgba(0, 0, 0, 0.08);
+  box-shadow:
+    inset 0 2px 0 var(--candy-btn-highlight),
+    inset 0 -2.5px 0 var(--candy-btn-shade);
+  filter: grayscale(0.15);
+}
+
+.candy-btn:disabled:hover,
+.candy-btn:disabled:active {
+  transform: none !important;
+}
+
+.candy-btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.candy-btn-icon svg {
+  display: block;
+}
+
+/* Sizing variants */
+.candy-btn-xs {
+  font-size: 13px;
+  gap: 8px;
+  padding: 0 14px;
+  min-height: 32px;
+  height: 32px;
+  border-width: 3px;
+  box-shadow:
+    inset 0 1.5px 0 var(--candy-btn-highlight),
+    inset 0 -1.5px 0 var(--candy-btn-shade);
+}
+.candy-btn-xs:disabled,
+.candy-btn-xs[aria-disabled="true"] {
+  box-shadow:
+    inset 0 1.5px 0 var(--candy-btn-highlight),
+    inset 0 -1.5px 0 var(--candy-btn-shade);
+}
+
+.candy-btn-sm {
+  font-size: 15px;
+  gap: 9px;
+  padding: 0 20px;
+  min-height: 40px;
+  height: 40px;
+  border-width: 3.5px;
+  box-shadow:
+    inset 0 1.5px 0 var(--candy-btn-highlight),
+    inset 0 -2px 0 var(--candy-btn-shade);
+}
+.candy-btn-sm:disabled,
+.candy-btn-sm[aria-disabled="true"] {
+  box-shadow:
+    inset 0 1.5px 0 var(--candy-btn-highlight),
+    inset 0 -2px 0 var(--candy-btn-shade);
+}
+
+.candy-btn-md {
+  font-size: 18px;
+  gap: 10px;
+  padding: 0 28px;
+  min-height: 52px;
+  height: 52px;
+  border-width: 4.5px;
+  box-shadow:
+    inset 0 2px 0 var(--candy-btn-highlight),
+    inset 0 -2.5px 0 var(--candy-btn-shade);
+}
+.candy-btn-md:disabled,
+.candy-btn-md[aria-disabled="true"] {
+  box-shadow:
+    inset 0 2px 0 var(--candy-btn-highlight),
+    inset 0 -2.5px 0 var(--candy-btn-shade);
+}
+
+.candy-btn-lg {
+  font-size: 21px;
+  gap: 12px;
+  padding: 0 36px;
+  min-height: 64px;
+  height: 64px;
+  border-width: 5.5px;
+  box-shadow:
+    inset 0 2.5px 0 var(--candy-btn-highlight),
+    inset 0 -3px 0 var(--candy-btn-shade);
+}
+.candy-btn-lg:disabled,
+.candy-btn-lg[aria-disabled="true"] {
+  box-shadow:
+    inset 0 2.5px 0 var(--candy-btn-highlight),
+    inset 0 -3px 0 var(--candy-btn-shade);
+}
+
+.candy-btn-xl {
+  font-size: 24px;
+  gap: 12px;
+  padding: 0 44px;
+  min-height: 76px;
+  height: 76px;
+  border-width: 6px;
+  box-shadow:
+    inset 0 3px 0 var(--candy-btn-highlight),
+    inset 0 -4px 0 var(--candy-btn-shade);
+}
+.candy-btn-xl:disabled,
+.candy-btn-xl[aria-disabled="true"] {
+  box-shadow:
+    inset 0 3px 0 var(--candy-btn-highlight),
+    inset 0 -4px 0 var(--candy-btn-shade);
+}
+
+/* Shape variants: default is pill; pill and circle are invariant to radius tokens */
+.candy-btn-pill {
+  border-radius: var(--candy-radius-full);
+}
+
+.candy-btn-circle {
+  border-radius: var(--candy-radius-full);
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  flex-shrink: 0;
+  justify-content: center;
+}
+
+.candy-btn-square {
+  border-radius: var(--candy-radius-md);
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  flex-shrink: 0;
+  justify-content: center;
+}
+.candy-btn-square.candy-btn-xs {
+  border-radius: var(--candy-radius-sm);
+}
+.candy-btn-square.candy-btn-sm {
+  border-radius: var(--candy-radius-sm);
+}
+.candy-btn-square.candy-btn-md {
+  border-radius: var(--candy-radius-md);
+}
+.candy-btn-square.candy-btn-lg {
+  border-radius: var(--candy-radius-lg);
+}
+.candy-btn-square.candy-btn-xl {
+  border-radius: var(--candy-radius-xl);
+}
+
+.candy-btn-circle.candy-btn-xs,
+.candy-btn-square.candy-btn-xs {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+}
+.candy-btn-circle.candy-btn-sm,
+.candy-btn-square.candy-btn-sm {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+}
+.candy-btn-circle.candy-btn-md,
+.candy-btn-square.candy-btn-md {
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
+  min-height: 52px;
+}
+.candy-btn-circle.candy-btn-lg,
+.candy-btn-square.candy-btn-lg {
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  min-height: 64px;
+}
+.candy-btn-circle.candy-btn-xl,
+.candy-btn-square.candy-btn-xl {
+  width: 76px;
+  height: 76px;
+  min-width: 76px;
+  min-height: 76px;
+}
+
+/* Explicit rounded shape honors radius tokens */
+.candy-btn-rounded {
+  border-radius: var(--candy-radius-md);
+}
+.candy-btn-rounded.candy-btn-xs {
+  border-radius: var(--candy-radius-sm);
+}
+.candy-btn-rounded.candy-btn-sm {
+  border-radius: var(--candy-radius-sm);
+}
+.candy-btn-rounded.candy-btn-md {
+  border-radius: var(--candy-radius-md);
+}
+.candy-btn-rounded.candy-btn-lg {
+  border-radius: var(--candy-radius-lg);
+}
+.candy-btn-rounded.candy-btn-xl {
+  border-radius: var(--candy-radius-xl);
+}
+
+.candy-btn:focus-visible {
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .candy-btn {
+    transition: none;
+  }
+  .candy-btn:hover:not(:disabled) {
+    transform: none;
+  }
+  .candy-btn:active:not(:disabled) {
+    transform: none;
+  }
+}

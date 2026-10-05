@@ -1,0 +1,392 @@
+/* CandyTabs Styles - Candy/Casual Game Aesthetic */
+
+/* Color Variants */
+.candy-tabs-pink {
+  --accent: var(--candy-pink, #f780ae);
+  --accent-shadow: var(--candy-pink-shadow, #8f2652);
+  --accent-text: var(--candy-pink-text, #12427a);
+}
+
+.candy-tabs-blue {
+  --accent: var(--candy-primary, var(--candy-blue, #1761d1));
+  --accent-shadow: var(
+    --candy-primary-shadow,
+    var(--candy-blue-shadow, #12427a)
+  );
+  --accent-text: var(--candy-primary-text, var(--candy-blue-text, #ffffff));
+}
+
+.candy-tabs-green {
+  --accent: var(--candy-green, #70d997);
+  --accent-shadow: var(--candy-green-shadow, #194a2b);
+  --accent-text: var(--candy-green-text, #12427a);
+}
+
+.candy-tabs-yellow {
+  --accent: var(--candy-yellow, #ffcb05);
+  --accent-shadow: var(--candy-yellow-shadow, #8a5700);
+  --accent-text: var(--candy-yellow-text, #12427a);
+  --candy-tabs-highlight: rgba(255, 255, 255, 0.85);
+  --candy-tabs-shade: rgba(0, 0, 0, 0.22);
+}
+
+.candy-tabs-orange {
+  --accent: var(--candy-orange, #ff9f43);
+  --accent-shadow: var(--candy-orange-shadow, #8a3c00);
+  --accent-text: var(--candy-orange-text, #12427a);
+}
+
+.candy-tabs-purple {
+  --accent: var(--candy-purple, #7955c7);
+  --accent-shadow: var(--candy-purple-shadow, #47287d);
+  --accent-text: var(--candy-purple-text, #ffffff);
+}
+
+.candy-tabs-choco {
+  --accent: var(--candy-choco, #8d5b3e);
+  --accent-shadow: var(--candy-choco-shadow, #3b1d0b);
+  --accent-text: var(--candy-choco-text, #ffffff);
+}
+
+.candy-tabs-cream {
+  --accent: var(--candy-cream, #fff5db);
+  --accent-shadow: var(--candy-cream-shadow, #665020);
+  --accent-text: var(--candy-cream-text, #12427a);
+  --candy-tabs-highlight: rgba(255, 255, 255, 0.85);
+  --candy-tabs-shade: rgba(0, 0, 0, 0.18);
+}
+
+.candy-tabs-dark {
+  --accent: var(--candy-dark, #12427a);
+  --accent-shadow: var(--candy-dark-shadow, #0a2749);
+  --accent-text: var(--candy-dark-text, #ffffff);
+}
+
+.candy-tabs-ghost {
+  --accent: var(--candy-track, #eaf0f8);
+  --accent-shadow: var(--candy-outline, #12427a);
+  --accent-text: var(--candy-text, #173d5d);
+}
+
+/* Root Tabs Container */
+.candy-tabs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-family: var(--candy-font-family);
+  --candy-tabs-highlight: rgba(255, 255, 255, 0.65);
+  --candy-tabs-shade: rgba(0, 0, 0, 0.2);
+}
+
+/* TabList Container */
+.candy-tabs-list {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  user-select: none;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.candy-tabs-list::-webkit-scrollbar {
+  display: none;
+}
+
+.candy-tabs-full-width > .candy-tabs-list,
+.candy-tabs-list.candy-tabs-full-width {
+  display: flex;
+  width: 100%;
+}
+
+.candy-tabs-full-width > .candy-tabs-list > .candy-tabs-tab,
+.candy-tabs-list.candy-tabs-full-width > .candy-tabs-tab {
+  flex: 1 1 0%;
+  min-width: 0;
+}
+
+/* Variant: Pill */
+.candy-tabs-list-pill {
+  background: var(--candy-surface-alt, #edf3fa);
+  border: 2px solid var(--candy-track, #d8e4f2);
+  border-radius: var(--candy-radius-full, 9999px);
+  box-shadow: inset 0 2px 4px rgba(8, 43, 75, 0.08);
+  padding: 4px;
+  gap: 4px;
+}
+
+/* Variant: Underline */
+.candy-tabs-list-underline {
+  background: transparent;
+  border-bottom: 3.5px solid var(--candy-track, #eaf0f8);
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0 4px;
+  gap: 12px;
+}
+
+/* Sizes for TabList & Tab */
+/* Size: sm */
+.candy-tabs-sm .candy-tabs-list-pill {
+  padding: 3px;
+  gap: 3px;
+}
+.candy-tabs-sm .candy-tabs-tab {
+  min-height: 32px;
+  padding: 0 12px;
+  font-size: 13px;
+  gap: 6px;
+  border-radius: var(--candy-radius-full, 9999px);
+}
+.candy-tabs-sm .candy-tabs-list-underline {
+  gap: 8px;
+}
+.candy-tabs-sm .candy-tabs-list-underline .candy-tabs-tab {
+  min-height: 34px;
+  padding: 0 10px 8px;
+  border-radius: var(--candy-radius-sm, 10px) var(--candy-radius-sm, 10px) 0 0;
+}
+
+/* Size: md */
+.candy-tabs-md .candy-tabs-list-pill {
+  padding: 4px;
+  gap: 4px;
+}
+.candy-tabs-md .candy-tabs-tab {
+  min-height: 42px;
+  padding: 0 18px;
+  font-size: 15px;
+  gap: 8px;
+  border-radius: var(--candy-radius-full, 9999px);
+}
+.candy-tabs-md .candy-tabs-list-underline {
+  gap: 12px;
+}
+.candy-tabs-md .candy-tabs-list-underline .candy-tabs-tab {
+  min-height: 44px;
+  padding: 0 14px 10px;
+  border-radius: var(--candy-radius-md, 18px) var(--candy-radius-md, 18px) 0 0;
+}
+
+/* Size: lg */
+.candy-tabs-lg .candy-tabs-list-pill {
+  padding: 6px;
+  gap: 6px;
+}
+.candy-tabs-lg .candy-tabs-tab {
+  min-height: 50px;
+  padding: 0 24px;
+  font-size: 17px;
+  gap: 10px;
+  border-radius: var(--candy-radius-full, 9999px);
+}
+.candy-tabs-lg .candy-tabs-list-underline {
+  gap: 16px;
+}
+.candy-tabs-lg .candy-tabs-list-underline .candy-tabs-tab {
+  min-height: 52px;
+  padding: 0 18px 12px;
+  border-radius: var(--candy-radius-md, 18px) var(--candy-radius-md, 18px) 0 0;
+}
+
+/* Individual Tab Button */
+.candy-tabs-tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid transparent;
+  background: transparent;
+  color: var(--candy-text-muted, #536e82);
+  font-family: var(--candy-font-family);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  cursor: pointer;
+  outline: none;
+  box-sizing: border-box;
+  text-decoration: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 0.18s var(--candy-bounce, cubic-bezier(0.2, 0.8, 0.2, 1)),
+    box-shadow 0.18s var(--candy-bounce, cubic-bezier(0.2, 0.8, 0.2, 1)),
+    background-color 0.15s ease,
+    color 0.15s ease,
+    filter 0.15s ease;
+}
+
+.candy-tabs-tab:focus-visible {
+  outline: 3px solid var(--candy-focus, #1761d1);
+  outline-offset: 2px;
+  z-index: 2;
+}
+
+/* Unselected Hover state */
+.candy-tabs-tab:hover:not(:disabled):not([aria-selected="true"]) {
+  color: var(--candy-text, #173d5d);
+  background: rgba(255, 255, 255, 0.55);
+}
+
+/* Pill Selected State: 3D chunky candy block with juicy inner shadow & drop shadow */
+.candy-tabs-list-pill .candy-tabs-tab[aria-selected="true"] {
+  background: var(--accent, var(--candy-primary, var(--candy-blue, #1761d1)));
+  color: var(--accent-text, var(--candy-primary-text, #ffffff));
+  border: 2px solid transparent;
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.14),
+    inset 0 1.5px 0 var(--candy-tabs-highlight, rgba(255, 255, 255, 0.5));
+  transform: none;
+  z-index: 1;
+}
+
+.candy-tabs-list-pill
+  .candy-tabs-tab[aria-selected="true"]:hover:not(:disabled) {
+  filter: brightness(1.06);
+}
+
+.candy-tabs-list-pill .candy-tabs-tab:active:not(:disabled) {
+  transform: translateY(1.5px);
+  box-shadow:
+    0 1px 0 var(--accent-shadow, var(--candy-primary-shadow, #12427a)),
+    inset 0 1.5px 0 var(--candy-tabs-highlight),
+    inset 0 -1.5px 0 var(--candy-tabs-shade);
+}
+
+/* Underline Selected State: Bottom indicator strip with candy gloss */
+.candy-tabs-list-underline .candy-tabs-tab[aria-selected="true"] {
+  color: var(--candy-text, #173d5d);
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.6);
+  transform: translateY(-2px);
+}
+
+.candy-tabs-list-underline .candy-tabs-tab[aria-selected="true"]::after {
+  content: "";
+  position: absolute;
+  bottom: -3.5px;
+  left: 12%;
+  right: 12%;
+  height: 4.5px;
+  border-radius: var(--candy-radius-full, 9999px);
+  background: var(--accent, var(--candy-primary, var(--candy-blue, #1761d1)));
+  border: 1px solid var(--candy-outline, #12427a);
+  box-shadow:
+    0 2px 0 var(--accent-shadow, var(--candy-primary-shadow, #12427a)),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  transition: all 0.2s var(--candy-bounce, cubic-bezier(0.2, 0.8, 0.2, 1));
+}
+
+.candy-tabs-list-underline .candy-tabs-tab:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Disabled Tab */
+.candy-tabs-tab:disabled,
+.candy-tabs-tab[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+  filter: grayscale(0.5);
+  transform: none;
+  box-shadow: none;
+}
+
+/* Tab Icon */
+.candy-tabs-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+/* Badges */
+.candy-tabs-badge-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--candy-pink, #f780ae);
+  border: 1.5px solid var(--candy-outline, #12427a);
+  box-shadow:
+    0 1px 0 var(--candy-pink-shadow, #8f2652),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  flex-shrink: 0;
+  margin-left: 2px;
+}
+
+.candy-tabs-badge-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: var(--candy-radius-full, 9999px);
+  background: var(--candy-pink, #f780ae);
+  color: var(--candy-pink-text, #12427a);
+  border: 1.5px solid var(--candy-outline, #12427a);
+  font-family: var(--candy-font-family);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow:
+    0 1.5px 0 var(--candy-pink-shadow, #8f2652),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.candy-tabs-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Panel */
+.candy-tabs-panel {
+  display: block;
+  outline: none;
+  box-sizing: border-box;
+  padding: 16px 0;
+  color: var(--candy-text, #173d5d);
+  font-family: var(--candy-font-family);
+  animation: candyTabsPanelFadeIn 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.candy-tabs-panel[hidden] {
+  display: none;
+}
+
+.candy-tabs-panel:focus-visible {
+  outline: 3px solid var(--candy-focus, #1761d1);
+  outline-offset: 3px;
+  border-radius: var(--candy-radius-md, 18px);
+}
+
+@keyframes candyTabsPanelFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Motion Reduction */
+@media (prefers-reduced-motion: reduce) {
+  .candy-tabs-tab,
+  .candy-tabs-list-underline .candy-tabs-tab[aria-selected="true"]::after,
+  .candy-tabs-panel {
+    transition: none;
+    animation: none;
+    transform: none;
+  }
+}

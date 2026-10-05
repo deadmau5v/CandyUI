@@ -1,0 +1,248 @@
+/* Ribbon colors: band / light (top highlight) / tail / fold / text */
+.candy-ribbon-blue {
+  --accent: #1f8bff;
+  --accent-light: #5aaeff;
+  --accent-tail: #1268dc;
+  --accent-fold: #0a3f8f;
+  --accent-text: #ffd21f;
+}
+.candy-ribbon-gold {
+  --accent: #ffc81a;
+  --accent-light: #ffe27a;
+  --accent-tail: #f0a500;
+  --accent-fold: #a86a00;
+  --accent-text: #ffffff;
+}
+.candy-ribbon-pink {
+  --accent: #ff7fb2;
+  --accent-light: #ffb3d2;
+  --accent-tail: #e45a93;
+  --accent-fold: #962a58;
+  --accent-text: #ffffff;
+}
+.candy-ribbon-green {
+  --accent: #5fd48b;
+  --accent-light: #9cebb8;
+  --accent-tail: #38b066;
+  --accent-fold: #1d6638;
+  --accent-text: #ffffff;
+}
+
+/* Panel root */
+.candy-ui-root .candy-panel,
+.candy-panel.candy-panel {
+  position: relative;
+  background: var(--candy-surface, #fff);
+  color: var(--candy-text, #173d5d);
+  font-family: var(--candy-font-family);
+  border: none;
+  border-radius: var(--candy-radius-xl, 24px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  overflow: visible;
+  box-sizing: border-box;
+}
+
+.candy-panel-cookie {
+  background: var(--candy-surface);
+}
+.candy-ui-root .candy-panel-bubblegum,
+.candy-panel-bubblegum.candy-panel-bubblegum {
+  background: #fff8fc;
+  border-color: #f5dce8;
+}
+.candy-ui-root .candy-panel-cyber,
+.candy-panel-cyber.candy-panel-cyber {
+  background: #f2f7fc;
+  border-color: #d6e5f3;
+}
+.candy-panel-frosted {
+  background: var(--candy-surface);
+}
+
+.candy-ui-root .candy-modal-content > .candy-panel,
+.candy-modal-content > .candy-panel.candy-panel {
+  border: 0;
+  background: var(--candy-surface, #fff);
+  box-shadow: 0 4px 14px rgb(8 43 75 / 8%);
+}
+
+.candy-ui-root .candy-panel-rivet,
+.candy-panel-rivet.candy-panel-rivet {
+  display: none;
+}
+
+.candy-ui-root .candy-panel-inner,
+.candy-panel-inner.candy-panel-inner {
+  background: #acc7d1;
+  border: 1px solid #94b5c2;
+  border-radius: var(--candy-radius-lg, 24px);
+  padding: 18px 20px;
+  color: var(--candy-text, #173d5d);
+  box-shadow: none;
+  box-sizing: border-box;
+}
+.candy-ui-root .candy-panel-inner .candy-panel-inset,
+.candy-panel-inner .candy-panel-inset.candy-panel {
+  background: #e4edf0;
+  border: 1px solid #9cbcc8;
+  border-radius: var(--candy-radius-md, 18px);
+  padding: 16px;
+  box-shadow: none;
+}
+
+/* Panel headings: rounded display type with CJK fallback */
+.candy-ui-root .candy-panel :is(h1, h2, h3, h4),
+.candy-panel.candy-panel :is(h1, h2, h3, h4) {
+  font-family: var(--candy-font-family);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+.candy-panel :is(h1, h2, h3, h4):lang(zh) {
+  letter-spacing: 0.04em;
+}
+
+/* Ribbon â€?arched game banner with folded tails (SVG shape + HTML text) */
+.candy-ui-root .candy-ribbon-container,
+.candy-ribbon-container.candy-ribbon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  margin-top: -62px;
+  margin-bottom: 14px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.candy-ui-root .candy-ribbon,
+.candy-ribbon.candy-ribbon {
+  --ribbon-height: 84px;
+  --ribbon-text-size: 30px;
+  --ribbon-ink: var(--candy-ribbon-ink, var(--candy-primary-shadow, #12427a));
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  width: max-content;
+  min-width: min(320px, calc(100% - 8px));
+  max-width: calc(100% - 8px);
+  height: var(--ribbon-height);
+  box-sizing: border-box;
+  padding: 0 72px;
+  color: var(--accent-text);
+  font-family: var(--candy-font-display, var(--candy-font-family));
+  font-size: var(--ribbon-text-size);
+  font-weight: 700;
+  font-synthesis-weight: none;
+  line-height: 1;
+  text-align: center;
+  pointer-events: auto;
+  filter: drop-shadow(0 3px 0 rgb(18 66 122 / 18%));
+}
+
+.candy-ui-root .candy-ribbon-shape,
+.candy-ribbon-shape.candy-ribbon-shape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.candy-ribbon-shape path {
+  vector-effect: non-scaling-stroke;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.candy-ribbon-shape .candy-ribbon-tail {
+  fill: var(--accent-tail);
+  stroke: var(--ribbon-ink);
+  stroke-width: 3px;
+}
+.candy-ribbon-shape .candy-ribbon-fold {
+  fill: var(--accent-fold);
+  stroke: var(--ribbon-ink);
+  stroke-width: 3px;
+}
+.candy-ribbon-shape .candy-ribbon-band {
+  fill: var(--accent);
+}
+.candy-ribbon-shape .candy-ribbon-highlight {
+  fill: var(--accent-light);
+  opacity: 1;
+}
+.candy-ribbon-shape .candy-ribbon-shade {
+  fill: rgb(10 39 73 / 16%);
+}
+.candy-ribbon-shape .candy-ribbon-rim {
+  fill: none;
+  stroke: rgb(255 255 255 / 38%);
+  stroke-width: 2px;
+}
+.candy-ribbon-shape .candy-ribbon-outline {
+  fill: none;
+  stroke: var(--ribbon-ink);
+  stroke-width: 4px;
+}
+
+/* Text sits on the arched band's optical centre */
+.candy-ui-root .candy-ribbon-content,
+.candy-ribbon-content.candy-ribbon-content {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
+  max-width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0 0 26px;
+}
+.candy-ui-root .candy-ribbon-text,
+.candy-ribbon-text.candy-ribbon-text {
+  min-width: 0;
+  padding: 4px 4px 6px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  /* Thick cartoon outline + chunky drop; text-shadow works on every engine */
+  text-shadow:
+    2px 0 0 var(--ribbon-ink),
+    -2px 0 0 var(--ribbon-ink),
+    0 2px 0 var(--ribbon-ink),
+    0 -2px 0 var(--ribbon-ink),
+    1.5px 1.5px 0 var(--ribbon-ink),
+    -1.5px 1.5px 0 var(--ribbon-ink),
+    1.5px -1.5px 0 var(--ribbon-ink),
+    -1.5px -1.5px 0 var(--ribbon-ink),
+    0 4px 0 var(--ribbon-ink),
+    2px 4px 0 var(--ribbon-ink),
+    -2px 4px 0 var(--ribbon-ink);
+}
+.candy-ribbon-text:lang(zh) {
+  letter-spacing: 0.08em;
+}
+.candy-ui-root .candy-ribbon-icon,
+.candy-ribbon-icon.candy-ribbon-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 0 var(--ribbon-ink));
+}
+
+@media (max-width: 420px) {
+  .candy-ui-root .candy-ribbon-container,
+  .candy-ribbon-container.candy-ribbon-container {
+    margin-top: -50px;
+  }
+  .candy-ui-root .candy-ribbon,
+  .candy-ribbon.candy-ribbon {
+    --ribbon-height: 64px;
+    --ribbon-text-size: 21px;
+    padding: 0 52px;
+  }
+  .candy-ui-root .candy-ribbon-content,
+  .candy-ribbon-content.candy-ribbon-content {
+    padding-bottom: 22px;
+  }
+}

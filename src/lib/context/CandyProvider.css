@@ -1,0 +1,16 @@
+body {
+  margin: 0;
+}
+
+.candy-ui-root,
+.candy-ui-root *,
+.candy-ui-root *::before,
+.candy-ui-root *::after {
+  box-sizing: border-box;
+}
+.candy-ui-root {
+  font-family: var(--candy-font-family);
+  color: var(--candy-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
