@@ -20,6 +20,8 @@
   padding: 52px 20px 16px;
   outline: none;
 }
+.candy-modal-plain { padding: 0; }
+.candy-modal-title { margin: 0 32px 18px 0; font-size: 21px; line-height: 1.4; color: var(--candy-text); }
 .candy-modal-content:focus,
 .candy-modal-content:focus-visible {
   outline: none;

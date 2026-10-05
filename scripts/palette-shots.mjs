@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env bun
 /**
  * One-click palette renders for CandyUI.
  *
@@ -8,20 +8,20 @@
  *   artifacts/palette/sections/<backdrop>/<id>.png one PNG per component section (--split)
  *
  * Usage:
- *   pnpm run palette                       # all backdrops, full sheets
- *   pnpm run palette -- --split            # + one PNG per component per backdrop
- *   pnpm run palette -- --backdrop white,navy
- *   pnpm run palette -- --section buttons,badges,toasts
- *   pnpm run palette -- --css my-theme.css # inject a theme override to test colours
- *   pnpm run palette -- --var --candy-blue=#e11d48 --var --candy-blue-shadow=#7f1033
- *   pnpm run palette -- --out artifacts/palette-red --scale 2
- *   pnpm run palette -- --url http://127.0.0.1:5173   # reuse a running dev server
+ *   bun run palette                       # all backdrops, full sheets
+ *   bun run palette -- --split            # + one PNG per component per backdrop
+ *   bun run palette -- --backdrop white,navy
+ *   bun run palette -- --section buttons,badges,toasts
+ *   bun run palette -- --css my-theme.css # inject a theme override to test colours
+ *   bun run palette -- --var --candy-blue=#e11d48 --var --candy-blue-shadow=#7f1033
+ *   bun run palette -- --out artifacts/palette-red --scale 2
+ *   bun run palette -- --url http://127.0.0.1:5173   # reuse a running dev server
  *
  * Env: CHROME_PATH (browser executable), PALETTE_URL (same as --url).
  */
 import { chromium } from "@playwright/test";
 import { createServer } from "vite";
-import { mkdir, readFile, rm } from "node:fs/promises";
+import { mkdir, readFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -167,7 +167,6 @@ try {
 
     if (opts.split) {
       const dir = join(opts.out, "sections", backdrop);
-      await rm(dir, { recursive: true, force: true });
       await mkdir(dir, { recursive: true });
       const ids = opts.section.includes("all") ? sectionIds : opts.section;
       for (const id of ids) {

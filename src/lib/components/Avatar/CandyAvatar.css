@@ -1,3 +1,9 @@
+.candy-avatar-status { position: absolute; top: -2px; right: -2px; width: 13px; height: 13px; border: 2px solid var(--candy-surface); border-radius: 50%; background: var(--candy-success); }
+.candy-avatar-status-offline { background: var(--candy-text-muted); }
+.candy-avatar-status-away { background: var(--candy-warning); }
+.candy-avatar-status-playing { background: var(--candy-info); }
+.candy-avatar-edit { position: absolute; top: -5px; right: -5px; display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border: 2px solid var(--candy-surface); border-radius: 50%; background: var(--candy-primary); color: var(--candy-primary-text); cursor: pointer; }
+.candy-avatar-edit:focus-visible { outline: 3px solid var(--candy-focus); outline-offset: 2px; }
 /* Avatar */
 .candy-avatar {
   position: relative;

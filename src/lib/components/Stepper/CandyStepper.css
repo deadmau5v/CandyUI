@@ -1,0 +1,109 @@
+.candy-stepper-field {
+  display: inline-flex;
+  width: auto;
+  max-width: 100%;
+}
+
+.candy-stepper {
+  --candy-stepper-height: 42px;
+  display: inline-flex;
+  align-items: stretch;
+  max-width: 100%;
+  height: var(--candy-stepper-height);
+  box-sizing: border-box;
+  border: 1.5px solid var(--candy-border, #b9c8dc);
+  border-radius: var(--candy-radius-sm);
+  background: var(--candy-surface);
+  color: var(--candy-text);
+  box-shadow:
+    inset 0 2px 3px rgb(16 35 75 / 5%),
+    0 2px 0 rgb(16 35 75 / 6%);
+  overflow: hidden;
+  font-family: var(--candy-font-family);
+}
+
+.candy-stepper-xs {
+  --candy-stepper-height: 30px;
+  font-size: 0.75rem;
+}
+.candy-stepper-sm {
+  --candy-stepper-height: 36px;
+  font-size: 0.875rem;
+}
+.candy-stepper-md {
+  font-size: 1rem;
+}
+.candy-stepper-lg {
+  --candy-stepper-height: 48px;
+  font-size: 1.125rem;
+}
+.candy-stepper-xl {
+  --candy-stepper-height: 56px;
+  font-size: 1.25rem;
+}
+
+.candy-stepper button {
+  flex: 0 0 var(--candy-stepper-height);
+  width: var(--candy-stepper-height);
+  border: 0;
+  background: linear-gradient(var(--candy-surface), var(--candy-surface-alt));
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  font-size: 1.35em;
+  cursor: pointer;
+}
+
+.candy-stepper button:first-child {
+  border-right: 1px solid var(--candy-border, #b9c8dc);
+}
+.candy-stepper button:last-child {
+  border-left: 1px solid var(--candy-border, #b9c8dc);
+}
+.candy-stepper button:hover:not(:disabled) {
+  background: var(--candy-blue-light);
+  color: var(--candy-primary);
+}
+.candy-stepper button:active:not(:disabled) {
+  box-shadow: inset 0 2px 3px rgb(16 35 75 / 12%);
+}
+.candy-stepper button:disabled {
+  color: var(--candy-text-muted);
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.candy-stepper input {
+  appearance: textfield;
+  width: 5em;
+  min-width: 0;
+  padding: 0 6px;
+  border: 0;
+  border-radius: 0;
+  outline: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 600;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.candy-stepper input::-webkit-inner-spin-button,
+.candy-stepper input::-webkit-outer-spin-button {
+  appearance: none;
+  margin: 0;
+}
+.candy-stepper:focus-within {
+  border-color: var(--candy-primary);
+  outline: 3px solid color-mix(in srgb, var(--candy-primary) 18%, transparent);
+  outline-offset: 2px;
+}
+.candy-stepper button:focus-visible {
+  outline: 2px solid var(--candy-primary);
+  outline-offset: -4px;
+}
+.candy-stepper-disabled {
+  opacity: 0.55;
+  background: var(--candy-surface-alt);
+}

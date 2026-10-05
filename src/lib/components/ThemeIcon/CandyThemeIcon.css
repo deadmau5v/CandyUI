@@ -1,0 +1,13 @@
+.candy-theme-icon {
+  display: inline-block;
+  flex: 0 0 auto;
+  vertical-align: middle;
+  overflow: visible;
+  filter: drop-shadow(0 2px 1px rgb(16 35 75 / 12%));
+}
+
+@media (forced-colors: active) {
+  .candy-theme-icon {
+    filter: none;
+  }
+}

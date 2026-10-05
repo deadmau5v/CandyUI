@@ -1,0 +1,45 @@
+.candy-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 0;
+  padding: 24px 18px;
+  color: var(--candy-text);
+  font-family: var(--candy-font-family);
+  text-align: center;
+}
+
+.candy-empty-state-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.candy-empty-state-icon > svg {
+  width: 64px;
+  height: 64px;
+}
+
+.candy-empty-state-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.candy-empty-state-description {
+  max-width: 32ch;
+  margin: 5px 0 0;
+  color: var(--candy-text-muted);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.candy-empty-state-content,
+.candy-empty-state-action {
+  margin-top: 14px;
+}

@@ -1,67 +1,52 @@
-import React from "react";
+import React, { forwardRef, useId } from "react";
 import { useCandy } from "../../context/CandyProvider";
+import { CandyColor } from "../../types";
 import "./CandySwitch.css";
 
-export interface CandySwitchProps {
-  "aria-label"?: string;
+export interface CandySwitchProps extends Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "onChange" | "color"
+> {
   checked: boolean;
   onChange: (checked: boolean) => void;
-  disabled?: boolean;
+  color?: CandyColor;
+  label?: React.ReactNode;
   sound?: boolean;
   iconOn?: React.ReactNode;
   iconOff?: React.ReactNode;
-  className?: string;
-  style?: React.CSSProperties;
 }
 
-export const CandySwitch: React.FC<CandySwitchProps> = ({
-  checked,
-  "aria-label": ariaLabel,
-  onChange,
-  disabled = false,
-  sound = true,
-  iconOn,
-  iconOff,
-  className = "",
-  style,
-}) => {
-  const { playSound } = useCandy();
-
-  const handleToggle = () => {
-    if (disabled) return;
-    if (sound) {
-      playSound("toggle");
-    }
-    onChange(!checked);
-  };
-
-  const classes = [
-    "candy-switch",
-    checked ? "candy-switch-checked" : "",
-    disabled ? "opacity-50 cursor-not-allowed" : "",
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
-
-  return (
-    <div
-      role="switch"
-      aria-label={ariaLabel}
-      aria-checked={checked}
-      aria-disabled={disabled}
-      tabIndex={disabled ? -1 : 0}
-      className={classes}
-      onClick={handleToggle}
-      onKeyDown={(e) => {
-        if (e.key === " " || e.key === "Enter") {
-          e.preventDefault();
-          handleToggle();
-        }
-      }}
-      style={style}
-    >
-      <div className="candy-switch-thumb">{checked ? iconOn : iconOff}</div>
-    </div>
-  );
-};
+export const CandySwitch = forwardRef<HTMLButtonElement, CandySwitchProps>(
+  ({ checked, onChange, color = "blue", label, disabled = false, sound = true,
+    iconOn, iconOff, className = "", style, onClick, "aria-label": ariaLabel,
+    "aria-labelledby": ariaLabelledBy, ...rest }, ref) => {
+    const { playSound } = useCandy();
+    const labelId = useId();
+    const accent = color === "blue" ? "var(--candy-primary)" : color === "ghost" ? "var(--candy-text-muted)" : `var(--candy-${color})`;
+    const toggle = (
+      <button
+        {...rest}
+        ref={ref}
+        type="button"
+        role="switch"
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy || (!ariaLabel && label ? labelId : undefined)}
+        aria-checked={checked}
+        aria-disabled={disabled || undefined}
+        disabled={disabled}
+        className={["candy-switch", checked ? "candy-switch-checked" : "", className].filter(Boolean).join(" ")}
+        style={{ "--candy-switch-accent": accent, ...style } as React.CSSProperties}
+        onClick={(event) => {
+          onClick?.(event);
+          if (event.defaultPrevented || disabled) return;
+          if (sound) playSound("toggle");
+          onChange(!checked);
+        }}
+      >
+        <span className="candy-switch-thumb" aria-hidden="true">{checked ? iconOn : iconOff}</span>
+      </button>
+    );
+    return label ? <span className="candy-switch-control">{toggle}<span id={labelId}>{label}</span></span> : toggle;
+  },
+);
+CandySwitch.displayName = "CandySwitch";

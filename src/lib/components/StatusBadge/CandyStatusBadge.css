@@ -1,0 +1,66 @@
+.candy-status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  box-sizing: border-box;
+  padding: 5px 8px;
+  border: 1px solid currentColor;
+  border-color: color-mix(in srgb, currentColor 18%, transparent);
+  border-radius: var(--candy-radius-sm);
+  font-family: var(--candy-font-family);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.candy-status-badge-sm {
+  padding: 3px 6px;
+  font-size: 0.6875rem;
+}
+
+.candy-status-badge-icon,
+.candy-status-badge-icon svg {
+  display: inline-flex;
+  flex: 0 0 auto;
+  width: 14px;
+  height: 14px;
+}
+
+.candy-status-badge-sm .candy-status-badge-icon,
+.candy-status-badge-sm .candy-status-badge-icon svg {
+  width: 12px;
+  height: 12px;
+}
+
+.candy-status-badge-online {
+  background: var(--candy-success-light, #e4fbef);
+  color: var(--candy-success, #00875a);
+}
+
+.candy-status-badge-playing {
+  background: var(--candy-warning-light, #fff6da);
+  color: var(--candy-warning, #a26900);
+}
+
+.candy-status-badge-offline {
+  background: var(--candy-danger-light, #ffe9ee);
+  color: var(--candy-danger, #df1645);
+}
+
+.candy-status-badge-away,
+.candy-status-badge-host {
+  background: var(--candy-purple-light);
+  color: var(--candy-purple-dark);
+}
+
+.candy-status-badge-admin {
+  background: var(--candy-blue-light);
+  color: var(--candy-primary);
+}
+
+.candy-status-badge-full {
+  background: var(--candy-surface-alt);
+  color: var(--candy-text-muted);
+}

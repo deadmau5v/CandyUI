@@ -49,7 +49,7 @@ export const CandyToast: React.FC<CandyToastProps> = ({ toast, onDismiss }) => {
       <button
         type="button"
         className="candy-toast-close"
-        aria-label="Close notification"
+        aria-label={`Dismiss notification: ${toast.title}`}
         onClick={(e) => {
           e.stopPropagation();
           onDismiss(toast.id);

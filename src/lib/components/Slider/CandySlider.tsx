@@ -3,6 +3,7 @@ import { CandyColor } from "../../types";
 import "./CandySlider.css";
 
 export interface CandySliderProps {
+  id?: string;
   "aria-label"?: string;
   value: number;
   min?: number;
@@ -16,6 +17,7 @@ export interface CandySliderProps {
 }
 
 export const CandySlider: React.FC<CandySliderProps> = ({
+  id,
   value,
   "aria-label": ariaLabel = "Value",
   min = 0,
@@ -68,6 +70,7 @@ export const CandySlider: React.FC<CandySliderProps> = ({
 
   return (
     <div
+      id={id}
       ref={trackRef}
       className={`candy-slider-root candy-slider-${color} ${className}`}
       role="slider"

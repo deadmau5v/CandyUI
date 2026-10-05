@@ -12,6 +12,9 @@ export interface CandyButtonProps extends React.ButtonHTMLAttributes<HTMLButtonE
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   fullWidth?: boolean;
+  appearance?: "solid" | "outline" | "soft";
+  loading?: boolean;
+  loadingLabel?: React.ReactNode;
 }
 
 export const CandyButton = forwardRef<HTMLButtonElement, CandyButtonProps>(
@@ -21,6 +24,9 @@ export const CandyButton = forwardRef<HTMLButtonElement, CandyButtonProps>(
       variant = "blue",
       size = "md",
       shape = "pill",
+      appearance = "solid",
+      loading = false,
+      loadingLabel,
       sound = "pop",
       leftIcon,
       rightIcon,
@@ -37,7 +43,7 @@ export const CandyButton = forwardRef<HTMLButtonElement, CandyButtonProps>(
     const { playSound } = useCandy();
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-      if (disabled) return;
+      if (disabled || loading) return;
       if (sound) {
         playSound(sound);
       }
@@ -49,6 +55,8 @@ export const CandyButton = forwardRef<HTMLButtonElement, CandyButtonProps>(
       `candy-btn-${variant}`,
       `candy-btn-${size}`,
       `candy-btn-${shape}`,
+      `candy-btn-${appearance}`,
+      loading ? "candy-btn-loading" : "",
       fullWidth ? "w-full" : "",
       className,
     ]
@@ -60,7 +68,8 @@ export const CandyButton = forwardRef<HTMLButtonElement, CandyButtonProps>(
         ref={ref}
         type={type}
         className={classes}
-        disabled={disabled}
+        disabled={disabled || loading}
+        aria-busy={loading || undefined}
         onClick={handleClick}
         style={{
           width: fullWidth ? "100%" : undefined,
@@ -68,7 +77,8 @@ export const CandyButton = forwardRef<HTMLButtonElement, CandyButtonProps>(
         }}
         {...rest}
       >
-        {leftIcon && (
+        {loading && <span className="candy-btn-spinner" aria-hidden="true" />}
+        {!loading && leftIcon && (
           <span
             className="candy-btn-icon candy-btn-icon-left"
             aria-hidden="true"
@@ -76,7 +86,7 @@ export const CandyButton = forwardRef<HTMLButtonElement, CandyButtonProps>(
             {leftIcon}
           </span>
         )}
-        {children}
+        {loading && loadingLabel ? loadingLabel : children}
         {rightIcon && (
           <span
             className="candy-btn-icon candy-btn-icon-right"

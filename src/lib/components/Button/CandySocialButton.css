@@ -1,0 +1,5 @@
+.candy-social-twitter { --accent: var(--candy-cyan); --accent-shadow: var(--candy-cyan-shadow); --accent-text: var(--candy-cyan-text); }
+.candy-social-google { --accent: #c52828; --accent-shadow: #7f1c22; --accent-text: #ffffff; }
+.candy-social-vk { --accent: #2d67b7; --accent-shadow: #183e77; --accent-text: #ffffff; }
+.candy-social-discord { --accent: #5b54d5; --accent-shadow: #353075; --accent-text: #ffffff; }
+.candy-social-btn { font-weight: 600; }

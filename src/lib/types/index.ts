@@ -1,6 +1,9 @@
 export type CandyColor =
   | "pink"
   | "blue"
+  | "cyan"
+  | "red"
+  | "gray"
   | "green"
   | "yellow"
   | "orange"

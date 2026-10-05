@@ -1,46 +1,54 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@400;500;700;900&family=ZCOOL+KuaiLe&display=swap");
 
 :root {
-  /* Latin glyphs come from Fredoka; CJK falls through to a clean Chinese
-     stack (system fonts first, Noto Sans SC as the web fallback). */
   --candy-font-family:
     "Fredoka", "HarmonyOS Sans SC", "PingFang SC", "Noto Sans SC",
     "Microsoft YaHei", "Trebuchet MS", sans-serif;
-  /* Chunky display face for ribbons/titles; Chinese uses rounded ZCOOL KuaiLe */
   --candy-font-display:
     "Fredoka", "ZCOOL KuaiLe", "HarmonyOS Sans SC", "PingFang SC",
     "Noto Sans SC", "Microsoft YaHei", sans-serif;
 
-  /* Flat, lively colors with legible label colors aligned with DESIGN.md */
-  --candy-pink: #f780ae;
-  --candy-pink-light: #ffedf4;
-  --candy-pink-dark: #cf4d7f;
-  --candy-pink-shadow: #8f2652;
-  --candy-pink-text: #12427a;
-
-  --candy-blue: #1761d1;
-  --candy-blue-light: #eaf2ff;
-  --candy-blue-dark: #0f4494;
-  --candy-blue-shadow: #12427a;
+  --candy-blue: #0068f0;
+  --candy-blue-light: #e9f3ff;
+  --candy-blue-dark: #0057d6;
+  --candy-blue-shadow: #103679;
   --candy-blue-text: #ffffff;
 
-  --candy-green: #70d997;
-  --candy-green-light: #eafaf0;
-  --candy-green-dark: #389658;
-  --candy-green-shadow: #194a2b;
-  --candy-green-text: #12427a;
+  --candy-cyan: #00b8ef;
+  --candy-cyan-light: #e2f7ff;
+  --candy-cyan-dark: #0096d1;
+  --candy-cyan-shadow: #07577d;
+  --candy-cyan-text: #10234b;
 
-  --candy-yellow: #ffcb05;
-  --candy-yellow-light: #fff8dd;
-  --candy-yellow-dark: #c98d00;
-  --candy-yellow-shadow: #8a5700;
-  --candy-yellow-text: #12427a;
+  --candy-yellow: #ffd51c;
+  --candy-yellow-light: #fff8d8;
+  --candy-yellow-dark: #e6ad00;
+  --candy-yellow-shadow: #947000;
+  --candy-yellow-text: #10234b;
+
+  --candy-green: #58d13f;
+  --candy-green-light: #e6f9e9;
+  --candy-green-dark: #239537;
+  --candy-green-shadow: #1b5d31;
+  --candy-green-text: #10234b;
+
+  --candy-red: #df1645;
+  --candy-red-light: #ffedf1;
+  --candy-red-dark: #bd0c36;
+  --candy-red-shadow: #82102e;
+  --candy-red-text: #ffffff;
+
+  --candy-pink: #f780ae;
+  --candy-pink-light: #ffedf4;
+  --candy-pink-dark: #b9376d;
+  --candy-pink-shadow: #8f2652;
+  --candy-pink-text: #10234b;
 
   --candy-orange: #ff9f43;
   --candy-orange-light: #fff2e5;
-  --candy-orange-dark: #cc6d14;
+  --candy-orange-dark: #b75b0c;
   --candy-orange-shadow: #8a3c00;
-  --candy-orange-text: #12427a;
+  --candy-orange-text: #10234b;
 
   --candy-purple: #7955c7;
   --candy-purple-light: #f2edfc;
@@ -58,40 +66,73 @@
   --candy-cream-light: #fffcf2;
   --candy-cream-dark: #d8c494;
   --candy-cream-shadow: #665020;
-  --candy-cream-text: #12427a;
+  --candy-cream-text: #10234b;
 
-  --candy-dark: #12427a;
+  --candy-gray: #e8edf3;
+  --candy-gray-light: #f5f7fa;
+  --candy-gray-dark: #b2bfce;
+  --candy-gray-shadow: #7d8da5;
+  --candy-gray-text: #34445f;
+
+  --candy-dark: #10234b;
   --candy-dark-light: #e8eef4;
-  --candy-dark-dark: #0a2749;
-  --candy-dark-shadow: #0a2749;
+  --candy-dark-dark: #08152e;
+  --candy-dark-shadow: #08152e;
   --candy-dark-text: #ffffff;
 
-  /* Public theme controls, inherited by every blue/default accent */
   --candy-primary: var(--candy-blue);
   --candy-primary-shadow: var(--candy-blue-shadow);
   --candy-primary-text: var(--candy-blue-text);
-  --candy-btn-depth: 5px;
-  --candy-outline: var(--candy-primary-shadow, #12427a);
-  --candy-text: #173d5d;
-  --candy-text-muted: #536e82;
+  --candy-btn-depth: 3px;
+  --candy-outline: #10234b;
+  --candy-border: #c1cfdf;
+  --candy-text: #10234b;
+  --candy-text-muted: #53647d;
   --candy-surface: #ffffff;
-  --candy-surface-alt: #f8fafc;
-  --candy-card-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.03);
-  --candy-track: #eaf0f8;
-  --candy-panel-shadow: #cbdde9;
-  --candy-focus: #1761d1;
+  --candy-surface-alt: #f3f8fd;
+  --candy-track: #e5edf7;
+  --candy-panel-shadow: #d2e1ef;
+  --candy-card-shadow: 0 3px 8px rgb(34 74 125 / 8%);
+  --candy-focus: var(--candy-primary);
+  --candy-focus-ring: 0 0 0 3px color-mix(in srgb, var(--candy-focus) 22%, transparent);
 
-  /* Corner radii */
-  --candy-radius-sm: 10px;
-  --candy-radius-md: 18px;
-  --candy-radius-lg: 24px;
-  --candy-radius-xl: 30px;
+  --candy-success: #00784f;
+  --candy-success-light: #e3fbef;
+  --candy-info: #0060d9;
+  --candy-info-light: #e5f3ff;
+  --candy-warning: #966100;
+  --candy-warning-light: #fff7d5;
+  --candy-danger: #c71440;
+  --candy-danger-light: #ffedf1;
+
+  --candy-radius-sm: 8px;
+  --candy-radius-md: 14px;
+  --candy-radius-lg: 18px;
+  --candy-radius-xl: 24px;
   --candy-radius-full: 9999px;
-
   --candy-transition:
     transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
   --candy-bounce: cubic-bezier(0.2, 0.8, 0.2, 1);
-  --candy-pop-shadow: 0 5px 0 var(--candy-panel-shadow);
+  --candy-pop-shadow: 0 3px 0 var(--candy-panel-shadow);
   --candy-text-stroke: none;
+}
+
+[data-candy-theme="dark"] {
+  color-scheme: dark;
+  --candy-text: #edf4ff;
+  --candy-text-muted: #b5c4d8;
+  --candy-surface: #172844;
+  --candy-surface-alt: #203553;
+  --candy-border: #53708f;
+  --candy-track: #294263;
+  --candy-panel-shadow: #0b172c;
+  --candy-card-shadow: 0 3px 12px rgb(0 0 0 / 20%);
+  --candy-success: #68e2b0;
+  --candy-success-light: #123e34;
+  --candy-info: #8dc3ff;
+  --candy-info-light: #18375d;
+  --candy-warning: #ffd36f;
+  --candy-warning-light: #46391e;
+  --candy-danger: #ff9fb5;
+  --candy-danger-light: #4a2436;
 }

@@ -16,24 +16,25 @@ export interface CandyProgressProps extends React.HTMLAttributes<HTMLDivElement>
 export const CandyProgress: React.FC<CandyProgressProps> = ({
   value,
   max = 100,
-  variant = "green",
-  striped = true,
+  variant = "blue",
+  striped = false,
   showLabel = true,
   height = 24,
   icon,
-  sparkle = true,
+  sparkle = false,
   className = "",
   style,
   ...rest
 }) => {
-  const percentage =
-    max > 0 ? Math.max(0, Math.min(100, (value / max) * 100)) : 0;
+  const safeMax = Number.isFinite(max) && max > 0 ? max : 0;
+  const safeValue = Number.isFinite(value) ? Math.max(0, Math.min(safeMax, value)) : 0;
+  const percentage = safeMax > 0 ? (safeValue / safeMax) * 100 : 0;
 
   let labelText = "";
   if (typeof showLabel === "function") {
-    labelText = showLabel(value, max);
+    labelText = showLabel(safeValue, safeMax);
   } else if (showLabel) {
-    labelText = `${Math.round(value)} / ${max}`;
+    labelText = `${Math.round(safeValue)} / ${safeMax}`;
   }
 
   const containerClasses = [
@@ -49,8 +50,8 @@ export const CandyProgress: React.FC<CandyProgressProps> = ({
     <div
       role="progressbar"
       aria-valuemin={0}
-      aria-valuemax={Math.max(0, max)}
-      aria-valuenow={Math.max(0, Math.min(Math.max(0, max), value))}
+      aria-valuemax={safeMax}
+      aria-valuenow={safeValue}
       className={containerClasses}
       style={{
         height,
@@ -71,7 +72,7 @@ export const CandyProgress: React.FC<CandyProgressProps> = ({
             justifyContent: "center",
           }}
         >
-          {icon}
+          <span aria-hidden="true">{icon}</span>
         </div>
       )}
 

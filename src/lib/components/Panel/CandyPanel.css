@@ -61,9 +61,9 @@
 
 .candy-ui-root .candy-modal-content > .candy-panel,
 .candy-modal-content > .candy-panel.candy-panel {
-  border: 0;
+  border: 1px solid var(--candy-border);
   background: var(--candy-surface, #fff);
-  box-shadow: 0 4px 14px rgb(8 43 75 / 8%);
+  box-shadow: 0 8px 30px rgb(8 43 75 / 16%);
 }
 
 .candy-ui-root .candy-panel-rivet,
@@ -101,7 +101,7 @@
   letter-spacing: 0.04em;
 }
 
-/* Ribbon â€?arched game banner with folded tails (SVG shape + HTML text) */
+/* Ribbon ï¿½?arched game banner with folded tails (SVG shape + HTML text) */
 .candy-ui-root .candy-ribbon-container,
 .candy-ribbon-container.candy-ribbon-container {
   display: flex;

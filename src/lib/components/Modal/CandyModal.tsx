@@ -11,6 +11,8 @@ export interface CandyModalProps {
   isOpen: boolean;
   onClose: () => void;
   title?: React.ReactNode;
+  titleStyle?: "plain" | "ribbon";
+  closeLabel?: string;
   ribbonColor?: CandyRibbonColor;
   theme?: CandyPanelTheme;
   showCloseButton?: boolean;
@@ -23,6 +25,22 @@ export interface CandyModalProps {
 
 const KNOWN_CANDY_VARS = [
   "--candy-font-family",
+  "--candy-font-display",
+  "--candy-border",
+  "--candy-focus-ring",
+  "--candy-surface-alt",
+  "--candy-success",
+  "--candy-success-light",
+  "--candy-info",
+  "--candy-info-light",
+  "--candy-warning",
+  "--candy-warning-light",
+  "--candy-danger",
+  "--candy-danger-light",
+  ...["cyan", "red", "gray"].flatMap((color) => [
+    `--candy-${color}`, `--candy-${color}-light`, `--candy-${color}-dark`,
+    `--candy-${color}-shadow`, `--candy-${color}-text`,
+  ]),
   "--candy-pink",
   "--candy-pink-light",
   "--candy-pink-dark",
@@ -97,6 +115,8 @@ export const CandyModal: React.FC<CandyModalProps> = ({
   isOpen,
   onClose,
   title,
+  titleStyle = "plain",
+  closeLabel = "Close",
   ribbonColor = "blue",
   theme = "cookie",
   showCloseButton = true,
@@ -233,36 +253,37 @@ export const CandyModal: React.FC<CandyModalProps> = ({
               aria-labelledby={title ? titleId : undefined}
               aria-label={title ? undefined : "Game dialog"}
               tabIndex={-1}
-              className={`candy-modal-content ${className}`}
+              className={`candy-modal-content candy-modal-${titleStyle} ${className}`}
               style={{ width, ...style }}
             >
               <CandyPanel
                 theme={theme}
-                ribbon={title ? <span id={titleId}>{title}</span> : undefined}
+                ribbon={title && titleStyle === "ribbon" ? <span id={titleId}>{title}</span> : undefined}
                 ribbonColor={ribbonColor}
               >
                 {showCloseButton && (
                   <div
                     style={{
                       position: "absolute",
-                      top: -14,
-                      right: -14,
+                      top: titleStyle === "ribbon" ? -14 : 10,
+                      right: titleStyle === "ribbon" ? -14 : 10,
                       zIndex: 30,
                     }}
                   >
                     <CandyIconButton
-                      aria-label="Close"
-                      size="sm"
-                      variant="pink"
+                      aria-label={closeLabel}
+                      size="xs"
+                      variant="ghost"
                       shape="circle"
                       sound="pop"
                       onClick={onClose}
                       icon={
-                        <CandyGameIcon name="cross" size={12} color="#8f2652" />
+                        <CandyGameIcon name="cross" size={14} color="currentColor" />
                       }
                     />
                   </div>
                 )}
+                {title && titleStyle === "plain" && <h2 id={titleId} className="candy-modal-title">{title}</h2>}
                 {children}
               </CandyPanel>
             </div>

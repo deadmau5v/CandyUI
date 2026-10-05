@@ -41,6 +41,7 @@ import {
 } from "candy-ui";
 
 import { Character } from "./PlayfulArt";
+import { referenceCatalog, referenceSnippets, ReferenceComponentPreview } from "./ReferenceComponentDocs";
 
 const catalog = [
   {
@@ -59,8 +60,8 @@ const catalog = [
       [
         "shape",
         "CandyShape",
-        "'pill'",
-        "Pill by default; rounded honors theme radius, plus square or circle.",
+        "'rounded'",
+        "Rounded game controls; also supports pill, square and circle.",
       ],
       [
         "sound",
@@ -68,6 +69,8 @@ const catalog = [
         "'pop'",
         "Optional synthesized click feedback.",
       ],
+      ["appearance", "'solid' | 'outline' | 'soft'", "'solid'", "Action hierarchy without changing the color API."],
+      ["loading / loadingLabel", "boolean / ReactNode", "false / —", "Pending state with a disabled button and spinner."],
       ["disabled", "boolean", "false", "Disables the action."],
       ["fullWidth", "boolean", "false", "Fills the available width."],
     ],
@@ -112,6 +115,8 @@ const catalog = [
       ["onClose", "() => void", "required", "Close callback."],
       ["title", "ReactNode", "—", "Dialog title."],
       ["width", "string | number", "'480px'", "Responsive dialog width."],
+      ["titleStyle", "'plain' | 'ribbon'", "'plain'", "Plain heading or opt-in game ribbon."],
+      ["closeLabel", "string", "'Close'", "Accessible, localizable close action."],
     ],
   },
   {
@@ -129,14 +134,14 @@ const catalog = [
         "'blue'",
         "Color theme: blue, green, yellow, pink, purple, orange.",
       ],
-      ["striped", "boolean", "true", "Animated diagonal candy stripes."],
-      ["sparkle", "boolean", "true", "Leading sparkle circle marker."],
+      ["striped", "boolean", "false", "Opt-in diagonal game texture."],
+      ["sparkle", "boolean", "false", "Opt-in leading sparkle marker."],
       ["height", "number", "24", "Height of the progress bar in pixels."],
       [
         "showLabel",
         "boolean | function",
         "true",
-        "Show percentage or custom formatted text.",
+        "Show current / max values, or custom formatted text.",
       ],
       ["icon", "ReactNode", "—", "Optional leading status icon."],
     ],
@@ -174,7 +179,8 @@ const catalog = [
         "State change callback.",
       ],
       ["disabled", "boolean", "false", "Disables interaction."],
-      ["color", "CandyColor", "'green'", "Accent color when active."],
+      ["color", "CandyColor", "'blue'", "Accent color when active."],
+      ["label", "ReactNode", "—", "Visible label linked to the native switch button."],
     ],
   },
   {
@@ -201,7 +207,9 @@ const catalog = [
     component: "CandyAvatar",
     description: "Put a face to a name, and help at their fingertips.",
     props: [
-      ["src", "string", "required", "Avatar image URL."],
+      ["src", "string", "—", "Optional avatar image; falls back to a vector character."],
+      ["character", "CandyAvatarCharacter", "'smile'", "Original smile face or an existing animal character."],
+      ["status / onEdit", "string / () => void", "—", "Optional presence dot and accessible edit action."],
       ["alt", "string", "'Player Avatar'", "Accessible description."],
       ["level", "number | string", "—", "Optional level label."],
       ["size", "CandySize", "'md'", "Avatar dimensions."],
@@ -216,11 +224,10 @@ const catalog = [
       ["content", "ReactNode", "required", "Tooltip text or element."],
       [
         "position",
-        "'top' | 'bottom' | 'left' | 'right'",
+        "'top' | 'bottom'",
         "'top'",
         "Placement relative to target.",
       ],
-      ["delay", "number", "200", "Show delay in milliseconds."],
     ],
   },
   {
@@ -261,6 +268,8 @@ const catalog = [
       ["label", "ReactNode", "—", "Accessible field label."],
       ["hint", "ReactNode", "—", "Helper text below the input."],
       ["error", "ReactNode", "—", "Error feedback message."],
+      ["success", "boolean", "false", "Input success border and check indicator."],
+      ["showCount", "boolean", "false", "Textarea character count, including maxLength when provided."],
     ],
   },
   {
@@ -289,7 +298,7 @@ const catalog = [
       ["value", "string", "—", "Active tab identifier."],
       ["onChange", "(val: string) => void", "—", "Tab switch callback."],
       ["variant", "'pill' | 'underline'", "'pill'", "Visual slider style."],
-      ["color", "CandyColor", "'pink'", "Tab accent color."],
+      ["color", "CandyColor", "'blue'", "Tab accent color."],
       ["size", "'sm' | 'md' | 'lg'", "'md'", "Tab button size."],
     ],
   },
@@ -303,7 +312,7 @@ const catalog = [
       ["checked", "boolean", "false", "Checked state."],
       ["onChange", "(checked) => void", "—", "Toggle callback."],
       ["label", "ReactNode", "—", "Inline label text."],
-      ["color", "CandyColor", "'pink'", "Theme accent color."],
+      ["color", "CandyColor", "'blue'", "Theme accent color."],
       ["size", "'sm' | 'md' | 'lg'", "'md'", "Control scale."],
       ["indeterminate", "boolean", "false", "Half-checked state."],
     ],
@@ -317,7 +326,7 @@ const catalog = [
     props: [
       ["value", "number", "0", "Rating score."],
       ["onChange", "(score: number) => void", "—", "Score change callback."],
-      ["count", "number", "5", "Total star count."],
+      ["max", "number", "5", "Total star count."],
       ["allowHalf", "boolean", "false", "Permit 0.5 step increments."],
       [
         "allowClear",
@@ -371,6 +380,7 @@ const catalog = [
       ["size", "'sm' | 'md' | 'lg'", "'md'", "Row padding and font size."],
     ],
   },
+  ...referenceCatalog,
 ];
 
 export function ComponentDocs() {
@@ -401,7 +411,7 @@ export function ComponentDocs() {
 
   const doc = catalog.find((d) => d.id === selected) || catalog[0];
 
-  const code =
+  const code = referenceSnippets[selected] || (
     selected === "buttons"
       ? `import { CandyButton } from 'candy-ui';\nimport 'candy-ui/style.css';\n\n<CandyButton variant="${variant}" size="${size}"${disabled ? " disabled" : ""}\n  onClick={() => startGame()}>\n  Let’s play\n</CandyButton>`
       : selected === "badges"
@@ -440,7 +450,7 @@ export function ComponentDocs() {
                                           ? `<CandyTagGroup gap="sm">\n  <CandyTag checkable checked={selected} color="pink" onCheckedChange={setSelected}>休闲游戏</CandyTag>\n  <CandyTag closable color="blue" variant="soft" onClose={handleClose}>薄荷糖</CandyTag>\n</CandyTagGroup>`
                                           : selected === "spinners"
                                             ? `<CandySpinner variant="ring" size="md" color="blue" />\n<CandySpinner variant="dots" size="lg" />\n<CandySkeleton lines={3} width={260} />`
-                                            : `<CandyList variant="ranked">\n  <CandyListItem rank={1} title="糖果大师" description="总积分: 99,999" trailing="👑 冠军" interactive />\n  <CandyListItem rank={2} title="果冻布丁" description="总积分: 88,400" trailing="🥈 亚军" />\n  <CandyDivider as="li">我的名次</CandyDivider>\n  <CandyListItem rank={12} highlight title="玩家本尊" description="总积分: 52,100" interactive />\n</CandyList>`;
+                                            : `<CandyList variant="ranked">\n  <CandyListItem rank={1} title="糖果大师" description="总积分: 99,999" trailing="👑 冠军" interactive />\n  <CandyListItem rank={2} title="果冻布丁" description="总积分: 88,400" trailing="🥈 亚军" />\n  <CandyDivider as="li">我的名次</CandyDivider>\n  <CandyListItem rank={12} highlight title="玩家本尊" description="总积分: 52,100" interactive />\n</CandyList>`);
 
   async function copy() {
     await navigator.clipboard.writeText(code);
@@ -484,6 +494,7 @@ export function ComponentDocs() {
                   key={d.id}
                   type="button"
                   className={d.id === selected ? "selected" : ""}
+                  aria-current={d.id === selected ? "page" : undefined}
                   onClick={() => setSelected(d.id)}
                 >
                   <span>{d.name}</span>
@@ -520,6 +531,7 @@ export function ComponentDocs() {
           <p className="docs-description">{doc.description}</p>
           <div className="docs-preview">
             <span className="preview-caption">INTERACTIVE PREVIEW</span>
+            <ReferenceComponentPreview id={selected} key={selected} />
             {selected === "buttons" && (
               <div className="button-examples">
                 <CandyButton
@@ -1315,6 +1327,7 @@ export function ComponentDocs() {
                 </span>
                 <CandySelect
                   placeholder="Color"
+                  aria-label="Component color"
                   value={variant}
                   onChange={(val) => setVariant(val as CandyColor)}
                   options={[
@@ -1346,6 +1359,7 @@ export function ComponentDocs() {
                 </span>
                 <CandySelect
                   placeholder="Size"
+                  aria-label="Button size"
                   value={size}
                   onChange={(val) => setSize(val as CandySize)}
                   options={["xs", "sm", "md", "lg", "xl"].map((c) => ({
@@ -1397,6 +1411,7 @@ export function ComponentDocs() {
                 </span>
                 <CandySelect
                   placeholder="Color"
+                  aria-label="Component color"
                   value={progressVariant}
                   onChange={(val) => setProgressVariant(val as CandyColor)}
                   options={[
@@ -1425,6 +1440,7 @@ export function ComponentDocs() {
                 </span>
                 <CandySelect
                   placeholder="Height"
+                  aria-label="Progress height"
                   value={String(progressHeight)}
                   onChange={(val) => setProgressHeight(Number(val))}
                   options={[14, 16, 18, 20, 24, 28, 32].map((h) => ({

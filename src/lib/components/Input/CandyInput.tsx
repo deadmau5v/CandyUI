@@ -144,6 +144,7 @@ export interface CandyInputProps extends Omit<
   size?: CandyInputSize;
   /** 是否处于无效/错误状态 */
   invalid?: boolean;
+  success?: boolean;
   /** 左侧图标或装饰节点 */
   leftIcon?: React.ReactNode;
   /** 右侧图标或装饰节点 */
@@ -171,6 +172,7 @@ const CandyInputBase = forwardRef<HTMLInputElement, CandyInputProps>(
   (
     {
       type = "text",
+      success = false,
       size: propSize,
       invalid: propInvalid,
       leftIcon,
@@ -318,7 +320,8 @@ const CandyInputBase = forwardRef<HTMLInputElement, CandyInputProps>(
     const wrapperClasses = [
       "candy-input-wrapper",
       `candy-input-${size}`,
-      invalid ? "candy-input-invalid" : "",
+      type === "search" ? "candy-input-search" : "",
+      invalid ? "candy-input-invalid" : success ? "candy-input-success" : "",
       disabled ? "candy-input-disabled" : "",
       isFocused ? "candy-input-focused" : "",
       className,
@@ -366,6 +369,11 @@ const CandyInputBase = forwardRef<HTMLInputElement, CandyInputProps>(
         />
 
         <div className="candy-input-actions">
+          {(invalid || success) && (
+            <span className="candy-input-status" aria-label={invalid ? "Invalid" : "Valid"}>
+              {invalid ? "!" : "✓"}
+            </span>
+          )}
           {clearable && hasValue && !disabled && !readOnly && (
             <button
               type="button"
@@ -484,6 +492,7 @@ CandyInput.displayName = "CandyInput";
 /* -------------------------------------------------------------------------- */
 
 export interface CandyTextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  showCount?: boolean;
   /** 尺寸：小号 (sm)、中号 (md)、大号 (lg) */
   size?: CandyInputSize;
   /** 是否处于无效/错误状态 */
@@ -522,6 +531,7 @@ const CandyTextareaBase = forwardRef<HTMLTextAreaElement, CandyTextareaProps>(
       style,
       textareaClassName = "",
       textareaStyle,
+      showCount = false,
       value,
       defaultValue,
       onChange,
@@ -634,6 +644,7 @@ const CandyTextareaBase = forwardRef<HTMLTextAreaElement, CandyTextareaProps>(
     const wrapperClasses = [
       "candy-textarea-wrapper",
       `candy-textarea-${size}`,
+      showCount ? "candy-textarea-counted" : "",
       invalid ? "candy-textarea-invalid" : "",
       disabled ? "candy-textarea-disabled" : "",
       isFocused ? "candy-textarea-focused" : "",
@@ -671,6 +682,11 @@ const CandyTextareaBase = forwardRef<HTMLTextAreaElement, CandyTextareaProps>(
           {...rest}
         />
 
+        {showCount && (
+          <span className="candy-textarea-count">
+            {currentValue.length}{rest.maxLength !== undefined ? `/${rest.maxLength}` : ""}
+          </span>
+        )}
         {clearable && hasValue && !disabled && !readOnly && (
           <button
             type="button"

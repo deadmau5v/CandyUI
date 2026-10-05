@@ -19,19 +19,17 @@ import {
 import { CandyMark, Character } from "./components/PlayfulArt";
 import { GameIconWallpaper } from "./components/GameIconWallpaper";
 import { ShowHero } from "./components/ShowHero";
-import { ThemeCustomizer } from "./components/ThemeCustomizer";
 import { ComponentDocs } from "./components/ComponentDocs";
-import { ScenarioShowcase } from "./components/ScenarioShowcase";
 import { GameIconGallery } from "./components/GameIconGallery";
+import { GameShowcaseBoard } from "./components/GameShowcaseBoard";
 import "./styles/docs.css";
 
-type Page = "home" | "components" | "icons" | "sandbox" | "examples";
+type Page = "home" | "showcase" | "components" | "icons";
 const navigation: { id: Page; label: string }[] = [
   { id: "home", label: "Overview" },
+  { id: "showcase", label: "Showcase" },
   { id: "components", label: "Components" },
   { id: "icons", label: "Icons" },
-  { id: "sandbox", label: "Sandbox" },
-  { id: "examples", label: "Examples" },
 ];
 
 function getInitialPage(): Page {
@@ -39,10 +37,9 @@ function getInitialPage(): Page {
   const path = window.location.pathname.replace(/^\/+|\/+$/g, "").toLowerCase();
   const hash = window.location.hash.replace(/^#\/?/, "").toLowerCase();
   const target = path || hash;
+  if (target === "showcase") return "showcase";
   if (target === "components") return "components";
   if (target === "icons") return "icons";
-  if (target === "sandbox") return "sandbox";
-  if (target === "examples") return "examples";
   return "home";
 }
 
@@ -132,8 +129,7 @@ function Site() {
             <div className="site-stage-card">
               <ShowHero
                 onExplore={() => navigate("components")}
-                onCustomize={() => navigate("sandbox")}
-                onPlayScenarios={() => navigate("examples")}
+                onShowcase={() => navigate("showcase")}
               />
               <div className="feature-strip">
                 <div>
@@ -182,11 +178,11 @@ function Site() {
                     Lobbies, leaderboards, rewards, and the little things in
                     between.
                     <br />
-                    See how the pieces play together.
+                    See how the pieces play together in the showcase.
                   </p>
                   <CandyButton
                     variant="blue"
-                    onClick={() => navigate("examples")}
+                    onClick={() => navigate("showcase")}
                     rightIcon={
                       <CandyGameIcon
                         name="arrow-right"
@@ -195,7 +191,7 @@ function Site() {
                       />
                     }
                   >
-                    Play with the examples
+                    Open game showcase
                   </CandyButton>
                 </div>
               </section>
@@ -204,14 +200,12 @@ function Site() {
         ) : (
           <div className="stage-card-wrapper">
             <div className="site-stage-card">
-              {page === "sandbox" ? (
-                <ThemeCustomizer />
+              {page === "showcase" ? (
+                <GameShowcaseBoard />
               ) : page === "components" ? (
                 <ComponentDocs />
-              ) : page === "icons" ? (
-                <GameIconGallery />
               ) : (
-                <ScenarioShowcase />
+                <GameIconGallery />
               )}
             </div>
           </div>

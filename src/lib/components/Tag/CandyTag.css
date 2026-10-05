@@ -131,8 +131,8 @@
   font-family: var(--candy-font-family);
   font-weight: 600;
   letter-spacing: 0.01em;
-  border-radius: var(--candy-radius-full, 9999px);
-  border: 2px solid var(--candy-outline, #12427a);
+  border-radius: var(--candy-radius-sm, 8px);
+  border: 1px solid color-mix(in srgb, var(--accent-shadow) 30%, transparent);
   white-space: nowrap;
   user-select: none;
   box-sizing: border-box;

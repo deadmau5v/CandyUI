@@ -5,7 +5,6 @@
   --line: #e3e9f2;
   --blue: #2164d9;
   --paper: #fff;
-  --candy-font-family: "Fredoka", "Segoe UI", sans-serif;
   font-synthesis: none;
   color: var(--ink);
   font-family: var(--candy-font-family);
@@ -68,8 +67,8 @@ input,
 select {
   min-width: 0;
 }
-input:not([type="range"]):not([type="checkbox"]):not([type="color"]):not(.candy-input-element),
-select {
+input:not([type="range"]):not([type="checkbox"]):not([type="color"]):not([class*="candy-"]),
+select:not([class*="candy-"]) {
   border: 2px solid #dfe6ef;
   border-radius: 9px;
   background: #f8fafc;

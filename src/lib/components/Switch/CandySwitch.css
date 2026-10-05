@@ -1,60 +1,36 @@
-/* Switch */
+.candy-switch-control { display: inline-flex; align-items: center; gap: 10px; color: var(--candy-text); font: 14px/1.4 var(--candy-font-family); }
 .candy-switch {
   position: relative;
   display: inline-flex;
   align-items: center;
-  width: 58px;
-  height: 32px;
+  flex-shrink: 0;
+  width: 52px;
+  height: 29px;
+  padding: 0;
+  border: 1px solid transparent;
   border-radius: var(--candy-radius-full);
-  background: var(--candy-track);
-  border: 2px solid var(--candy-outline);
-  box-shadow: inset 0 1.5px 2px rgba(8, 43, 75, 0.1);
+  background: var(--candy-gray-dark);
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 8%);
   cursor: pointer;
-  user-select: none;
-  transition:
-    background-color 0.15s ease,
-    box-shadow 0.15s ease;
+  transition: background-color 0.15s ease;
 }
-.candy-switch-checked {
-  background: var(--candy-green);
-  box-shadow:
-    inset 0 2px 0 rgba(255, 255, 255, 0.45),
-    inset 0 -2px 0 rgba(0, 0, 0, 0.16);
-}
+.candy-switch-checked { background: var(--candy-switch-accent, var(--candy-primary)); }
 .candy-switch-thumb {
   position: absolute;
-  left: 3px;
-  width: 24px;
-  height: 24px;
-  border-radius: var(--candy-radius-full);
-  background: var(--candy-surface);
-  border: 1.5px solid var(--candy-outline);
-  box-shadow:
-    0 2px 0 var(--candy-panel-shadow),
-    inset 0 1.5px 0 rgba(255, 255, 255, 0.8),
-    inset 0 -1.5px 0 rgba(0, 0, 0, 0.12);
-  color: var(--candy-text);
-  transition: transform 0.15s ease;
-  display: flex;
+  left: 2px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 23px;
+  height: 23px;
+  border: 1px solid rgb(16 35 75 / 8%);
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 15%);
+  color: var(--candy-outline);
+  transition: transform 0.15s ease;
 }
-.candy-switch-checked .candy-switch-thumb {
-  transform: translateX(26px);
-}
-.candy-switch[aria-disabled="true"] {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.candy-switch:focus-visible {
-  outline: 3px solid var(--candy-focus);
-  outline-offset: 3px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .candy-switch,
-  .candy-switch-thumb {
-    transition: none;
-  }
-}
+.candy-switch-checked .candy-switch-thumb { transform: translateX(23px); }
+.candy-switch:disabled { opacity: 0.5; cursor: not-allowed; }
+.candy-switch:focus-visible { outline: 3px solid var(--candy-focus); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .candy-switch, .candy-switch-thumb { transition: none; } }

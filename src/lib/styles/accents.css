@@ -1,0 +1,45 @@
+:is(.candy-btn-cyan, .candy-badge-cyan, .candy-progress-cyan, .candy-slider-cyan, .candy-select-cyan, .candy-tabs-cyan, .candy-tag-cyan, .candy-spinner-cyan, .candy-checkbox-cyan, .candy-radio-cyan) {
+  --accent: var(--candy-cyan);
+  --accent-light: var(--candy-cyan-light);
+  --accent-bg: var(--candy-cyan-light);
+  --accent-shadow: var(--candy-cyan-shadow);
+  --accent-text: var(--candy-cyan-text);
+  --accent-text-soft: var(--candy-cyan-shadow);
+  --spinner-accent: var(--candy-cyan);
+  --spinner-accent-shadow: var(--candy-cyan-shadow);
+  --spinner-accent-light: var(--candy-cyan-light);
+  --candy-checkbox-bg: var(--candy-cyan);
+  --candy-checkbox-shadow: var(--candy-cyan-shadow);
+  --candy-checkbox-text: var(--candy-cyan-text);
+  --candy-radio-dot-bg: var(--candy-cyan-dark);
+}
+:is(.candy-btn-red, .candy-badge-red, .candy-progress-red, .candy-slider-red, .candy-select-red, .candy-tabs-red, .candy-tag-red, .candy-spinner-red, .candy-checkbox-red, .candy-radio-red) {
+  --accent: var(--candy-red);
+  --accent-light: var(--candy-red-light);
+  --accent-bg: var(--candy-red-light);
+  --accent-shadow: var(--candy-red-shadow);
+  --accent-text: var(--candy-red-text);
+  --accent-text-soft: var(--candy-red-shadow);
+  --spinner-accent: var(--candy-red);
+  --spinner-accent-shadow: var(--candy-red-shadow);
+  --spinner-accent-light: var(--candy-red-light);
+  --candy-checkbox-bg: var(--candy-red);
+  --candy-checkbox-shadow: var(--candy-red-shadow);
+  --candy-checkbox-text: var(--candy-red-text);
+  --candy-radio-dot-bg: var(--candy-red);
+}
+:is(.candy-btn-gray, .candy-badge-gray, .candy-progress-gray, .candy-slider-gray, .candy-select-gray, .candy-tabs-gray, .candy-tag-gray, .candy-spinner-gray, .candy-checkbox-gray, .candy-radio-gray) {
+  --accent: var(--candy-gray);
+  --accent-light: var(--candy-gray-light);
+  --accent-bg: var(--candy-gray-light);
+  --accent-shadow: var(--candy-gray-shadow);
+  --accent-text: var(--candy-gray-text);
+  --accent-text-soft: var(--candy-gray-text);
+  --spinner-accent: var(--candy-gray-shadow);
+  --spinner-accent-shadow: var(--candy-gray-shadow);
+  --spinner-accent-light: var(--candy-gray-light);
+  --candy-checkbox-bg: var(--candy-gray);
+  --candy-checkbox-shadow: var(--candy-gray-shadow);
+  --candy-checkbox-text: var(--candy-gray-text);
+  --candy-radio-dot-bg: var(--candy-gray-shadow);
+}

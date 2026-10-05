@@ -3,14 +3,12 @@ import { CandyButton, CandyGameIcon, useCandy, useCandyToast } from "candy-ui";
 
 export interface ShowHeroProps {
   onExplore?: () => void;
-  onCustomize?: () => void;
-  onPlayScenarios?: () => void;
+  onShowcase?: () => void;
 }
 
 export function ShowHero({
   onExplore,
-  onCustomize,
-  onPlayScenarios,
+  onShowcase,
 }: ShowHeroProps) {
   const [copied, setCopied] = useState(false);
   const { showToast } = useCandyToast();
@@ -63,27 +61,15 @@ export function ShowHero({
           </CandyButton>
 
           <CandyButton
-            variant="ghost"
+            variant="yellow"
             size="lg"
             shape="pill"
-            onClick={onCustomize}
+            onClick={onShowcase}
             leftIcon={
-              <CandyGameIcon name="paint-bucket" size={18} color="#1761d1" />
+              <CandyGameIcon name="controller" size={20} color="#10234b" />
             }
           >
-            Make it yours
-          </CandyButton>
-
-          <CandyButton
-            variant="blue"
-            size="lg"
-            shape="pill"
-            onClick={onPlayScenarios}
-            leftIcon={
-              <CandyGameIcon name="controller" size={18} color="#ffffff" />
-            }
-          >
-            Try the demo
+            Game showcase
           </CandyButton>
         </div>
 
