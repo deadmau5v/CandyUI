@@ -1,4 +1,4 @@
-﻿import React, { useMemo } from "react";
+﻿import React from "react";
 import allIconsRaw from "./all-icons.json";
 
 export type GameIconName = string;

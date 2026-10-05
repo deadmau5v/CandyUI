@@ -11,7 +11,6 @@ import {
   CandyCounter,
   CandyAvatar,
   CandyTooltip,
-  CandyFloatingText,
   useFloatingText,
   useCandyToast,
   triggerCandyConfetti,
@@ -22,7 +21,6 @@ import {
   CandyTextarea,
   CandyField,
   CandySelect,
-  CandySelectOption,
   CandyTabs,
   CandyTabList,
   CandyTab,
@@ -487,7 +485,9 @@ export function ComponentDocs() {
         <aside className="docs-sidebar">
           <div className="docs-search-wrapper" style={{ marginBottom: 12 }}>
             <CandyInput
-              leftIcon={<CandyGameIcon name="search" size={16} color="currentColor" />}
+              leftIcon={
+                <CandyGameIcon name="search" size={16} color="currentColor" />
+              }
               aria-label="Find a component"
               placeholder="Find a component…"
               value={query}
@@ -1404,7 +1404,18 @@ export function ComponentDocs() {
           {selected === "buttons" && (
             <div className="props-controls">
               <div style={{ flex: "1 1 140px" }}>
-                <span className="control-label" style={{ display: "block", marginBottom: 6, fontSize: 13, fontWeight: 600, color: "var(--candy-text, #082b4b)" }}>Color</span>
+                <span
+                  className="control-label"
+                  style={{
+                    display: "block",
+                    marginBottom: 6,
+                    fontSize: 13,
+                    fontWeight: 600,
+                    color: "var(--candy-text, #082b4b)",
+                  }}
+                >
+                  Color
+                </span>
                 <CandySelect
                   placeholder="Color"
                   value={variant}
@@ -1424,43 +1435,97 @@ export function ComponentDocs() {
                 />
               </div>
               <div style={{ flex: "1 1 120px" }}>
-                <span className="control-label" style={{ display: "block", marginBottom: 6, fontSize: 13, fontWeight: 600, color: "var(--candy-text, #082b4b)" }}>Size</span>
+                <span
+                  className="control-label"
+                  style={{
+                    display: "block",
+                    marginBottom: 6,
+                    fontSize: 13,
+                    fontWeight: 600,
+                    color: "var(--candy-text, #082b4b)",
+                  }}
+                >
+                  Size
+                </span>
                 <CandySelect
                   placeholder="Size"
                   value={size}
                   onChange={(val) => setSize(val as CandySize)}
-                  options={["xs", "sm", "md", "lg", "xl"].map((c) => ({ value: c, label: c }))}
+                  options={["xs", "sm", "md", "lg", "xl"].map((c) => ({
+                    value: c,
+                    label: c,
+                  }))}
                   size="sm"
                 />
               </div>
-              <div style={{ display: "flex", alignItems: "center", gap: 8, paddingTop: 18 }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  paddingTop: 18,
+                }}
+              >
                 <CandySwitch
                   aria-label="Toggle disabled"
                   checked={disabled}
                   onChange={setDisabled}
                 />
-                <span style={{ fontSize: 13, fontWeight: 500, color: "var(--candy-text, #082b4b)" }}>Disabled</span>
+                <span
+                  style={{
+                    fontSize: 13,
+                    fontWeight: 500,
+                    color: "var(--candy-text, #082b4b)",
+                  }}
+                >
+                  Disabled
+                </span>
               </div>
             </div>
           )}
           {selected === "progress" && (
             <div className="props-controls">
               <div style={{ flex: "1 1 140px" }}>
-                <span className="control-label" style={{ display: "block", marginBottom: 6, fontSize: 13, fontWeight: 600, color: "var(--candy-text, #082b4b)" }}>Color</span>
+                <span
+                  className="control-label"
+                  style={{
+                    display: "block",
+                    marginBottom: 6,
+                    fontSize: 13,
+                    fontWeight: 600,
+                    color: "var(--candy-text, #082b4b)",
+                  }}
+                >
+                  Color
+                </span>
                 <CandySelect
                   placeholder="Color"
                   value={progressVariant}
-                  onChange={(val) =>
-                    setProgressVariant(val as CandyColor)
-                  }
-                  options={["blue", "green", "yellow", "pink", "purple", "orange"].map(
-                    (c) => ({ value: c, label: c }),
-                  )}
+                  onChange={(val) => setProgressVariant(val as CandyColor)}
+                  options={[
+                    "blue",
+                    "green",
+                    "yellow",
+                    "pink",
+                    "purple",
+                    "orange",
+                  ].map((c) => ({ value: c, label: c }))}
                   size="sm"
                 />
               </div>
               <div style={{ flex: "1 1 120px" }}>
-                <span className="control-label" style={{ display: "block", marginBottom: 6, fontSize: 13, fontWeight: 600, color: "var(--candy-text, #082b4b)" }}>Height</span>
+                <span
+                  className="control-label"
+                  style={{
+                    display: "block",
+                    marginBottom: 6,
+                    fontSize: 13,
+                    fontWeight: 600,
+                    color: "var(--candy-text, #082b4b)",
+                  }}
+                >
+                  Height
+                </span>
                 <CandySelect
                   placeholder="Height"
                   value={String(progressHeight)}
@@ -1472,21 +1537,51 @@ export function ComponentDocs() {
                   size="sm"
                 />
               </div>
-              <div style={{ display: "flex", alignItems: "center", gap: 8, paddingTop: 18 }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  paddingTop: 18,
+                }}
+              >
                 <CandySwitch
                   aria-label="Toggle striped"
                   checked={progressStriped}
                   onChange={setProgressStriped}
                 />
-                <span style={{ fontSize: 13, fontWeight: 500, color: "var(--candy-text, #082b4b)" }}>Striped</span>
+                <span
+                  style={{
+                    fontSize: 13,
+                    fontWeight: 500,
+                    color: "var(--candy-text, #082b4b)",
+                  }}
+                >
+                  Striped
+                </span>
               </div>
-              <div style={{ display: "flex", alignItems: "center", gap: 8, paddingTop: 18 }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  paddingTop: 18,
+                }}
+              >
                 <CandySwitch
                   aria-label="Toggle sparkle"
                   checked={progressSparkle}
                   onChange={setProgressSparkle}
                 />
-                <span style={{ fontSize: 13, fontWeight: 500, color: "var(--candy-text, #082b4b)" }}>Sparkle</span>
+                <span
+                  style={{
+                    fontSize: 13,
+                    fontWeight: 500,
+                    color: "var(--candy-text, #082b4b)",
+                  }}
+                >
+                  Sparkle
+                </span>
               </div>
             </div>
           )}

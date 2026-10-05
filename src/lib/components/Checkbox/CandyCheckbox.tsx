@@ -472,7 +472,7 @@ export const CandyRadioGroup = forwardRef<HTMLDivElement, CandyRadioGroupProps>(
         size,
         color,
       }),
-      [groupName, currentValue, disabled, size, color],
+      [groupName, currentValue, disabled, size, color, handleGroupChange],
     );
 
     const groupClasses = [

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CandyButton, CandyGameIcon, useCandyToast } from "candy-ui";
+import { CandyButton, CandyGameIcon, useCandy, useCandyToast } from "candy-ui";
 
 export interface ShowHeroProps {
   onExplore?: () => void;
@@ -14,11 +14,13 @@ export function ShowHero({
 }: ShowHeroProps) {
   const [copied, setCopied] = useState(false);
   const { showToast } = useCandyToast();
+  const { playSound } = useCandy();
 
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText("pnpm add candy-ui");
       setCopied(true);
+      playSound("pop");
       showToast({
         title: "Copied to clipboard: pnpm add candy-ui",
         variant: "green",
@@ -86,37 +88,42 @@ export function ShowHero({
         </div>
 
         <div className="card-hero-meta">
-          <button
-            type="button"
+          <div
             className="card-hero-install"
             onClick={handleCopy}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                handleCopy();
+              }
+            }}
             aria-label="Copy install command: pnpm add candy-ui"
           >
-            <span className="card-hero-terminal-dollar" aria-hidden="true">
-              $
-            </span>
-            <code>pnpm add candy-ui</code>
-            <span
-              style={{
-                fontSize: 13,
-                fontWeight: 700,
-                marginLeft: 8,
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 4,
-              }}
+            <div className="card-hero-install-cmd">
+              <span className="card-hero-terminal-dollar" aria-hidden="true">
+                $
+              </span>
+              <code>pnpm add candy-ui</code>
+            </div>
+            <CandyButton
+              variant={copied ? "green" : "cream"}
+              size="sm"
+              shape="pill"
+              className="card-hero-copy-btn"
+              tabIndex={-1}
+              leftIcon={
+                <CandyGameIcon
+                  name={copied ? "tick" : "copy"}
+                  size={14}
+                  color={copied ? "#ffffff" : "#1761d1"}
+                />
+              }
             >
-              {copied ? (
-                <>
-                  <CandyGameIcon name="tick" size={14} color="#10b981" /> Copied
-                </>
-              ) : (
-                <>
-                  <CandyGameIcon name="copy" size={14} color="#64748b" /> Copy
-                </>
-              )}
-            </span>
-          </button>
+              {copied ? "Copied" : "Copy"}
+            </CandyButton>
+          </div>
 
           <div className="card-hero-badges">
             <span>

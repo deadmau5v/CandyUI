@@ -1,11 +1,4 @@
-import React, {
-  forwardRef,
-  useContext,
-  useEffect,
-  useId,
-  useRef,
-  useState,
-} from "react";
+import React, { forwardRef, useContext, useId, useRef, useState } from "react";
 import { useCandy } from "../../context/CandyProvider";
 import "./CandyInput.css";
 

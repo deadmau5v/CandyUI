@@ -186,9 +186,17 @@ export function ScenarioShowcase() {
                         <CandyGameIcon name="tick" size={20} color="#10b981" />
                       ) : d === 3 ? (
                         claimed ? (
-                          <CandyGameIcon name="tick" size={20} color="#10b981" />
+                          <CandyGameIcon
+                            name="tick"
+                            size={20}
+                            color="#10b981"
+                          />
                         ) : (
-                          <CandyGameIcon name="coin" size={24} color="#f59e0b" />
+                          <CandyGameIcon
+                            name="coin"
+                            size={24}
+                            color="#f59e0b"
+                          />
                         )
                       ) : (
                         <CandyGameIcon name="chest" size={22} color="#94a3b8" />
@@ -272,7 +280,14 @@ export function ScenarioShowcase() {
                           sound={false}
                         />
                       ) : (
-                        <span style={{ fontSize: 10, color: "var(--candy-text-muted)" }}>—</span>
+                        <span
+                          style={{
+                            fontSize: 10,
+                            color: "var(--candy-text-muted)",
+                          }}
+                        >
+                          —
+                        </span>
                       )}
                     </div>
                   </CandyButton>
@@ -328,13 +343,40 @@ export function ScenarioShowcase() {
                   />
                 </div>
 
-                <div style={{ display: "flex", flexDirection: "column", gap: 8, margin: "8px 0 12px" }}>
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                    <span style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 14, fontWeight: 500 }}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 8,
+                    margin: "8px 0 12px",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <span
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 8,
+                        fontSize: 14,
+                        fontWeight: 500,
+                      }}
+                    >
                       <CandyGameIcon name="volume" size={18} color="#1761d1" />
                       Master volume
                     </span>
-                    <span style={{ fontSize: 13, color: "var(--candy-primary, #1761d1)", fontWeight: 600 }}>
+                    <span
+                      style={{
+                        fontSize: 13,
+                        color: "var(--candy-primary, #1761d1)",
+                        fontWeight: 600,
+                      }}
+                    >
                       {Math.round(soundVolume * 100)}%
                     </span>
                   </div>

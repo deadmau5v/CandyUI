@@ -1,5 +1,6 @@
 import React, {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -60,11 +61,14 @@ export const CandyProvider: React.FC<CandyProviderProps> = ({
     candySound.setVolume(vol);
   };
 
-  const playSound = (type: CandySoundType = "click") => {
-    if (soundEnabled) {
-      candySound.play(type);
-    }
-  };
+  const playSound = useCallback(
+    (type: CandySoundType = "click") => {
+      if (soundEnabled) {
+        candySound.play(type);
+      }
+    },
+    [soundEnabled],
+  );
 
   const value = useMemo(
     () => ({
@@ -74,7 +78,7 @@ export const CandyProvider: React.FC<CandyProviderProps> = ({
       setSoundVolume,
       playSound,
     }),
-    [soundEnabled, soundVolume],
+    [soundEnabled, soundVolume, playSound],
   );
 
   return (

@@ -57,7 +57,7 @@ export const CandySlider: React.FC<CandySliderProps> = ({
       updateFromPosition(moveEvt.clientX);
     };
 
-    const onPointerUp = (upEvt: PointerEvent) => {
+    const onPointerUp = () => {
       window.removeEventListener("pointermove", onPointerMove);
       window.removeEventListener("pointerup", onPointerUp);
     };

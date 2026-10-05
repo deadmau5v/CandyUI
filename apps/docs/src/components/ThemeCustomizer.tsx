@@ -7,9 +7,83 @@ import {
   CandyBadge,
   CandyPanel,
   CandyGameIcon,
+  useCandy,
   useCandyToast,
 } from "candy-ui";
 import { Character } from "./PlayfulArt";
+
+interface CandyColorPickerProps {
+  id: string;
+  label: string;
+  value: string;
+  onChange: (hex: string) => void;
+  presets?: string[];
+}
+
+function CandyColorPicker({
+  id,
+  label,
+  value,
+  onChange,
+  presets = [],
+}: CandyColorPickerProps) {
+  const { playSound } = useCandy();
+
+  return (
+    <div className="candy-color-control">
+      <div className="candy-color-control-header">
+        <label htmlFor={id}>{label}</label>
+      </div>
+      <div className="candy-color-control-body">
+        <div
+          className="candy-color-trigger"
+          title="Click to pick a custom color"
+        >
+          <input
+            id={id}
+            type="color"
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            className="candy-color-hidden-input"
+            aria-label={`${label} color picker`}
+          />
+          <span
+            className="candy-color-swatch-disc"
+            style={{ backgroundColor: value }}
+          >
+            <span className="candy-color-swatch-shine" />
+          </span>
+          <code className="candy-color-code">{value.toUpperCase()}</code>
+          <span className="candy-color-icon-wrap" aria-hidden="true">
+            <CandyGameIcon name="paint-bucket" size={14} color="#64748b" />
+          </span>
+        </div>
+
+        {presets.length > 0 && (
+          <div className="candy-color-presets" aria-label={`${label} presets`}>
+            {presets.map((preset) => {
+              const isActive = value.toLowerCase() === preset.toLowerCase();
+              return (
+                <button
+                  key={preset}
+                  type="button"
+                  className={`candy-color-preset-dot ${isActive ? "is-active" : ""}`}
+                  style={{ backgroundColor: preset }}
+                  onClick={() => {
+                    playSound("pop");
+                    onChange(preset);
+                  }}
+                  title={`Preset: ${preset}`}
+                  aria-label={`Select ${preset}`}
+                />
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 const presets = [
   { name: "Ocean Breeze", color: "#2164d9", shadow: "#12427a" },
@@ -119,31 +193,21 @@ export function ThemeCustomizer() {
             })}
           </div>
 
-          <div className="color-control">
-            <label htmlFor="theme-color">Primary color</label>
-            <div className="color-control-inputs">
-              <input
-                id="theme-color"
-                type="color"
-                value={primary}
-                onChange={(e) => setPrimary(e.target.value)}
-              />
-              <code>{primary.toUpperCase()}</code>
-            </div>
-          </div>
+          <CandyColorPicker
+            id="theme-color"
+            label="Primary color"
+            value={primary}
+            onChange={setPrimary}
+            presets={["#2164d9", "#e84376", "#28a745", "#f59e0b", "#8b5cf6"]}
+          />
 
-          <div className="color-control">
-            <label htmlFor="theme-shadow">Shadow color</label>
-            <div className="color-control-inputs">
-              <input
-                id="theme-shadow"
-                type="color"
-                value={shadow}
-                onChange={(e) => setShadow(e.target.value)}
-              />
-              <code>{shadow.toUpperCase()}</code>
-            </div>
-          </div>
+          <CandyColorPicker
+            id="theme-shadow"
+            label="Shadow color"
+            value={shadow}
+            onChange={setShadow}
+            presets={["#12427a", "#8f2652", "#194a2b", "#8a5700", "#4c1d95"]}
+          />
 
           <div className="color-control" style={{ margin: "14px 0 10px" }}>
             <span>Dark surface</span>
