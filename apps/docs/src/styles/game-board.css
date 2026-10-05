@@ -79,7 +79,6 @@
 .gb-avatar-presets > button[aria-pressed="true"] { border-color: var(--candy-primary); background: var(--candy-blue-light); }
 .gb-rating-value { color: var(--candy-text); font-size: 19px; font-weight: 600; }
 .gb-icon-grid { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); align-items: center; justify-items: center; gap: 13px 7px; }
-.gb-medallions { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 5px; margin-top: 6px; padding-top: 11px; border-top: 1px solid #e8eff7; }
 .gb-dialog-actions { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
 .gb-loading-row { display: flex; align-items: center; justify-content: center; gap: 15px; color: var(--candy-text-muted); font-size: 12px; }
 .gb-tooltip-example { padding: 12px 14px; border-radius: 8px; background: var(--candy-dark); color: #ffffff; }
@@ -116,4 +115,67 @@
   .gb-tile[data-palette-section="themes"] .candy-theme-card .candy-theme-icon { width: 44px; height: 44px; }
   .gb-social-grid { grid-template-columns: 1fr 1fr; }
   .gb-social-grid .candy-btn { font-size: 12px; }
+}
+
+/* Real Assets & Tactile Enhancements */
+.gb-intro-mascot {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 14px rgba(18, 66, 122, 0.22));
+  animation: gbFloat 3.5s ease-in-out infinite alternate;
+  flex-shrink: 0;
+}
+
+@keyframes gbFloat {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-7px) rotate(4deg); }
+}
+
+.gb-theme-asset-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 6px rgba(18, 66, 122, 0.16));
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.candy-theme-card:hover .gb-theme-asset-img {
+  transform: scale(1.08) translateY(-2px);
+}
+
+.gb-asset-icon-md {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 6px rgba(18, 66, 122, 0.18));
+}
+
+.gb-room-asset-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(18, 66, 122, 0.14));
+}
+
+.gb-empty-mascot-img {
+  width: 76px;
+  height: 76px;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 12px rgba(18, 66, 122, 0.18));
+}
+
+.gb-notification-asset-img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(18, 66, 122, 0.15));
+}
+
+.gb-theme-badge-asset {
+  transition: transform 0.18s ease;
+}
+
+.candy-theme-card:hover .gb-theme-badge-asset {
+  transform: scale(1.1) translateY(-2px);
 }

@@ -46,6 +46,11 @@ export function ShowHero({
   return (
     <section className="card-hero-section" aria-label="CandyUI introduction">
       <div className="card-hero-container">
+        <img src="/assets/badges/turtle-wave.png" alt="" aria-hidden="true" className="hero-sticker hero-sticker-top-left" />
+        <img src="/assets/items/trophy.png" alt="" aria-hidden="true" className="hero-sticker hero-sticker-top-right" />
+        <img src="/assets/items/chest.png" alt="" aria-hidden="true" className="hero-sticker hero-sticker-bottom-left" />
+        <img src="/assets/badges/sparkles.png" alt="" aria-hidden="true" className="hero-sticker hero-sticker-bottom-right" />
+
         <p className="card-hero-kicker">REACT UI FOR WEB GAMES</p>
 
         <h1 className="card-hero-title">

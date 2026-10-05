@@ -44,6 +44,28 @@ assert.match(
   /aria-valuenow="40"/,
 );
 assert.match(
+  render(library.CandyStepper, {
+    label: "Round duration",
+    value: 180,
+    fullWidth: true,
+  }),
+  /candy-stepper-full-width/,
+);
+assert.match(
+  render(library.CandyStepper, {
+    label: "Round duration",
+    value: 180,
+  }),
+  /candy-stepper-field/,
+);
+assert.doesNotMatch(
+  render(library.CandyStepper, {
+    label: "Round duration",
+    value: 180,
+  }),
+  /candy-stepper-full-width/,
+);
+assert.match(
   render(library.CandyProgress, { value: 150, max: 100 }),
   /aria-valuenow="100"/,
 );

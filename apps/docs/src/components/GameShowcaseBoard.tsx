@@ -7,10 +7,10 @@ import {
   CandyPagination, CandyProgress, CandyRadio, CandyRadioGroup, CandyRating,
   CandyRoomCard, CandySelect, CandySlider, CandySocialButton, CandySocialProvider,
   CandySpinner, CandyStatusBadge, CandyStepper, CandySteps, CandySwitch, CandyTab, CandyTabList,
-  CandyTabs, CandyTag, CandyTagGroup, CandyTagInput, CandyTextarea, CandyTheme,
-  CandyThemeCard, CandyThemeGrid, CandyThemeIcon, CandyTimePicker, CandyTooltip, useCandyToast,
+  CandyTabs, CandyTag, CandyTagGroup, CandyTagInput, CandyTextarea,
+  CandyThemeCard, CandyThemeGrid, CandyTimePicker, CandyTooltip, useCandyToast,
 } from "candy-ui";
-import { demoRooms, gameNavigation, themeDefinitions, themeOptions } from "./gameKitData";
+import { GameTheme, demoRooms, gameNavigation, themeDefinitions, themeOptions } from "./gameKitData";
 import "../styles/game-board.css";
 
 function Section({ id, title, subtitle, span = 3, children }: {
@@ -28,13 +28,21 @@ const alertMessages: { tone: CandyAlertTone; text: string }[] = [
   { tone: "warning", text: "网络连接不稳定" },
   { tone: "error", text: "连接失败，请重试" },
 ];
-const avatarCharacters: CandyAvatarCharacter[] = ["smile", "fox", "cat", "frog"];
+
+export const avatarPresets = [
+  { id: "smile", name: "活力少年", src: "/assets/avatars/player-smile.png" },
+  { id: "corgi", name: "侦探柯基", src: "/assets/avatars/player-corgi.png" },
+  { id: "anime", name: "炫彩少年", src: "/assets/avatars/player-anime.png" },
+  { id: "panda", name: "呆萌熊猫", src: "/assets/avatars/player-panda.png" },
+  { id: "burger", name: "汉堡超人", src: "/assets/avatars/player-burger.png" },
+  { id: "turtle", name: "小海龟", src: "/assets/avatars/player-turtle.png" },
+];
 
 export function GameShowcaseBoard() {
   const { showToast } = useCandyToast();
   const [nav, setNav] = useState("home");
   const [tab, setTab] = useState("basic");
-  const [theme, setTheme] = useState<CandyTheme>("fox");
+  const [theme, setTheme] = useState<GameTheme>("animals");
   const [sound, setSound] = useState(true);
   const [checked, setChecked] = useState(true);
   const [radio, setRadio] = useState("public");
@@ -75,14 +83,21 @@ export function GameShowcaseBoard() {
   return (
     <div className="game-board-container" id="game-board-stage" lang="zh-CN">
       <div className="gb-intro">
-        <div><span className="gb-eyebrow">THE WEB GAME TOOLBOX</span><h1>小组件，大乐趣。<span>Let’s play.</span></h1><p>从第一声「开始游戏」，到最后一颗星星。为你的下一款游戏准备好了。</p></div>
-        <div className="gb-intro-badges"><CandyBadge variant="blue">React + TypeScript</CandyBadge><CandyTag color="green" variant="soft">真实交互 · 自由组合</CandyTag></div>
+        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+          <img src="/assets/badges/turtle-badge.png" alt="CandyPlay Mascot" className="gb-intro-mascot" />
+          <div>
+            <span className="gb-eyebrow">THE WEB GAME TOOLBOX</span>
+            <h1>小组件，大乐趣。<span>Let’s play.</span></h1>
+            <p>从第一声「开始游戏」，到最后一颗星星。为你的下一款游戏准备好了。</p>
+          </div>
+        </div>
+        <div className="gb-intro-badges"><CandyBadge variant="blue">React + TypeScript</CandyBadge><CandyTag color="green" variant="soft">真实交互 · 质感贴纸</CandyTag></div>
       </div>
 
       <div className="gb-gamebar">
         <CandyNavigation aria-label="展示游戏导航" value={nav} onChange={setNav} items={gameNavigation}
           brand={<span className="gb-game-brand"><CandyGameIcon name="controller" size={28} />Candy<span>Play</span></span>} />
-        <CandyDropdown align="end" trigger={<CandyButton size="sm" variant="gray" appearance="soft" leftIcon={<CandyAvatar size="xs" character={avatarCharacters[avatarIndex]} borderColor="dark" />} rightIcon={<CandyGameIcon name="arrow-down" size={12} />}>{name || "玩家"}</CandyButton>} items={menuItems} />
+        <CandyDropdown align="end" trigger={<CandyButton size="sm" variant="gray" appearance="soft" leftIcon={<CandyAvatar size="xs" src={avatarPresets[avatarIndex].src} borderColor="dark" />} rightIcon={<CandyGameIcon name="arrow-down" size={12} />}>{name || "玩家"}</CandyButton>} items={menuItems} />
       </div>
 
       <div className="gb-grid">
@@ -134,7 +149,7 @@ export function GameShowcaseBoard() {
         </Section>
 
         <Section id="themes" title="主题选择" subtitle="Theme grid" span={5}>
-          <CandyThemeGrid aria-label="展示主题选择" value={theme} onChange={(value) => setTheme(value as CandyTheme)} options={themeOptions(50)} columns={4} />
+          <CandyThemeGrid aria-label="展示主题选择" value={theme} onChange={(value) => setTheme(value as GameTheme)} options={themeOptions(36)} columns={4} />
           <div className="gb-theme-caption"><span><b>{activeTheme.label}</b> · {activeTheme.description}</span><CandyTag size="sm" color="blue" variant="soft">官方主题</CandyTag></div>
         </Section>
 
@@ -145,25 +160,98 @@ export function GameShowcaseBoard() {
         </Section>
 
         <Section id="cards" title="卡片" subtitle="Cards" span={4}>
-          <div className="gb-card-examples"><CandyThemeCard title="动物" description="官方主题 · 可爱动物" icon={<CandyThemeIcon theme="fox" size={66} />} selected={theme === "fox"} onSelect={() => setTheme("fox")} /><CandyThemeCard title="食物" description="官方主题 · 美味灵感" icon={<CandyThemeIcon theme="burger" size={66} />} selected={theme === "burger"} onSelect={() => setTheme("burger")} /></div>
-          <CandyCard title="涂鸦大师" description="累计赢得 10 场比赛" icon={<CandyGameIcon name="trophy" size={36} color="#d69c00" />}><div className="gb-meter-label"><span>成就进度</span><b>6 / 10</b></div><CandyProgress aria-label="成就进度" value={6} max={10} height={12} showLabel={false} striped /></CandyCard>
+          <div className="gb-card-examples">
+            <CandyThemeCard
+              title="动物"
+              description="官方主题 · 侦探柯基"
+              icon={<img src="/assets/avatars/player-corgi.png" alt="动物" className="gb-theme-asset-img" />}
+              selected={theme === "animals"}
+              onSelect={() => setTheme("animals")}
+            />
+            <CandyThemeCard
+              title="美食"
+              description="官方主题 · 汉堡超人"
+              icon={<img src="/assets/avatars/player-burger.png" alt="美食" className="gb-theme-asset-img" />}
+              selected={theme === "food"}
+              onSelect={() => setTheme("food")}
+            />
+          </div>
+          <CandyCard
+            title="涂鸦大师"
+            description="累计赢得 10 场比赛"
+            icon={<img src="/assets/items/trophy.png" alt="奖杯" className="gb-asset-icon-md" />}
+          >
+            <div className="gb-meter-label"><span>成就进度</span><b>6 / 10</b></div>
+            <CandyProgress aria-label="成就进度" value={6} max={10} height={12} showLabel={false} striped />
+          </CandyCard>
         </Section>
 
         <Section id="rooms" title="房间列表" subtitle="Room list" span={4}>
-          <div className="gb-room-list">{visibleRooms.length ? visibleRooms.map((room) => <CandyRoomCard key={room.id} title={room.title} icon={<CandyThemeIcon theme={room.theme} size={44} />} players={room.players} capacity={room.capacity} compact connection={room.id % 4 === 0 ? "fair" : "good"} connectionLabel={room.id % 4 === 0 ? "连接一般" : "连接良好"} joinLabel={room.players >= room.capacity ? "已满" : "加入"} onJoin={() => showToast({ title: `正在加入「${room.title}」`, description: "这是本地交互演示，不会连接真实游戏服务器。", variant: "blue" })} />) : <CandyEmptyState title="没有找到房间" description="换个关键词试试。" action={<CandyButton size="xs" onClick={() => { setSearch(""); setPage(1); }}>清除搜索</CandyButton>} />}</div>
+          <div className="gb-room-list">
+            {visibleRooms.length ? visibleRooms.map((room) => (
+              <CandyRoomCard
+                key={room.id}
+                title={room.title}
+                icon={<img src={room.iconSrc} alt={room.title} className="gb-room-asset-icon" />}
+                players={room.players}
+                capacity={room.capacity}
+                compact
+                connection={room.id % 4 === 0 ? "fair" : "good"}
+                connectionLabel={room.id % 4 === 0 ? "连接一般" : "连接良好"}
+                joinLabel={room.players >= room.capacity ? "已满" : "加入"}
+                onJoin={() => showToast({ title: `正在加入「${room.title}」`, description: "这是本地交互演示，不会连接真实游戏服务器。", variant: "blue" })}
+              />
+            )) : <CandyEmptyState title="没有找到房间" description="换个关键词试试。" action={<CandyButton size="xs" onClick={() => { setSearch(""); setPage(1); }}>清除搜索</CandyButton>} />}
+          </div>
           <CandyPagination aria-label="展示房间分页" page={currentPage} totalPages={pages} onPageChange={setPage} size="sm" siblingCount={0} />
           <span className="gb-muted">{filteredRooms.length} 个演示房间 · 第 {currentPage} / {pages} 页</span>
         </Section>
 
         <Section id="avatars" title="玩家资料" subtitle="Avatar & rating" span={4}>
-          <div className="gb-profile"><CandyAvatar character={avatarCharacters[avatarIndex]} size="xl" borderColor="dark" alt="当前玩家头像" onEdit={() => setAvatarIndex((value) => (value + 1) % avatarCharacters.length)} editLabel="切换展示头像" /><div className="gb-stack"><strong>{name || "玩家"}</strong><CandyStatusBadge status="online" label="在线" /><CandyTag color="blue" variant="soft" size="sm">Lv. 15</CandyTag></div><div className="gb-avatar-presets">{avatarCharacters.map((character, index) => <button key={character} type="button" aria-label={`选择${character}头像`} aria-pressed={avatarIndex === index} onClick={() => setAvatarIndex(index)}><CandyAvatar character={character} size="xs" borderColor="blue" alt={character} /></button>)}</div></div>
-          <div className="gb-meter-label"><span>下一级</span><b>680 / 1,000</b></div><CandyProgress aria-label="玩家等级进度" value={68} showLabel={false} striped height={14} />
-          <div className="gb-divider" /><div className="gb-row gb-between"><CandyRating aria-label="展示星级评分" value={rating} onChange={setRating} size="sm" /><b className="gb-rating-value">{rating.toFixed(1)}</b></div>
+          <div className="gb-profile">
+            <CandyAvatar
+              src={avatarPresets[avatarIndex].src}
+              size="xl"
+              borderColor="dark"
+              alt={avatarPresets[avatarIndex].name}
+              onEdit={() => setAvatarIndex((value) => (value + 1) % avatarPresets.length)}
+              editLabel="切换展示头像"
+            />
+            <div className="gb-stack">
+              <strong>{name || "玩家"}</strong>
+              <CandyStatusBadge status="online" label="在线" />
+              <CandyTag color="blue" variant="soft" size="sm">Lv. 15</CandyTag>
+            </div>
+            <div className="gb-avatar-presets">
+              {avatarPresets.map((preset, index) => (
+                <button
+                  key={preset.id}
+                  type="button"
+                  aria-label={`选择${preset.name}头像`}
+                  aria-pressed={avatarIndex === index}
+                  onClick={() => setAvatarIndex(index)}
+                >
+                  <CandyAvatar
+                    src={preset.src}
+                    size="xs"
+                    borderColor="blue"
+                    alt={preset.name}
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="gb-meter-label"><span>下一级</span><b>680 / 1,000</b></div>
+          <CandyProgress aria-label="玩家等级进度" value={68} showLabel={false} striped height={14} />
+          <div className="gb-divider" />
+          <div className="gb-row gb-between">
+            <CandyRating aria-label="展示星级评分" value={rating} onChange={setRating} size="sm" />
+            <b className="gb-rating-value">{rating.toFixed(1)}</b>
+          </div>
         </Section>
 
         <Section id="icons" title="图标库" subtitle="Game icons" span={4}>
           <div className="gb-icon-grid">{["home", "user", "trophy", "crown", "settings", "search", "plus", "cross", "heart", "bell", "mail", "world", "controller", "camera", "edit", "trash", "star", "diamond", "briefcase", "potion", "coin", "cards", "shield", "sparkle"].map((icon) => <CandyGameIcon key={icon} name={icon} size={25} color="var(--candy-primary)" />)}</div>
-          <div className="gb-medallions">{themeDefinitions.map((item) => <CandyThemeIcon key={item.value} theme={item.value} size={37} label={item.label} />)}</div>
         </Section>
 
         <Section id="tags" title="标签与输入" subtitle="Tags" span={4}>
@@ -174,17 +262,40 @@ export function GameShowcaseBoard() {
         </Section>
 
         <Section id="modals" title="弹窗与菜单" subtitle="Dialog & dropdown" span={4}>
-          <CandyCard title="创建新房间" description="选择你的游戏主题开始吧！" icon={<CandyGameIcon name="trophy" size={38} color="#d69c00" />} footer={<><CandyButton appearance="outline" variant="gray" size="xs" onClick={() => toast("已取消创建")}>取消</CandyButton><CandyButton variant="yellow" size="xs" onClick={() => setDialog("create")}>创建房间</CandyButton></>} />
-          <div className="gb-row gb-between"><CandyDropdown trigger={<CandyButton size="sm" appearance="outline" variant="gray" leftIcon={<CandyGameIcon name="user" size={18} />} rightIcon={<CandyGameIcon name="arrow-down" size={12} />}>玩家菜单</CandyButton>} items={menuItems} /><CandyTooltip content="选择一个主题，开始你的第一场游戏。"><CandyIconButton aria-label="展示主题帮助" size="sm" variant="ghost" icon={<CandyGameIcon name="question" size={25} />} /></CandyTooltip><CandyButton size="xs" variant="red" appearance="soft" onClick={() => setDialog("error")}>错误弹窗</CandyButton></div>
+          <CandyCard
+            title="创建新房间"
+            description="选择你的游戏主题开始吧！"
+            icon={<img src="/assets/items/chest.png" alt="宝箱" className="gb-asset-icon-md" />}
+            footer={<><CandyButton appearance="outline" variant="gray" size="xs" onClick={() => toast("已取消创建")}>取消</CandyButton><CandyButton variant="yellow" size="xs" onClick={() => setDialog("create")}>创建房间</CandyButton></>}
+          />
+          <div className="gb-row gb-between">
+            <CandyDropdown trigger={<CandyButton size="sm" appearance="outline" variant="gray" leftIcon={<CandyGameIcon name="user" size={18} />} rightIcon={<CandyGameIcon name="arrow-down" size={12} />}>玩家菜单</CandyButton>} items={menuItems} />
+            <CandyTooltip content="选择一个主题，开始你的第一场游戏。"><CandyIconButton aria-label="展示主题帮助" size="sm" variant="ghost" icon={<CandyGameIcon name="question" size={25} />} /></CandyTooltip>
+            <CandyButton size="xs" variant="red" appearance="soft" onClick={() => setDialog("error")}>错误弹窗</CandyButton>
+          </div>
         </Section>
 
         <Section id="empty" title="加载与空状态" subtitle="Loading & empty" span={4}>
           <div className="gb-loading-row"><CandySpinner variant="ring" size="sm" color="blue" /><span>加载中…</span><CandySpinner variant="dots" size="sm" color="blue" /></div>
-          <CandyEmptyState title={created ? "房间准备好了！" : "暂时还没有房间"} description={created ? `${activeTheme.label}主题 · 等待朋友加入` : "灵感已经就位，就等你来创建。"} icon={<CandyThemeIcon theme={created ? theme : "robot"} size={56} />} action={<CandyButton size="sm" variant="cyan" onClick={() => setDialog("create")}>{created ? "再创建一个" : "创建我的房间"}</CandyButton>} />
+          <CandyEmptyState
+            title={created ? "房间准备好了！" : "暂时还没有房间"}
+            description={created ? `${activeTheme.label}主题 · 等待朋友加入` : "灵感已经就位，就等你来创建。"}
+            icon={<img src={created ? "/assets/badges/turtle-badge.png" : "/assets/badges/turtle-think.png"} alt="海龟" className="gb-empty-mascot-img" />}
+            action={<CandyButton size="sm" variant="cyan" onClick={() => setDialog("create")}>{created ? "再创建一个" : "创建我的房间"}</CandyButton>}
+          />
         </Section>
 
         <Section id="notifications" title="通知" subtitle="Notifications" span={4}>
-          {notification ? <CandyNotification title="你有 3 条新消息" description="朋友们正在等待你的邀请。" icon={<CandyGameIcon name="bell" size={29} color="#e0aa00" />} closeLabel="关闭展示通知" onClose={() => setNotification(false)} action={<CandyButton size="xs" variant="ghost" onClick={() => toast("所有演示消息已读")}>查看消息</CandyButton>} /> : <CandyButton size="sm" appearance="outline" onClick={() => setNotification(true)}>重新显示通知</CandyButton>}
+          {notification ? (
+            <CandyNotification
+              title="你有 3 条新消息"
+              description="朋友们正在等待你的邀请。"
+              icon={<img src="/assets/items/envelope.png" alt="信封" className="gb-notification-asset-img" />}
+              closeLabel="关闭展示通知"
+              onClose={() => setNotification(false)}
+              action={<CandyButton size="xs" variant="ghost" onClick={() => toast("所有演示消息已读")}>查看消息</CandyButton>}
+            />
+          ) : <CandyButton size="sm" appearance="outline" onClick={() => setNotification(true)}>重新显示通知</CandyButton>}
           <div className="gb-tooltip-example"><span>小提示</span><p>菜单可以用方向键选择，按 Escape 关闭。每一个组件，都可以用键盘来玩。</p></div>
           <span className="gb-muted">所有互动均为本地演示，无账号登录、网络上传或真实多人游戏。</span>
         </Section>
@@ -196,7 +307,7 @@ export function GameShowcaseBoard() {
 
       <CandyModal isOpen={dialog !== null} onClose={() => setDialog(null)} closeLabel="关闭展示弹窗" title={dialog === "create" ? "创建新房间" : dialog === "error" ? "发生错误" : dialog === "profile" ? "玩家资料" : "选择游戏主题"} width={480}>
         {dialog === "error" ? <div className="gb-stack"><CandyAlert tone="error" title="这个演示房间已经满员" >试试其他房间，或者创建你自己的主题房间。</CandyAlert><CandyButton variant="blue" onClick={() => setDialog(null)}>知道了</CandyButton></div> : <div className="gb-stack">
-          {dialog === "profile" ? <><div className="gb-row"><CandyAvatar character={avatarCharacters[avatarIndex]} size="lg" borderColor="dark" onEdit={() => setAvatarIndex((value) => (value + 1) % avatarCharacters.length)} editLabel="切换资料头像" /><CandyInput label="昵称" value={name} maxLength={16} onChange={(event) => setName(event.target.value)} /></div><CandyTextarea label="个人介绍" value={bio} onChange={(event) => setBio(event.target.value)} maxLength={200} showCount /></> : <><p className="gb-muted">选一个喜欢的主题，和朋友一起创造乐趣。</p><CandyThemeGrid aria-label="弹窗主题选择" value={theme} onChange={(value) => setTheme(value as CandyTheme)} options={themeOptions(54)} columns={4} /></>}
+          {dialog === "profile" ? <><div className="gb-row"><CandyAvatar src={avatarPresets[avatarIndex].src} size="lg" borderColor="dark" onEdit={() => setAvatarIndex((value) => (value + 1) % avatarPresets.length)} editLabel="切换资料头像" /><CandyInput label="昵称" value={name} maxLength={16} onChange={(event) => setName(event.target.value)} /></div><CandyTextarea label="个人介绍" value={bio} onChange={(event) => setBio(event.target.value)} maxLength={200} showCount /></> : <><p className="gb-muted">选一个喜欢的主题，和朋友一起创造乐趣。</p><CandyThemeGrid aria-label="弹窗主题选择" value={theme} onChange={(value) => setTheme(value as GameTheme)} options={themeOptions(44)} columns={4} /></>}
           <div className="gb-dialog-actions"><CandyButton size="sm" variant="gray" appearance="outline" onClick={() => setDialog(null)}>取消</CandyButton><CandyButton size="sm" variant={dialog === "create" ? "yellow" : "blue"} onClick={dialog === "create" ? createRoom : () => { setDialog(null); toast("设置已保存"); }}>{dialog === "create" ? "创建" : "保存"}</CandyButton></div>
         </div>}
       </CandyModal>

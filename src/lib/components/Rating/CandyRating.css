@@ -71,23 +71,19 @@
   width: var(--candy-rating-size, 34px);
   height: var(--candy-rating-size, 34px);
   cursor: pointer;
-  transition:
-    transform 0.18s var(--candy-bounce, cubic-bezier(0.2, 0.8, 0.2, 1)),
-    filter 0.15s ease;
+  transition: filter 0.15s ease;
   transform-origin: center center;
 }
 
 /* Interactive Hover & Active states */
 .candy-rating:not(.candy-rating-disabled):not(.candy-rating-readonly)
   .candy-rating-star:hover {
-  transform: scale(1.14);
   filter: brightness(1.06);
 }
 
 .candy-rating:not(.candy-rating-disabled):not(.candy-rating-readonly)
   .candy-rating-star:active {
-  transform: translateY(2px) scale(0.95);
-  filter: brightness(0.96);
+  filter: brightness(0.95);
 }
 
 .candy-rating-disabled .candy-rating-star {
@@ -164,8 +160,7 @@
 }
 
 .candy-rating-star-bounce {
-  animation: candy-rating-bounce 0.38s
-    var(--candy-bounce, cubic-bezier(0.2, 0.8, 0.2, 1));
+  animation: candy-rating-bounce 0.38s ease-out;
 }
 
 /* ==========================================================================
@@ -233,8 +228,7 @@
 }
 
 .candy-stars-star-animated.candy-stars-star-active {
-  animation: candy-stars-pop-in 0.45s
-    var(--candy-bounce, cubic-bezier(0.2, 0.8, 0.2, 1)) both;
+  animation: candy-stars-pop-in 0.45s ease-out both;
   animation-delay: calc(var(--candy-star-delay, 0) * 140ms + 50ms);
 }
 

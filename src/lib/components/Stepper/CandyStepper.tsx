@@ -23,6 +23,7 @@ export interface CandyStepperProps extends Omit<
   label?: React.ReactNode;
   decrementLabel?: string;
   incrementLabel?: string;
+  fullWidth?: boolean;
 }
 
 export const CandyStepper = forwardRef<HTMLInputElement, CandyStepperProps>(
@@ -40,6 +41,7 @@ export const CandyStepper = forwardRef<HTMLInputElement, CandyStepperProps>(
       incrementLabel = "Increase value",
       disabled = false,
       readOnly = false,
+      fullWidth = false,
       id,
       className = "",
       style,
@@ -96,8 +98,11 @@ export const CandyStepper = forwardRef<HTMLInputElement, CandyStepperProps>(
 
     return (
       <div
-        className={`candy-field candy-stepper-field ${className}`}
-        style={style}
+        className={`candy-field candy-stepper-field ${fullWidth ? "candy-stepper-field-full-width" : ""} ${className}`.trim()}
+        style={{
+          width: fullWidth ? "100%" : undefined,
+          ...style,
+        }}
       >
         {label && (
           <label className="candy-field-label" htmlFor={inputId}>
@@ -105,7 +110,7 @@ export const CandyStepper = forwardRef<HTMLInputElement, CandyStepperProps>(
           </label>
         )}
         <div
-          className={`candy-stepper candy-stepper-${size}${disabled ? " candy-stepper-disabled" : ""}`}
+          className={`candy-stepper candy-stepper-${size}${fullWidth ? " candy-stepper-full-width" : ""}${disabled ? " candy-stepper-disabled" : ""}`}
         >
           <button
             type="button"

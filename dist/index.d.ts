@@ -837,6 +837,7 @@ export declare interface CandyStepperProps extends Omit<default_2.InputHTMLAttri
     label?: default_2.ReactNode;
     decrementLabel?: string;
     incrementLabel?: string;
+    fullWidth?: boolean;
 }
 
 export declare const CandySteps: default_2.ForwardRefExoticComponent<CandyStepsProps & default_2.RefAttributes<HTMLOListElement>>;

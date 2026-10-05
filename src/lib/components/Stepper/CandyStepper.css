@@ -1,13 +1,26 @@
+.candy-field.candy-stepper-field,
 .candy-stepper-field {
   display: inline-flex;
-  width: auto;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: flex-start;
+  width: fit-content;
   max-width: 100%;
+}
+
+.candy-field.candy-stepper-field.candy-stepper-field-full-width,
+.candy-stepper-field-full-width {
+  display: flex;
+  width: 100%;
+  align-self: stretch;
+  align-items: stretch;
 }
 
 .candy-stepper {
   --candy-stepper-height: 42px;
   display: inline-flex;
   align-items: stretch;
+  width: fit-content;
   max-width: 100%;
   height: var(--candy-stepper-height);
   box-sizing: border-box;
@@ -20,6 +33,11 @@
     0 2px 0 rgb(16 35 75 / 6%);
   overflow: hidden;
   font-family: var(--candy-font-family);
+}
+
+.candy-stepper.candy-stepper-full-width {
+  display: flex;
+  width: 100%;
 }
 
 .candy-stepper-xs {
@@ -77,6 +95,7 @@
   appearance: textfield;
   width: 5em;
   min-width: 0;
+  flex: 1 1 auto;
   padding: 0 6px;
   border: 0;
   border-radius: 0;
@@ -87,6 +106,11 @@
   font-weight: 600;
   text-align: center;
   font-variant-numeric: tabular-nums;
+}
+
+.candy-stepper.candy-stepper-full-width input {
+  flex: 1 1 0%;
+  width: 100%;
 }
 
 .candy-stepper input::-webkit-inner-spin-button,

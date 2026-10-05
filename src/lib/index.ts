@@ -45,7 +45,6 @@ export * from "./components/TagInput";
 export * from "./components/FileUpload";
 export * from "./components/Picker";
 export * from "./components/Card";
-export * from "./components/ThemeIcon";
 export * from "./components/Alert";
 export * from "./components/EmptyState";
 export * from "./components/Notification";

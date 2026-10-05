@@ -8,11 +8,14 @@
   justify-content: center;
   z-index: 1000;
   padding: 24px;
-  animation: candyFadeIn 0.15s ease-out;
+  animation: candyModalFadeIn 0.18s ease-out;
+  will-change: opacity;
 }
 
 .candy-modal-content {
-  animation: candyPopIn 0.2s ease-out;
+  animation: candyModalPopIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: center center;
+  will-change: transform, opacity;
   max-width: 90vw;
   max-height: calc(100dvh - 48px);
   overflow: auto;
@@ -27,18 +30,18 @@
   outline: none;
 }
 
-@keyframes candyPopIn {
+@keyframes candyModalPopIn {
   from {
     opacity: 0;
-    transform: translateY(8px) scale(0.97);
+    transform: scale(0.96) translateY(8px);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: scale(1) translateY(0);
   }
 }
 
-@keyframes candyFadeIn {
+@keyframes candyModalFadeIn {
   from {
     opacity: 0;
   }

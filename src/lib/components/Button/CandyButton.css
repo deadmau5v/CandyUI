@@ -37,20 +37,15 @@
   cursor: pointer;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.15s ease;
+  transition: filter 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .candy-btn:hover:not(:disabled) {
-  transform: translateY(-1px);
-  box-shadow:
-    inset 0 2px 0 rgb(255 255 255 / 55%),
-    inset 0 -2px 0 rgb(0 0 0 / 12%),
-    0 calc(var(--candy-effective-depth) + 1px) 0 var(--accent-shadow, var(--candy-primary-shadow));
+  filter: brightness(1.05);
 }
 
 .candy-btn:active:not(:disabled) {
-  transform: translateY(var(--candy-effective-depth));
-  box-shadow: inset 0 2px 3px rgb(0 0 0 / 15%), 0 0 0 var(--accent-shadow);
+  filter: brightness(0.94);
 }
 
 .candy-btn:focus-visible {
@@ -95,7 +90,7 @@
   box-shadow: none;
   --candy-effective-depth: 0px;
 }
-.candy-btn-ghost:hover:not(:disabled) { background: var(--candy-track); box-shadow: none; transform: none; }
+.candy-btn-ghost:hover:not(:disabled) { background: var(--candy-track); box-shadow: none; }
 
 .candy-btn-icon { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; line-height: 1; }
 .candy-btn-icon svg { display: block; }
@@ -130,6 +125,5 @@
 @keyframes candyButtonSpin { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) {
   .candy-btn { transition: none; }
-  .candy-btn:hover:not(:disabled), .candy-btn:active:not(:disabled) { transform: none; }
   .candy-btn-spinner { animation: none; }
 }

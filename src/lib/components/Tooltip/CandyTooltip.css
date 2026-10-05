@@ -13,10 +13,10 @@
   box-shadow: 0 3px 0 var(--candy-panel-shadow);
   z-index: 100;
   pointer-events: none;
-  animation: candyFadeIn 0.12s ease;
+  animation: candyTooltipFadeIn 0.14s ease-out;
 }
 
-@keyframes candyFadeIn {
+@keyframes candyTooltipFadeIn {
   from {
     opacity: 0;
   }

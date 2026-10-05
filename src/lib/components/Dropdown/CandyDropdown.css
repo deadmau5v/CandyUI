@@ -22,7 +22,9 @@
   box-shadow:
     0 4px 0 var(--candy-panel-shadow, #cbdde9),
     0 10px 24px rgb(16 35 75 / 14%);
-  animation: candyDropdownIn 0.12s ease-out;
+  animation: candyDropdownIn 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: top center;
+  will-change: transform, opacity;
 }
 
 .candy-dropdown-menu-start {
@@ -39,6 +41,7 @@
 
 .candy-dropdown-menu-top {
   bottom: calc(100% + 8px);
+  transform-origin: bottom center;
 }
 
 .candy-dropdown-item {
@@ -98,11 +101,11 @@
 @keyframes candyDropdownIn {
   from {
     opacity: 0;
-    transform: translateY(-3px);
+    transform: scale(0.96) translateY(-4px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1) translateY(0);
   }
 }
 

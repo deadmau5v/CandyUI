@@ -6892,6 +6892,7 @@ const u8 = O(
     incrementLabel: p = "Increase value",
     disabled: v = !1,
     readOnly: m = !1,
+    fullWidth: w8 = !1,
     id: M,
     className: b = "",
     style: H,
@@ -6920,14 +6921,14 @@ const u8 = O(
     return /* @__PURE__ */ f(
       "div",
       {
-        className: `candy-field candy-stepper-field ${b}`,
-        style: H,
+        className: `candy-field candy-stepper-field ${w8 ? "candy-stepper-field-full-width" : ""} ${b}`.trim(),
+        style: { width: w8 ? "100%" : void 0, ...H },
         children: [
           s && /* @__PURE__ */ a("label", { className: "candy-field-label", htmlFor: V, children: s }),
           /* @__PURE__ */ f(
             "div",
             {
-              className: `candy-stepper candy-stepper-${d}${v ? " candy-stepper-disabled" : ""}`,
+              className: `candy-stepper candy-stepper-${d}${w8 ? " candy-stepper-full-width" : ""}${v ? " candy-stepper-disabled" : ""}`,
               children: [
                 /* @__PURE__ */ a(
                   "button",

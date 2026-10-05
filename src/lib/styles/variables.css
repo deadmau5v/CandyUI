@@ -111,7 +111,7 @@
   --candy-radius-xl: 24px;
   --candy-radius-full: 9999px;
   --candy-transition:
-    transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+    background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
   --candy-bounce: cubic-bezier(0.2, 0.8, 0.2, 1);
   --candy-pop-shadow: 0 3px 0 var(--candy-panel-shadow);
   --candy-text-stroke: none;

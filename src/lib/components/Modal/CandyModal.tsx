@@ -111,6 +111,49 @@ const KNOWN_CANDY_VARS = [
 const useIsomorphicLayoutEffect =
   typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
 
+let modalScrollLockCount = 0;
+let savedOverflow = "";
+let savedPaddingRight = "";
+let unlockTimeout: ReturnType<typeof setTimeout> | null = null;
+
+function lockBodyScroll() {
+  if (typeof document === "undefined") return;
+  if (unlockTimeout !== null) {
+    clearTimeout(unlockTimeout);
+    unlockTimeout = null;
+  }
+  if (modalScrollLockCount === 0) {
+    savedOverflow = document.body.style.overflow;
+    savedPaddingRight = document.body.style.paddingRight;
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+    if (scrollbarWidth > 0) {
+      const currentPadding =
+        parseFloat(getComputedStyle(document.body).paddingRight) || 0;
+      document.body.style.paddingRight = `${currentPadding + scrollbarWidth}px`;
+    }
+    document.body.style.overflow = "hidden";
+  }
+  modalScrollLockCount++;
+}
+
+function unlockBodyScroll() {
+  if (typeof document === "undefined") return;
+  modalScrollLockCount = Math.max(0, modalScrollLockCount - 1);
+  if (modalScrollLockCount === 0) {
+    if (unlockTimeout !== null) {
+      clearTimeout(unlockTimeout);
+    }
+    unlockTimeout = setTimeout(() => {
+      unlockTimeout = null;
+      if (modalScrollLockCount === 0 && typeof document !== "undefined") {
+        document.body.style.overflow = savedOverflow;
+        document.body.style.paddingRight = savedPaddingRight;
+      }
+    }, 0);
+  }
+}
+
 export const CandyModal: React.FC<CandyModalProps> = ({
   isOpen,
   onClose,
@@ -133,6 +176,7 @@ export const CandyModal: React.FC<CandyModalProps> = ({
   const onCloseRef = useRef(onClose);
   onCloseRef.current = onClose;
   const titleId = useId();
+  const hasPlayedSoundRef = useRef(false);
 
   useIsomorphicLayoutEffect(() => {
     if (!isOpen || typeof window === "undefined") return;
@@ -159,24 +203,19 @@ export const CandyModal: React.FC<CandyModalProps> = ({
         targetStyle.setProperty(prop, val);
       }
     }
-  });
+  }, [isOpen]);
 
   useEffect(() => {
-    if (!isOpen || typeof document === "undefined") return;
-    playSound("whoosh");
-    const previousFocus = document.activeElement as HTMLElement | null;
-    const previousOverflow = document.body.style.overflow;
-    const previousPaddingRight = document.body.style.paddingRight;
-    // Hiding the page scrollbar widens the viewport and makes content jump;
-    // pad the body by the scrollbar width so the layout stays put.
-    const scrollbarWidth =
-      window.innerWidth - document.documentElement.clientWidth;
-    if (scrollbarWidth > 0) {
-      const currentPadding =
-        parseFloat(getComputedStyle(document.body).paddingRight) || 0;
-      document.body.style.paddingRight = `${currentPadding + scrollbarWidth}px`;
+    if (!isOpen || typeof document === "undefined") {
+      hasPlayedSoundRef.current = false;
+      return;
     }
-    document.body.style.overflow = "hidden";
+    if (!hasPlayedSoundRef.current) {
+      playSound("whoosh");
+      hasPlayedSoundRef.current = true;
+    }
+    lockBodyScroll();
+    const previousFocus = document.activeElement as HTMLElement | null;
     const dialog = dialogRef.current;
     const focusable = () =>
       Array.from(
@@ -189,7 +228,7 @@ export const CandyModal: React.FC<CandyModalProps> = ({
           getComputedStyle(element).visibility !== "hidden" &&
           !element.closest("[inert]"),
       );
-    (focusable()[0] || dialog)?.focus();
+    (focusable()[0] || dialog)?.focus({ preventScroll: true });
     const handleKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         event.preventDefault();
@@ -219,10 +258,9 @@ export const CandyModal: React.FC<CandyModalProps> = ({
     };
     document.addEventListener("keydown", handleKey);
     return () => {
-      document.body.style.overflow = previousOverflow;
-      document.body.style.paddingRight = previousPaddingRight;
+      unlockBodyScroll();
       document.removeEventListener("keydown", handleKey);
-      previousFocus?.focus();
+      previousFocus?.focus({ preventScroll: true });
     };
   }, [isOpen, playSound]);
 

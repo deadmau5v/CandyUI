@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import allIconsRaw from "./all-icons.json";
 
 export type GameIconName = string;
@@ -29,6 +29,8 @@ const aliases: Record<string, string> = {
   world: "earth",
   close: "cross",
   cancel: "cross",
+  edit: "pencil",
+  pen: "pencil",
   settings: "settings",
   gear: "settings",
   trophy: "trophy",

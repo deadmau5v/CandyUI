@@ -25,7 +25,8 @@
   cursor: pointer;
   transition:
     background-color 0.15s ease,
-    transform 0.15s ease;
+    border-color 0.15s ease,
+    filter 0.15s ease;
 }
 
 .candy-pagination-button:hover:not(:disabled):not([aria-current]) {
@@ -41,7 +42,7 @@
 }
 
 .candy-pagination-button:active:not(:disabled) {
-  transform: translateY(1px);
+  filter: brightness(0.95);
 }
 
 .candy-pagination-button:focus-visible {

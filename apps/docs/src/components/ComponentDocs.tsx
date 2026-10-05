@@ -208,7 +208,7 @@ const catalog = [
     description: "Put a face to a name, and help at their fingertips.",
     props: [
       ["src", "string", "—", "Optional avatar image; falls back to a vector character."],
-      ["character", "CandyAvatarCharacter", "'smile'", "Original smile face or an existing animal character."],
+      ["character", "CandyAvatarCharacter", "'bear'", "Game character icon (bear, cat, fox, rabbit, frog, crown, user)."],
       ["status / onEdit", "string / () => void", "—", "Optional presence dot and accessible edit action."],
       ["alt", "string", "'Player Avatar'", "Accessible description."],
       ["level", "number | string", "—", "Optional level label."],
@@ -756,34 +756,42 @@ export function ComponentDocs() {
               </div>
             )}
             {selected === "avatars" && (
-              <div className="button-examples" style={{ gap: 20 }}>
+              <div className="button-examples" style={{ gap: 20, alignItems: "center" }}>
                 <CandyAvatar
-                  character="bear"
-                  alt="Bear player"
+                  src="/assets/avatars/player-smile.png"
+                  alt="Smile player"
+                  level={15}
+                  size="xl"
+                  borderColor="yellow"
+                  status="online"
+                />
+                <CandyAvatar
+                  src="/assets/avatars/player-corgi.png"
+                  alt="Corgi player"
                   level={12}
                   size="lg"
-                  borderColor="yellow"
-                />
-                <CandyAvatar
-                  character="cat"
-                  alt="Cat player"
-                  level={8}
-                  size="md"
                   borderColor="blue"
+                  status="playing"
                 />
                 <CandyAvatar
-                  character="fox"
-                  alt="Fox player"
-                  level={25}
+                  src="/assets/avatars/player-panda.png"
+                  alt="Panda player"
+                  level={8}
                   size="md"
                   borderColor="pink"
                 />
                 <CandyAvatar
-                  character="rabbit"
-                  alt="Rabbit player"
-                  level={1}
-                  size="sm"
+                  character="fox"
+                  alt="Fox character"
+                  level={25}
+                  size="md"
                   borderColor="green"
+                />
+                <CandyAvatar
+                  character="bear"
+                  alt="Bear character"
+                  size="sm"
+                  borderColor="yellow"
                 />
               </div>
             )}

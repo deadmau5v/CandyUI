@@ -174,7 +174,7 @@
     background-color 0.15s ease,
     border-color 0.15s ease,
     box-shadow 0.15s ease,
-    transform 0.1s ease;
+    filter 0.15s ease;
 }
 
 /* Checked & Indeterminate Box State */
@@ -208,18 +208,12 @@
     inset 0 -2.5px 0 rgba(0, 0, 0, 0.16);
 }
 
-/* Active / Press Down State */
-.candy-checkbox:active:not(.candy-checkbox-disabled) .candy-checkbox-box {
-  transform: translateY(1.5px);
+/* Hover & Active States */
+.candy-checkbox:hover:not(.candy-checkbox-disabled) .candy-checkbox-box {
+  filter: brightness(1.04);
 }
-.candy-checkbox-checked:active:not(.candy-checkbox-disabled)
-  .candy-checkbox-box,
-.candy-checkbox-indeterminate:active:not(.candy-checkbox-disabled)
-  .candy-checkbox-box {
-  box-shadow:
-    0 1px 0 var(--candy-checkbox-shadow, var(--candy-blue-shadow, #12427a)),
-    inset 0 1.5px 0 rgba(255, 255, 255, 0.35),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.16);
+.candy-checkbox:active:not(.candy-checkbox-disabled) .candy-checkbox-box {
+  filter: brightness(0.95);
 }
 
 /* Focus Visible */
@@ -242,8 +236,7 @@
 .candy-checkbox-indeterminate .candy-checkbox-icon {
   transform: scale(1);
   opacity: 1;
-  animation: candy-checkbox-pop 0.25s
-    var(--candy-bounce, cubic-bezier(0.2, 0.8, 0.2, 1)) forwards;
+  animation: candy-checkbox-pop 0.22s ease-out forwards;
 }
 
 /* SVG Stroke Draw Animation */
@@ -259,8 +252,7 @@
 /* Indeterminate Dash Bar Animation */
 .candy-checkbox-dash {
   transform-origin: center;
-  animation: candy-dash-pop 0.22s
-    var(--candy-bounce, cubic-bezier(0.2, 0.8, 0.2, 1)) forwards;
+  animation: candy-dash-pop 0.22s ease-out forwards;
 }
 
 @keyframes candy-checkbox-pop {
@@ -402,7 +394,7 @@
     background-color 0.15s ease,
     border-color 0.15s ease,
     box-shadow 0.15s ease,
-    transform 0.1s ease;
+    filter 0.15s ease;
 }
 
 /* Checked Circle State */
@@ -411,14 +403,12 @@
   border-color: var(--candy-outline, var(--candy-primary-shadow, #12427a));
 }
 
-/* Active / Press Down State */
-.candy-radio:active:not(.candy-radio-disabled) .candy-radio-box {
-  transform: translateY(1.5px);
+/* Hover & Active States */
+.candy-radio:hover:not(.candy-radio-disabled) .candy-radio-box {
+  filter: brightness(1.04);
 }
-.candy-radio-checked:active:not(.candy-radio-disabled) .candy-radio-box {
-  box-shadow:
-    0 1px 0 var(--candy-panel-shadow, #cbdde9),
-    inset 0 1px 2px rgba(8, 43, 75, 0.08);
+.candy-radio:active:not(.candy-radio-disabled) .candy-radio-box {
+  filter: brightness(0.95);
 }
 
 /* Focus Visible */
@@ -442,8 +432,7 @@
 .candy-radio-checked .candy-radio-dot {
   transform: scale(1);
   opacity: 1;
-  animation: candy-radio-dot-bounce 0.28s
-    var(--candy-bounce, cubic-bezier(0.2, 0.8, 0.2, 1)) forwards;
+  animation: candy-radio-dot-bounce 0.28s ease-out forwards;
 }
 
 @keyframes candy-radio-dot-bounce {

@@ -4,7 +4,7 @@ import { CandyGameIcon } from "../GameIcon/CandyGameIcon";
 import "./CandyAvatar.css";
 
 export type CandyAvatarCharacter =
-  "smile" | "bear" | "cat" | "fox" | "rabbit" | "frog" | "crown" | "user";
+  "bear" | "cat" | "fox" | "rabbit" | "frog" | "crown" | "user";
 
 export interface CandyAvatarProps {
   src?: string;
@@ -28,7 +28,7 @@ export const CandyAvatar: React.FC<CandyAvatarProps> = ({
   size = "md",
   level,
   borderColor = "yellow",
-  character = "smile",
+  character = "bear",
   icon,
   fallbackBg,
   status,
@@ -60,7 +60,6 @@ export const CandyAvatar: React.FC<CandyAvatarProps> = ({
 
   const charColors: Record<CandyAvatarCharacter, { bg: string; fill: string }> =
     {
-      smile: { bg: "#ffdf57", fill: "#10234b" },
       bear: { bg: "#fee2e2", fill: "#991b1b" },
       cat: { bg: "#e0e7ff", fill: "#3730a3" },
       fox: { bg: "#ffedd5", fill: "#9a3412" },
@@ -100,28 +99,38 @@ export const CandyAvatar: React.FC<CandyAvatarProps> = ({
           aria-label={alt}
           style={{ background: fallbackBg || resolvedColors.bg }}
         >
-          {character === "smile" ? (
-            <svg viewBox="0 0 80 80" width="100%" height="100%" aria-hidden="true" fill="none" stroke="#10234b" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M13 81v-9c0-16 12-25 27-25s27 9 27 25v9" fill="#ffb833" />
-              <path d="m22 55 10 10v15m26-25L48 65v15" />
-              <path d="M14 29C14 10 24 4 40 4s26 6 26 25v6c0 16-11 25-26 25S14 51 14 35Z" fill="#ffdf57" />
-              <path d="M39 4q-6 5-1 9" />
-              <ellipse cx="29" cy="31" rx="2.5" ry="3.5" fill="#10234b" stroke="none" />
-              <ellipse cx="51" cy="31" rx="2.5" ry="3.5" fill="#10234b" stroke="none" />
-              <path d="M27 41q13 20 26 0Z" fill="#ffffff" />
-              <circle cx="19" cy="40" r="3" fill="#ffb14b" stroke="none" />
-              <circle cx="61" cy="40" r="3" fill="#ffb14b" stroke="none" />
-            </svg>
-          ) : (
-            <CandyGameIcon name={character === "user" ? "character" : character} size={iconSize} color={resolvedColors.fill} aria-hidden="true" />
-          )}
+          <CandyGameIcon
+            name={character === "user" ? "character" : character}
+            size={iconSize}
+            color={resolvedColors.fill}
+            aria-hidden="true"
+          />
         </div>
       )}
       {level !== undefined && <div className="candy-avatar-badge">{level}</div>}
-      {status && <span className={`candy-avatar-status candy-avatar-status-${status}`} role="img" aria-label={status} title={status} />}
-      {onEdit && <button type="button" className="candy-avatar-edit" aria-label={editLabel} onClick={onEdit}>
-        <svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="m4 12 8-8 4 4-8 8-5 1Z" strokeLinejoin="round" /></svg>
-      </button>}
+      {status && (
+        <span
+          className={`candy-avatar-status candy-avatar-status-${status}`}
+          role="img"
+          aria-label={status}
+          title={status}
+        />
+      )}
+      {onEdit && (
+        <button
+          type="button"
+          className="candy-avatar-edit"
+          aria-label={editLabel}
+          onClick={onEdit}
+        >
+          <CandyGameIcon
+            name="edit"
+            size={14}
+            color="currentColor"
+            aria-hidden="true"
+          />
+        </button>
+      )}
     </div>
   );
 };

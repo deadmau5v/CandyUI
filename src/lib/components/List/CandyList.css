@@ -362,35 +362,13 @@
   filter: brightness(1.03);
 }
 
-.candy-list-card
-  > .candy-list-item-interactive:hover:not(.candy-list-item-disabled),
-.candy-list-ranked
-  > .candy-list-item-interactive:hover:not(.candy-list-item-disabled) {
-  transform: translateY(-2px);
-  box-shadow:
-    0 6px 0 var(--candy-panel-shadow, #cbdde9),
-    inset 0 1.5px 0 rgba(255, 255, 255, 0.95);
-}
-
 .candy-list-plain
   > .candy-list-item-interactive:hover:not(.candy-list-item-disabled) {
   background: var(--candy-surface-alt, #f8fafc);
 }
 
-/* Active Down Sink */
 .candy-list-item-interactive:active:not(.candy-list-item-disabled) {
-  transform: translateY(2px) scale(0.995);
   filter: brightness(0.96);
-}
-
-.candy-list-card
-  > .candy-list-item-interactive:active:not(.candy-list-item-disabled),
-.candy-list-ranked
-  > .candy-list-item-interactive:active:not(.candy-list-item-disabled) {
-  transform: translateY(2px) scale(0.995);
-  box-shadow:
-    0 2px 0 var(--candy-panel-shadow, #cbdde9),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 /* Focus-visible: Highlight outer ring, strictly no black borders */
@@ -684,11 +662,6 @@
   .candy-list-item,
   .candy-list-item-rank-badge {
     transition: none;
-  }
-
-  .candy-list-item-interactive:hover,
-  .candy-list-item-interactive:active {
-    transform: none;
   }
 }
 

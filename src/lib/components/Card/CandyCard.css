@@ -81,12 +81,10 @@
 .candy-theme-card:hover:not(:disabled) {
   border-color: var(--candy-primary);
   background: var(--candy-blue-light);
-  transform: translateY(-2px);
 }
 
 .candy-theme-card:active:not(:disabled) {
-  transform: translateY(1px);
-  box-shadow: none;
+  filter: brightness(0.96);
 }
 
 .candy-theme-card:focus-visible,
@@ -286,11 +284,6 @@
 @media (prefers-reduced-motion: reduce) {
   .candy-theme-card {
     transition: none;
-  }
-
-  .candy-theme-card:hover:not(:disabled),
-  .candy-theme-card:active:not(:disabled) {
-    transform: none;
   }
 }
 
