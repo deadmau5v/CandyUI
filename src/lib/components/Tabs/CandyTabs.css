@@ -3,67 +3,77 @@
 /* Color Variants */
 .candy-tabs-pink {
   --accent: var(--candy-pink, #f780ae);
+  --accent-bg: var(--candy-pink-light, #ffeef5);
   --accent-shadow: var(--candy-pink-shadow, #8f2652);
-  --accent-text: var(--candy-pink-text, #12427a);
+  --accent-text: #cf4d7f;
 }
 
 .candy-tabs-blue {
   --accent: var(--candy-primary, var(--candy-blue, #1761d1));
+  --accent-bg: var(--candy-blue-light, #eaf1ff);
   --accent-shadow: var(
     --candy-primary-shadow,
     var(--candy-blue-shadow, #12427a)
   );
-  --accent-text: var(--candy-primary-text, var(--candy-blue-text, #ffffff));
+  --accent-text: var(--candy-primary, #1761d1);
 }
 
 .candy-tabs-green {
   --accent: var(--candy-green, #70d997);
+  --accent-bg: var(--candy-green-light, #eafaf0);
   --accent-shadow: var(--candy-green-shadow, #194a2b);
-  --accent-text: var(--candy-green-text, #12427a);
+  --accent-text: #198754;
 }
 
 .candy-tabs-yellow {
   --accent: var(--candy-yellow, #ffcb05);
+  --accent-bg: var(--candy-yellow-light, #fffbeb);
   --accent-shadow: var(--candy-yellow-shadow, #8a5700);
-  --accent-text: var(--candy-yellow-text, #12427a);
+  --accent-text: #8a5700;
   --candy-tabs-highlight: rgba(255, 255, 255, 0.85);
   --candy-tabs-shade: rgba(0, 0, 0, 0.22);
 }
 
 .candy-tabs-orange {
   --accent: var(--candy-orange, #ff9f43);
+  --accent-bg: #fff4ed;
   --accent-shadow: var(--candy-orange-shadow, #8a3c00);
-  --accent-text: var(--candy-orange-text, #12427a);
+  --accent-text: #c25e00;
 }
 
 .candy-tabs-purple {
   --accent: var(--candy-purple, #7955c7);
+  --accent-bg: #f3effc;
   --accent-shadow: var(--candy-purple-shadow, #47287d);
-  --accent-text: var(--candy-purple-text, #ffffff);
+  --accent-text: #603bb3;
 }
 
 .candy-tabs-choco {
   --accent: var(--candy-choco, #8d5b3e);
+  --accent-bg: #f7f1ec;
   --accent-shadow: var(--candy-choco-shadow, #3b1d0b);
-  --accent-text: var(--candy-choco-text, #ffffff);
+  --accent-text: #5e3720;
 }
 
 .candy-tabs-cream {
   --accent: var(--candy-cream, #fff5db);
+  --accent-bg: #fffcf5;
   --accent-shadow: var(--candy-cream-shadow, #665020);
-  --accent-text: var(--candy-cream-text, #12427a);
+  --accent-text: #8a6a20;
   --candy-tabs-highlight: rgba(255, 255, 255, 0.85);
   --candy-tabs-shade: rgba(0, 0, 0, 0.18);
 }
 
 .candy-tabs-dark {
   --accent: var(--candy-dark, #12427a);
+  --accent-bg: #e8eef6;
   --accent-shadow: var(--candy-dark-shadow, #0a2749);
-  --accent-text: var(--candy-dark-text, #ffffff);
+  --accent-text: #0a2749;
 }
 
 .candy-tabs-ghost {
   --accent: var(--candy-track, #eaf0f8);
+  --accent-bg: #ffffff;
   --accent-shadow: var(--candy-outline, #12427a);
   --accent-text: var(--candy-text, #173d5d);
 }
@@ -72,10 +82,15 @@
 .candy-tabs {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: fit-content;
+  max-width: 100%;
   font-family: var(--candy-font-family);
   --candy-tabs-highlight: rgba(255, 255, 255, 0.65);
   --candy-tabs-shade: rgba(0, 0, 0, 0.2);
+}
+
+.candy-tabs.candy-tabs-full-width {
+  width: 100%;
 }
 
 /* TabList Container */
@@ -220,8 +235,8 @@
 }
 
 .candy-tabs-tab:focus-visible {
-  outline: 3px solid var(--candy-focus, #1761d1);
-  outline-offset: 2px;
+  outline: 2px solid var(--candy-focus, #1761d1);
+  outline-offset: 1px;
   z-index: 2;
 }
 
@@ -231,29 +246,27 @@
   background: rgba(255, 255, 255, 0.55);
 }
 
-/* Pill Selected State: 3D chunky candy block with juicy inner shadow & drop shadow */
+/* Pill Selected State */
 .candy-tabs-list-pill .candy-tabs-tab[aria-selected="true"] {
-  background: var(--accent, var(--candy-primary, var(--candy-blue, #1761d1)));
-  color: var(--accent-text, var(--candy-primary-text, #ffffff));
-  border: 2px solid transparent;
+  background: var(--accent-bg, #eaf1ff);
+  color: var(--accent-text, var(--candy-primary, #1761d1));
+  font-weight: 700;
+  border: 1.5px solid rgba(23, 97, 209, 0.16);
   box-shadow:
-    0 3px 10px rgba(0, 0, 0, 0.14),
-    inset 0 1.5px 0 var(--candy-tabs-highlight, rgba(255, 255, 255, 0.5));
+    0 2px 6px rgba(18, 66, 122, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
   transform: none;
   z-index: 1;
 }
 
 .candy-tabs-list-pill
   .candy-tabs-tab[aria-selected="true"]:hover:not(:disabled) {
-  filter: brightness(1.06);
+  filter: brightness(1.02);
 }
 
 .candy-tabs-list-pill .candy-tabs-tab:active:not(:disabled) {
-  transform: translateY(1.5px);
-  box-shadow:
-    0 1px 0 var(--accent-shadow, var(--candy-primary-shadow, #12427a)),
-    inset 0 1.5px 0 var(--candy-tabs-highlight),
-    inset 0 -1.5px 0 var(--candy-tabs-shade);
+  transform: none;
+  box-shadow: 0 1px 3px rgba(18, 66, 122, 0.08);
 }
 
 /* Underline Selected State: Bottom indicator strip with candy gloss */

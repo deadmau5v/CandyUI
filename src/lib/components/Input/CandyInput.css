@@ -158,22 +158,34 @@
 }
 
 /* --- Native Input Element --- */
+.candy-input-wrapper .candy-input-element,
 .candy-input-element {
   flex: 1 1 auto;
   min-width: 0;
   width: 100%;
   height: 100%;
-  border: none;
-  outline: none;
-  background: transparent;
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
   color: var(--candy-text, #173d5d);
   font-family: var(--candy-font-family);
   font-size: inherit;
   font-weight: 500;
   line-height: normal;
-  padding: 0;
+  padding: 0 !important;
   margin: 0;
   box-sizing: border-box;
+}
+
+.candy-input-wrapper .candy-input-element:focus,
+.candy-input-wrapper .candy-input-element:focus-visible,
+.candy-input-element:focus,
+.candy-input-element:focus-visible {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .candy-input-element::placeholder {

@@ -38,7 +38,7 @@ select {
 }
 button:focus-visible,
 a:focus-visible,
-input:focus-visible,
+input:focus-visible:not(.candy-input-element),
 select:focus-visible {
   outline: 3px solid #ffcf59;
   outline-offset: 4px;
@@ -68,7 +68,7 @@ input,
 select {
   min-width: 0;
 }
-input:not([type="range"]):not([type="checkbox"]):not([type="color"]),
+input:not([type="range"]):not([type="checkbox"]):not([type="color"]):not(.candy-input-element),
 select {
   border: 2px solid #dfe6ef;
   border-radius: 9px;
@@ -1009,12 +1009,15 @@ a {
   font-size: 11px;
   color: #7b8fae;
 }
-.code-heading button {
+.code-heading button:not(.candy-btn) {
   display: flex;
   align-items: center;
   gap: 6px;
   color: var(--blue);
   font-size: 11px;
+}
+.code-heading .candy-btn {
+  color: var(--accent-text, #ffffff) !important;
 }
 .code-box pre {
   font-size: 12px;
@@ -2040,10 +2043,10 @@ a {
   color: var(--candy-text-muted, #64748b);
   margin: 12px 0 6px;
 }
-.scenario-panel input,
-.scenario-panel select,
-.lobby-card input,
-.lobby-card select {
+.scenario-panel input:not(.candy-input-element),
+.scenario-panel select:not(.candy-select-trigger),
+.lobby-card input:not(.candy-input-element),
+.lobby-card select:not(.candy-select-trigger) {
   font-size: 15px;
   padding: 11px 14px;
   border: 2px solid var(--candy-track, #d8e5f2);
@@ -2054,13 +2057,23 @@ a {
   box-sizing: border-box;
   font-family: inherit;
 }
-.scenario-panel input:focus,
-.scenario-panel select:focus,
-.lobby-card input:focus,
-.lobby-card select:focus {
+.scenario-panel input:not(.candy-input-element):focus,
+.scenario-panel select:not(.candy-select-trigger):focus,
+.lobby-card input:not(.candy-input-element):focus,
+.lobby-card select:not(.candy-select-trigger):focus {
   border-color: var(--candy-primary, #2164d9);
   outline: none;
   box-shadow: 0 0 0 3px rgba(33, 100, 217, 0.15);
+}
+
+.candy-input-wrapper input,
+.candy-input-wrapper .candy-input-element {
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
 }
 
 .create-room {
@@ -2819,24 +2832,28 @@ a {
   box-shadow:
     0 4px 0 #cbd5e1,
     0 6px 14px rgba(18, 66, 122, 0.08);
-  transition: all 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.1s ease,
+    filter 0.15s ease;
   gap: 12px;
   user-select: none;
 }
 
 .card-hero-install:hover {
   border-color: var(--candy-primary, #1865db);
-  transform: translateY(-2px);
   box-shadow:
-    0 6px 0 #cbd5e1,
-    0 10px 20px rgba(24, 101, 219, 0.14);
+    0 4px 0 #cbd5e1,
+    0 6px 14px rgba(24, 101, 219, 0.14);
 }
 
 .card-hero-install:active {
   transform: translateY(2px);
   box-shadow:
     0 2px 0 #cbd5e1,
-    0 4px 8px rgba(24, 101, 219, 0.08);
+    0 4px 8px rgba(18, 66, 122, 0.08);
+  filter: brightness(0.97);
 }
 
 .card-hero-install-cmd {
@@ -3031,6 +3048,11 @@ a {
 /* ==========================================================================
    Header Soft Pill Nav & High-Contrast Footer Link
    ========================================================================== */
+
+.site-header-nav-wrap {
+  display: flex;
+  align-items: center;
+}
 
 .site-header-nav {
   display: flex;

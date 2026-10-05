@@ -28,8 +28,6 @@ import {
   CandyCheckbox,
   CandyRadio,
   CandyRadioGroup,
-  CandyItemSlot,
-  CandyLevelTile,
   CandyRating,
   CandyStars,
   CandyTag,
@@ -311,26 +309,6 @@ const catalog = [
     ],
   },
   {
-    id: "item-slots",
-    name: "Item slots",
-    component: "CandyItemSlot",
-    description:
-      "RPG inventory slots with 5 rarity tiers, shimmering legendaries, and level map tiles.",
-    props: [
-      [
-        "rarity",
-        "CandyItemRarity",
-        "'common'",
-        "Tier: common, rare, epic, legendary, mythic.",
-      ],
-      ["count", "number", "—", "Item stack count."],
-      ["badge", "string", "—", "Corner highlight badge."],
-      ["selected", "boolean", "false", "Slot selection highlight."],
-      ["locked", "boolean", "false", "Slot locked mask."],
-      ["size", "'sm' | 'md' | 'lg' | 'xl'", "'md'", "Slot dimensions."],
-    ],
-  },
-  {
     id: "ratings",
     name: "Rating",
     component: "CandyRating",
@@ -414,7 +392,6 @@ export function ComponentDocs() {
   const [activeTab, setActiveTab] = useState("inventory");
   const [chkVal, setChkVal] = useState(true);
   const [radioVal, setRadioVal] = useState("strawberry");
-  const [slotSelected, setSlotSelected] = useState("potion");
   const [ratingScore, setRatingScore] = useState(3.5);
   const [tagChecked, setTagChecked] = useState(true);
   const [demoTags, setDemoTags] = useState(["薄荷糖", "跳跳糖", "棉花糖"]);
@@ -457,9 +434,7 @@ export function ComponentDocs() {
                                   ? `<CandyTabs value={tab} onChange={setTab} variant="pill" color="pink">\n  <CandyTabList aria-label="Game tabs">\n    <CandyTab value="inventory" icon="🎒" badge={12}>背包</CandyTab>\n    <CandyTab value="quests" icon="📜" badge>任务</CandyTab>\n    <CandyTab value="shop" icon="💎">商店</CandyTab>\n  </CandyTabList>\n</CandyTabs>`
                                   : selected === "checkboxes"
                                     ? `<CandyCheckbox\n  checked={agreed}\n  onChange={setAgreed}\n  color="pink"\n  label="开启糖果音效与触感反馈"\n/>\n\n<CandyRadioGroup value={flavor} onChange={setFlavor} orientation="horizontal">\n  <CandyRadio value="strawberry" label="草莓味" />\n  <CandyRadio value="blueberry" label="蓝莓味" />\n</CandyRadioGroup>`
-                                    : selected === "item-slots"
-                                      ? `<CandyItemSlot rarity="legendary" label="生命药水" count={1250} badge="UP">\n  <span>🧪</span>\n</CandyItemSlot>\n\n<CandyLevelTile level={8} stars={3} current />`
-                                      : selected === "ratings"
+                                    : selected === "ratings"
                                         ? `<CandyRating value={score} onChange={setScore} allowHalf allowClear size="md" />\n<CandyStars count={3} max={3} animated arched />`
                                         : selected === "tags"
                                           ? `<CandyTagGroup gap="sm">\n  <CandyTag checkable checked={selected} color="pink" onCheckedChange={setSelected}>休闲游戏</CandyTag>\n  <CandyTag closable color="blue" variant="soft" onClose={handleClose}>薄荷糖</CandyTag>\n</CandyTagGroup>`
@@ -826,9 +801,10 @@ export function ComponentDocs() {
                   variant="yellow"
                   onClick={(e) => {
                     const rect = e.currentTarget.getBoundingClientRect();
+                    const jitterX = (Math.random() - 0.5) * 24;
                     spawnText({
                       text: "+100 EXP!",
-                      x: rect.left + rect.width / 2,
+                      x: rect.left + rect.width / 2 + jitterX,
                       y: rect.top,
                       color: "yellow",
                     });
@@ -840,9 +816,10 @@ export function ComponentDocs() {
                   variant="pink"
                   onClick={(e) => {
                     const rect = e.currentTarget.getBoundingClientRect();
+                    const jitterX = (Math.random() - 0.5) * 24;
                     spawnText({
                       text: "CRITICAL HIT!",
-                      x: rect.left + rect.width / 2,
+                      x: rect.left + rect.width / 2 + jitterX,
                       y: rect.top,
                       color: "pink",
                     });
@@ -1095,86 +1072,6 @@ export function ComponentDocs() {
                     <CandyRadio value="blueberry" label="Blueberry" />
                     <CandyRadio value="grape" label="Grape" />
                   </CandyRadioGroup>
-                </div>
-              </div>
-            )}
-            {selected === "item-slots" && (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 24,
-                  alignItems: "flex-start",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    gap: 16,
-                    flexWrap: "wrap",
-                    alignItems: "center",
-                  }}
-                >
-                  <CandyItemSlot
-                    rarity="common"
-                    label="Iron Key"
-                    count={1}
-                    selected={slotSelected === "key"}
-                    onClick={() => setSlotSelected("key")}
-                  >
-                    <CandyGameIcon name="key" size={26} color="#eab308" />
-                  </CandyItemSlot>
-                  <CandyItemSlot
-                    rarity="epic"
-                    label="Magic Scroll"
-                    count={8}
-                    badge="HOT"
-                    selected={slotSelected === "scroll"}
-                    onClick={() => setSlotSelected("scroll")}
-                  >
-                    <CandyGameIcon name="cards" size={26} color="#a855f7" />
-                  </CandyItemSlot>
-                  <CandyItemSlot
-                    rarity="legendary"
-                    label="Health Potion"
-                    count={1250}
-                    badge="UP"
-                    selected={slotSelected === "potion"}
-                    onClick={() => setSlotSelected("potion")}
-                  >
-                    <CandyGameIcon name="potion" size={26} color="#10b981" />
-                  </CandyItemSlot>
-                  <CandyItemSlot
-                    rarity="mythic"
-                    label="Dragon Egg"
-                    count={1}
-                    locked
-                    selected={slotSelected === "egg"}
-                    onClick={() => setSlotSelected("egg")}
-                  >
-                    <CandyGameIcon name="diamond" size={26} color="#3b82f6" />
-                  </CandyItemSlot>
-                </div>
-                <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
-                  <CandyLevelTile
-                    level={1}
-                    stars={3}
-                    onClick={() =>
-                      showToast({ title: "Level 1 Cleared!", variant: "green" })
-                    }
-                  />
-                  <CandyLevelTile
-                    level={2}
-                    stars={2}
-                    current
-                    onClick={() =>
-                      showToast({
-                        title: "Starting Level 2...",
-                        variant: "blue",
-                      })
-                    }
-                  />
-                  <CandyLevelTile level={3} stars={0} locked />
                 </div>
               </div>
             )}

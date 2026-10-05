@@ -25,6 +25,15 @@
   }
 }
 
+@keyframes candyFadeIn {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   /* Keep the completion event used to remove transient reward text. */
   .candy-floating-text {

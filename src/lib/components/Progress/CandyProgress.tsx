@@ -52,7 +52,12 @@ export const CandyProgress: React.FC<CandyProgressProps> = ({
       aria-valuemax={Math.max(0, max)}
       aria-valuenow={Math.max(0, Math.min(Math.max(0, max), value))}
       className={containerClasses}
-      style={{ height, ...style }}
+      style={{
+        height,
+        ["--candy-progress-height" as any]:
+          typeof height === "number" ? `${height}px` : height,
+        ...style,
+      }}
       {...rest}
     >
       {icon && (

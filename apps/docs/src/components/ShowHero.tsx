@@ -51,36 +51,36 @@ export function ShowHero({
 
         <div className="card-hero-actions">
           <CandyButton
-            variant="yellow"
+            variant="blue"
             size="lg"
             shape="pill"
             onClick={onExplore}
             rightIcon={
-              <CandyGameIcon name="arrow-right" size={20} color="#12427a" />
+              <CandyGameIcon name="arrow-right" size={20} color="#ffffff" />
             }
           >
             Explore components
           </CandyButton>
 
           <CandyButton
-            variant="blue"
+            variant="ghost"
             size="lg"
             shape="pill"
             onClick={onCustomize}
             leftIcon={
-              <CandyGameIcon name="paint-bucket" size={18} color="#ffffff" />
+              <CandyGameIcon name="paint-bucket" size={18} color="#1761d1" />
             }
           >
             Make it yours
           </CandyButton>
 
           <CandyButton
-            variant="cream"
+            variant="blue"
             size="lg"
             shape="pill"
             onClick={onPlayScenarios}
             leftIcon={
-              <CandyGameIcon name="controller" size={18} color="#1761d1" />
+              <CandyGameIcon name="controller" size={18} color="#ffffff" />
             }
           >
             Try the demo
@@ -108,7 +108,7 @@ export function ShowHero({
               <code>pnpm add candy-ui</code>
             </div>
             <CandyButton
-              variant={copied ? "green" : "cream"}
+              variant={copied ? "green" : "blue"}
               size="sm"
               shape="pill"
               className="card-hero-copy-btn"
@@ -117,7 +117,7 @@ export function ShowHero({
                 <CandyGameIcon
                   name={copied ? "tick" : "copy"}
                   size={14}
-                  color={copied ? "#ffffff" : "#1761d1"}
+                  color="#ffffff"
                 />
               }
             >

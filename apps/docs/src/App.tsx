@@ -10,6 +10,9 @@ import {
   CandyCounter,
   CandyTooltip,
   CandyGameIcon,
+  CandyTabs,
+  CandyTabList,
+  CandyTab,
   useCandy,
   useCandyToast,
 } from "candy-ui";
@@ -80,20 +83,22 @@ function Site() {
             </span>
             <span className="version">0.1</span>
           </button>
-          <nav className="site-header-nav" aria-label="Main navigation">
-            {navigation.map((n) => {
-              const isActive = page === n.id;
-              return (
-                <button
-                  key={n.id}
-                  type="button"
-                  className={`nav-pill-item ${isActive ? "active" : ""}`}
-                  onClick={() => navigate(n.id)}
-                >
-                  {n.label}
-                </button>
-              );
-            })}
+          <nav className="site-header-nav-wrap" aria-label="Main navigation">
+            <CandyTabs
+              value={page}
+              onChange={(val) => navigate(val as Page)}
+              variant="pill"
+              color="blue"
+              size="sm"
+            >
+              <CandyTabList aria-label="Main navigation">
+                {navigation.map((n) => (
+                  <CandyTab key={n.id} value={n.id}>
+                    {n.label}
+                  </CandyTab>
+                ))}
+              </CandyTabList>
+            </CandyTabs>
           </nav>
           <div className="header-actions">
             <CandyTooltip

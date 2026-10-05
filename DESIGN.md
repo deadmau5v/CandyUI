@@ -119,4 +119,4 @@ components:
 - **Panel & Ribbon**：卡片面板为 24px~32px 圆角白面配细灰蓝边框；飘带（`CandyRibbon`）为自适应拉伸 SVG 拱形横幅，搭配深海军蓝描边与立体字效。
 - **Tabs**：支持 `pill`（内嵌果冻滑块）与 `underline` 变体，消除多层边框嵌套与尺寸抖动。
 - **Form Controls (Input, Select, Switch, Slider)**：内凹槽位视觉（沉底内阴影），聚焦时柔和光晕，严禁裸原生表单样式。
-- **Game Elements (ItemSlot, Rating, Avatar)**：道具槽自带稀有度分级（common/rare/epic/legendary/mythic）；星级评分采用纯矢量 SVG 糖果金星。
+- **Game Elements (Rating, Avatar)**：星级评分采用纯矢量 SVG 糖果金星。

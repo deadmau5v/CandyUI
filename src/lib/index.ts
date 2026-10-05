@@ -33,7 +33,6 @@ export * from "./components/Input/CandyInput";
 export * from "./components/Select/CandySelect";
 export * from "./components/Tabs/CandyTabs";
 export * from "./components/Checkbox/CandyCheckbox";
-export * from "./components/ItemSlot/CandyItemSlot";
 export * from "./components/Rating/CandyRating";
 export * from "./components/Tag/CandyTag";
 export * from "./components/Spinner/CandySpinner";

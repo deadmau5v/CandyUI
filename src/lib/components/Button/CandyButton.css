@@ -76,8 +76,6 @@
   border: 4.5px solid var(--candy-outline);
   border-radius: var(--candy-radius-full);
   box-shadow:
-    0 var(--candy-effective-depth) 0 0
-      var(--accent-shadow, var(--candy-outline)),
     inset 0 2px 0 var(--candy-btn-highlight),
     inset 0 -2.5px 0 var(--candy-btn-shade);
   transition:
@@ -101,9 +99,8 @@
 
 .candy-btn:active:not(:disabled) {
   filter: brightness(0.92);
-  transform: translateY(var(--candy-effective-depth));
+  transform: none;
   box-shadow:
-    0 0 0 0 var(--accent-shadow, var(--candy-outline)),
     inset 0 1.5px 0 var(--candy-btn-highlight),
     inset 0 -1.5px 0 var(--candy-btn-shade);
 }
