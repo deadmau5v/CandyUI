@@ -9,34 +9,24 @@ The visual direction takes inspiration from Gartic.io’s game controls and Gart
 ## Projects
 
 - `src/lib` — reusable React component library; ESM, CommonJS, CSS, and TypeScript declarations.
-- `apps/docs` — independent showcase: Overview, Components, Icons (Game Icon Pack), Sandbox, and Examples.
+- `apps/docs` — documentation app: Overview, Showcase (interactive game board), Components (API catalog & playground), and Icons (Game Icon Pack).
 
-The showcase includes an interactive lobby, leaderboard, daily rewards, level selection, and settings. All flows are local demos. There is no account service, multiplayer backend, persistent balance, or real-money purchase.
+## Installation
 
-## Develop
-
-```sh
-bun install
-bun run dev                         # http://127.0.0.1:5173
-bun run typecheck                   # library + docs
-bun run build                       # library + docs production build
-bun run build:lib
-bun run build:docs
-bun run test:lib                    # built ESM/CJS + React SSR smoke checks
-bun run format                      # format codebase with Prettier
-```
-
-Visual tests use installed Chrome at `C:/Program Files/Google/Chrome/Application/chrome.exe`. Override with `CHROME_PATH` and optionally `PREVIEW_URL`. No replacement browser/server is started by the test script.
-
-The package in this checkout has not been published as part of this work. The showcase installation command illustrates a package-consumer command, not a verified npm publication. Within this workspace the docs app imports `candy-ui` through its Vite/TypeScript source alias. To consume elsewhere, build then pack/link the local package:
+Install directly from GitHub into any React project:
 
 ```sh
-pnpm run build:lib
-pnpm pack
-# In another React app: pnpm add /path/to/candy-ui-0.1.0.tgz
+# bun (recommended)
+bun add github:deadmau5v/CandyUI
+
+# pnpm
+pnpm add github:deadmau5v/CandyUI
+
+# npm
+npm install github:deadmau5v/CandyUI
 ```
 
-## Use
+## Quick Start
 
 ```tsx
 import { CandyProvider, CandyToastProvider, CandyButton } from "candy-ui";
@@ -53,6 +43,20 @@ export function Game() {
     </CandyProvider>
   );
 }
+```
+
+## Development
+
+```sh
+bun install
+bun run dev                         # Start documentation app
+bun run typecheck                   # TypeScript check (lib + docs)
+bun run build                       # Build library + docs production bundle
+bun run build:lib                   # Build component library dist/
+bun run build:docs                  # Build docs site
+bun run test:lib                    # Smoke checks
+bun run test:visual                 # Visual review Playwright suite
+bun run lint                        # Lint with Oxlint
 ```
 
 React 18/19 are supported by the peer dependency declaration. Fredoka is loaded from Google Fonts by default; self-host and override `--candy-font-family` for offline or privacy-sensitive deployments. Audio stays off by default in the showcase; users can enable it in the header or Settings example.

@@ -4,7 +4,7 @@ node_modules/
 .npm/
 
 # Build & distribution outputs
-dist/
+apps/docs/dist/
 dist-ssr/
 *.local
 

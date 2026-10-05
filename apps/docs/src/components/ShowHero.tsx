@@ -6,27 +6,38 @@ export interface ShowHeroProps {
   onShowcase?: () => void;
 }
 
+const PM_COMMANDS = {
+  bun: "bun add github:deadmau5v/CandyUI",
+  pnpm: "pnpm add github:deadmau5v/CandyUI",
+  npm: "npm i github:deadmau5v/CandyUI",
+} as const;
+
+type PMType = keyof typeof PM_COMMANDS;
+
 export function ShowHero({
   onExplore,
   onShowcase,
 }: ShowHeroProps) {
+  const [pm, setPm] = useState<PMType>("bun");
   const [copied, setCopied] = useState(false);
   const { showToast } = useCandyToast();
   const { playSound } = useCandy();
 
+  const currentCmd = PM_COMMANDS[pm];
+
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText("pnpm add candy-ui");
+      await navigator.clipboard.writeText(currentCmd);
       setCopied(true);
       playSound("pop");
       showToast({
-        title: "Copied to clipboard: pnpm add candy-ui",
+        title: `Copied: ${currentCmd}`,
         variant: "green",
       });
       setTimeout(() => setCopied(false), 2000);
     } catch {
       showToast({
-        title: "Could not copy. Use pnpm add candy-ui",
+        title: `Could not copy. Use: ${currentCmd}`,
         variant: "pink",
       });
     }
@@ -74,6 +85,25 @@ export function ShowHero({
         </div>
 
         <div className="card-hero-meta">
+          <div className="card-hero-pm-selector" role="tablist" aria-label="Package manager">
+            {(["bun", "pnpm", "npm"] as const).map((key) => (
+              <button
+                key={key}
+                type="button"
+                role="tab"
+                aria-selected={pm === key}
+                className={`card-hero-pm-tab ${pm === key ? "active" : ""}`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setPm(key);
+                  playSound("click");
+                }}
+              >
+                {key}
+              </button>
+            ))}
+          </div>
+
           <div
             className="card-hero-install"
             onClick={handleCopy}
@@ -85,13 +115,13 @@ export function ShowHero({
                 handleCopy();
               }
             }}
-            aria-label="Copy install command: pnpm add candy-ui"
+            aria-label={`Copy install command: ${currentCmd}`}
           >
             <div className="card-hero-install-cmd">
               <span className="card-hero-terminal-dollar" aria-hidden="true">
                 $
               </span>
-              <code>pnpm add candy-ui</code>
+              <code>{currentCmd}</code>
             </div>
             <CandyButton
               variant={copied ? "green" : "blue"}

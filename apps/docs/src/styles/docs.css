@@ -2817,6 +2817,37 @@ a {
   gap: 16px;
 }
 
+.card-hero-pm-selector {
+  display: inline-flex;
+  background: var(--candy-track, #dfe6ef);
+  border-radius: 9999px;
+  padding: 3px;
+  gap: 4px;
+}
+
+.card-hero-pm-tab {
+  border: none;
+  background: transparent;
+  color: var(--candy-muted, #5b738e);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.card-hero-pm-tab:hover {
+  color: var(--candy-text, #082b4b);
+}
+
+.card-hero-pm-tab.active {
+  background: var(--candy-surface, #ffffff);
+  color: var(--candy-primary, #1865db);
+  box-shadow: 0 2px 4px rgba(16, 35, 75, 0.08);
+}
+
 .card-hero-install {
   display: inline-flex;
   align-items: center;

@@ -2,8 +2,16 @@
   "name": "candy-ui",
   "version": "0.1.0",
   "description": "Juicy, playful React WebGame UI component library styled with Fredoka",
-  "author": "CandyUI Team",
+  "author": "deadmau5v",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deadmau5v/CandyUI.git"
+  },
+  "bugs": {
+    "url": "https://github.com/deadmau5v/CandyUI/issues"
+  },
+  "homepage": "https://github.com/deadmau5v/CandyUI#readme",
   "type": "module",
   "main": "./dist/candy-ui.cjs",
   "module": "./dist/candy-ui.js",
