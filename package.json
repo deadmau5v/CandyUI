@@ -32,7 +32,8 @@
     "test:visual": "node scripts/visual-review.mjs",
     "test:lib": "node scripts/library-smoke.mjs",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "lint": "oxlint src apps/docs/src"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
@@ -53,6 +54,7 @@
     "esbuild": "^0.21.5",
     "esbuild-wasm": "0.21.5",
     "lucide-react": "^1.16.0",
+    "oxlint": "^1.86.0",
     "prettier": "^3.9.9",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

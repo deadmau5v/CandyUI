@@ -485,13 +485,15 @@ export function ComponentDocs() {
       </div>
       <div className="docs-layout">
         <aside className="docs-sidebar">
-          <div className="docs-search">
-            <CandyGameIcon name="search" size={16} color="currentColor" />
-            <input
+          <div className="docs-search-wrapper" style={{ marginBottom: 12 }}>
+            <CandyInput
+              leftIcon={<CandyGameIcon name="search" size={16} color="currentColor" />}
               aria-label="Find a component"
               placeholder="Find a component…"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
+              size="sm"
+              clearable
             />
           </div>
           <span className="field-label">COMPONENTS</span>
@@ -1120,7 +1122,7 @@ export function ComponentDocs() {
                     selected={slotSelected === "key"}
                     onClick={() => setSlotSelected("key")}
                   >
-                    <span style={{ fontSize: 24 }}>🗝️</span>
+                    <CandyGameIcon name="key" size={26} color="#eab308" />
                   </CandyItemSlot>
                   <CandyItemSlot
                     rarity="epic"
@@ -1130,7 +1132,7 @@ export function ComponentDocs() {
                     selected={slotSelected === "scroll"}
                     onClick={() => setSlotSelected("scroll")}
                   >
-                    <span style={{ fontSize: 24 }}>📜</span>
+                    <CandyGameIcon name="cards" size={26} color="#a855f7" />
                   </CandyItemSlot>
                   <CandyItemSlot
                     rarity="legendary"
@@ -1140,7 +1142,7 @@ export function ComponentDocs() {
                     selected={slotSelected === "potion"}
                     onClick={() => setSlotSelected("potion")}
                   >
-                    <span style={{ fontSize: 24 }}>🧪</span>
+                    <CandyGameIcon name="potion" size={26} color="#10b981" />
                   </CandyItemSlot>
                   <CandyItemSlot
                     rarity="mythic"
@@ -1150,7 +1152,7 @@ export function ComponentDocs() {
                     selected={slotSelected === "egg"}
                     onClick={() => setSlotSelected("egg")}
                   >
-                    <span style={{ fontSize: 24 }}>🥚</span>
+                    <CandyGameIcon name="diamond" size={26} color="#3b82f6" />
                   </CandyItemSlot>
                 </div>
                 <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
@@ -1401,14 +1403,13 @@ export function ComponentDocs() {
           </div>
           {selected === "buttons" && (
             <div className="props-controls">
-              <label>
-                Color
-                <select
-                  aria-label="Button color"
+              <div style={{ flex: "1 1 140px" }}>
+                <span className="control-label" style={{ display: "block", marginBottom: 6, fontSize: 13, fontWeight: 600, color: "var(--candy-text, #082b4b)" }}>Color</span>
+                <CandySelect
+                  placeholder="Color"
                   value={variant}
-                  onChange={(e) => setVariant(e.target.value as CandyColor)}
-                >
-                  {[
+                  onChange={(val) => setVariant(val as CandyColor)}
+                  options={[
                     "blue",
                     "green",
                     "yellow",
@@ -1418,81 +1419,75 @@ export function ComponentDocs() {
                     "cream",
                     "dark",
                     "ghost",
-                  ].map((c) => (
-                    <option key={c}>{c}</option>
-                  ))}
-                </select>
-              </label>
-              <label>
-                Size
-                <select
-                  aria-label="Button size"
+                  ].map((c) => ({ value: c, label: c }))}
+                  size="sm"
+                />
+              </div>
+              <div style={{ flex: "1 1 120px" }}>
+                <span className="control-label" style={{ display: "block", marginBottom: 6, fontSize: 13, fontWeight: 600, color: "var(--candy-text, #082b4b)" }}>Size</span>
+                <CandySelect
+                  placeholder="Size"
                   value={size}
-                  onChange={(e) => setSize(e.target.value as CandySize)}
-                >
-                  {["xs", "sm", "md", "lg", "xl"].map((c) => (
-                    <option key={c}>{c}</option>
-                  ))}
-                </select>
-              </label>
-              <label className="checkbox-control">
-                <input
-                  type="checkbox"
+                  onChange={(val) => setSize(val as CandySize)}
+                  options={["xs", "sm", "md", "lg", "xl"].map((c) => ({ value: c, label: c }))}
+                  size="sm"
+                />
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: 8, paddingTop: 18 }}>
+                <CandySwitch
+                  aria-label="Toggle disabled"
                   checked={disabled}
-                  onChange={(e) => setDisabled(e.target.checked)}
-                />{" "}
-                Disabled
-              </label>
+                  onChange={setDisabled}
+                />
+                <span style={{ fontSize: 13, fontWeight: 500, color: "var(--candy-text, #082b4b)" }}>Disabled</span>
+              </div>
             </div>
           )}
           {selected === "progress" && (
             <div className="props-controls">
-              <label>
-                Color
-                <select
-                  aria-label="Progress color"
+              <div style={{ flex: "1 1 140px" }}>
+                <span className="control-label" style={{ display: "block", marginBottom: 6, fontSize: 13, fontWeight: 600, color: "var(--candy-text, #082b4b)" }}>Color</span>
+                <CandySelect
+                  placeholder="Color"
                   value={progressVariant}
-                  onChange={(e) =>
-                    setProgressVariant(e.target.value as CandyColor)
+                  onChange={(val) =>
+                    setProgressVariant(val as CandyColor)
                   }
-                >
-                  {["blue", "green", "yellow", "pink", "purple", "orange"].map(
-                    (c) => (
-                      <option key={c}>{c}</option>
-                    ),
+                  options={["blue", "green", "yellow", "pink", "purple", "orange"].map(
+                    (c) => ({ value: c, label: c }),
                   )}
-                </select>
-              </label>
-              <label>
-                Height
-                <select
-                  aria-label="Progress height"
-                  value={progressHeight}
-                  onChange={(e) => setProgressHeight(Number(e.target.value))}
-                >
-                  {[14, 16, 18, 20, 24, 28, 32].map((h) => (
-                    <option key={h} value={h}>
-                      {h}px
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label className="checkbox-control">
-                <input
-                  type="checkbox"
+                  size="sm"
+                />
+              </div>
+              <div style={{ flex: "1 1 120px" }}>
+                <span className="control-label" style={{ display: "block", marginBottom: 6, fontSize: 13, fontWeight: 600, color: "var(--candy-text, #082b4b)" }}>Height</span>
+                <CandySelect
+                  placeholder="Height"
+                  value={String(progressHeight)}
+                  onChange={(val) => setProgressHeight(Number(val))}
+                  options={[14, 16, 18, 20, 24, 28, 32].map((h) => ({
+                    value: String(h),
+                    label: `${h}px`,
+                  }))}
+                  size="sm"
+                />
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: 8, paddingTop: 18 }}>
+                <CandySwitch
+                  aria-label="Toggle striped"
                   checked={progressStriped}
-                  onChange={(e) => setProgressStriped(e.target.checked)}
-                />{" "}
-                Striped
-              </label>
-              <label className="checkbox-control">
-                <input
-                  type="checkbox"
+                  onChange={setProgressStriped}
+                />
+                <span style={{ fontSize: 13, fontWeight: 500, color: "var(--candy-text, #082b4b)" }}>Striped</span>
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: 8, paddingTop: 18 }}>
+                <CandySwitch
+                  aria-label="Toggle sparkle"
                   checked={progressSparkle}
-                  onChange={(e) => setProgressSparkle(e.target.checked)}
-                />{" "}
-                Sparkle
-              </label>
+                  onChange={setProgressSparkle}
+                />
+                <span style={{ fontSize: 13, fontWeight: 500, color: "var(--candy-text, #082b4b)" }}>Sparkle</span>
+              </div>
             </div>
           )}
           <div className="code-box">

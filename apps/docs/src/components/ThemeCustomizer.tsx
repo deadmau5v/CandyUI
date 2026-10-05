@@ -1,74 +1,79 @@
-﻿import React, { useState } from "react";
+import React, { useState } from "react";
 import {
   CandyButton,
-  CandyBadge,
-  CandyProgress,
-  CandySwitch,
   CandySlider,
+  CandySwitch,
+  CandyProgress,
+  CandyBadge,
   CandyPanel,
   CandyGameIcon,
   useCandyToast,
 } from "candy-ui";
 import { Character } from "./PlayfulArt";
 
-function primaryLabel(hex: string) {
-  const channels = hex
-    .slice(1)
-    .match(/../g)!
-    .map((c) => parseInt(c, 16) / 255)
-    .map((c) =>
-      c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4),
-    );
-  const luminance =
-    channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722;
-  return (luminance + 0.05) / 0.078 > 1.05 / (luminance + 0.05)
-    ? "#172f56"
-    : "#ffffff";
-}
-
 const presets = [
-  { name: "Classic blue", color: "#1761d1", shadow: "#12427a" },
-  { name: "Lilac club", color: "#8559ca", shadow: "#47287d" },
-  { name: "Cherry pop", color: "#d74973", shadow: "#8f2652" },
-  { name: "Forest friends", color: "#398b56", shadow: "#194a2b" },
+  { name: "Ocean Breeze", color: "#2164d9", shadow: "#12427a" },
+  { name: "Cherry Pop", color: "#e84376", shadow: "#8f2652" },
+  { name: "Forest Run", color: "#28a745", shadow: "#194a2b" },
+  { name: "Golden Star", color: "#f59e0b", shadow: "#8a5700" },
+  { name: "Grape Soda", color: "#8b5cf6", shadow: "#4c1d95" },
 ];
 
 export function ThemeCustomizer() {
-  const [primary, setPrimary] = useState(presets[0].color);
-  const [shadow, setShadow] = useState(presets[0].shadow);
-  const [radius, setRadius] = useState(18);
-  const [depth, setDepth] = useState(5);
-  const [enabled, setEnabled] = useState(true);
+  const [primary, setPrimary] = useState("#2164d9");
+  const [shadow, setShadow] = useState("#12427a");
+  const [radius, setRadius] = useState(16);
+  const [depth, setDepth] = useState(4);
   const [isDark, setIsDark] = useState(false);
+  const [enabled, setEnabled] = useState(true);
   const [copied, setCopied] = useState(false);
   const { showToast } = useCandyToast();
 
-  const primaryText = primaryLabel(primary);
+  const primaryText = ["#f59e0b", "#ffcb05"].includes(primary)
+    ? "#172f56"
+    : "#ffffff";
+
   const variables: Record<string, string> = {
-    "--candy-primary-text": primaryText,
     "--candy-primary": primary,
     "--candy-primary-shadow": shadow,
     "--candy-outline": shadow,
+    "--candy-primary-text": primaryText,
     "--candy-btn-depth": `${depth}px`,
+    "--candy-radius-sm": `${Math.max(6, radius - 4)}px`,
     "--candy-radius-md": `${radius}px`,
     "--candy-radius-lg": `${radius + 6}px`,
     "--candy-radius-xl": `${radius + 12}px`,
     "--candy-surface": isDark ? "#1e293b" : "#ffffff",
     "--candy-surface-alt": isDark ? "#0f172a" : "#f8fafc",
-    "--candy-text": isDark ? "#f8fafc" : "#173d5d",
-    "--candy-text-muted": isDark ? "#94a3b8" : "#536e82",
+    "--candy-text": isDark ? "#f8fafc" : "#082b4b",
+    "--candy-text-muted": isDark ? "#94a3b8" : "#64748b",
     "--candy-track": isDark ? "#334155" : "#eaf0f8",
     "--candy-card-shadow": isDark
       ? "0 8px 28px rgba(0, 0, 0, 0.45)"
       : "0 8px 24px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.03)",
   };
 
-  const code = `.my-game {\n  --candy-primary: ${primary};\n  --candy-primary-shadow: ${shadow};\n  --candy-outline: ${shadow};\n  --candy-primary-text: ${primaryText};\n  --candy-btn-depth: ${depth}px;\n  --candy-radius-md: ${radius}px;\n  --candy-radius-lg: ${radius + 6}px;\n  --candy-radius-xl: ${radius + 12}px;\n  --candy-surface: ${variables["--candy-surface"]};\n  --candy-text: ${variables["--candy-text"]};\n}`;
+  const code = `.my-game {
+  --candy-primary: ${primary};
+  --candy-primary-shadow: ${shadow};
+  --candy-outline: ${shadow};
+  --candy-primary-text: ${primaryText};
+  --candy-btn-depth: ${depth}px;
+  --candy-radius-md: ${radius}px;
+  --candy-radius-lg: ${radius + 6}px;
+  --candy-radius-xl: ${radius + 12}px;
+  --candy-surface: ${variables["--candy-surface"]};
+  --candy-surface-alt: ${variables["--candy-surface-alt"]};
+  --candy-text: ${variables["--candy-text"]};
+  --candy-text-muted: ${variables["--candy-text-muted"]};
+  --candy-track: ${variables["--candy-track"]};
+}`;
 
   async function copy() {
     try {
       await navigator.clipboard.writeText(code);
       setCopied(true);
+      showToast({ title: "Theme CSS copied to clipboard!", variant: "green" });
       setTimeout(() => setCopied(false), 2000);
     } catch {
       showToast({ title: "Clipboard unavailable", variant: "pink" });
@@ -89,34 +94,29 @@ export function ThemeCustomizer() {
 
           <label className="field-label">START WITH A PALETTE</label>
           <div className="preset-grid">
-            {presets.map((p) => (
-              <CandyButton
-                key={p.name}
-                variant={primary === p.color ? "blue" : "cream"}
-                size="sm"
-                fullWidth
-                onClick={() => {
-                  setPrimary(p.color);
-                  setShadow(p.shadow);
-                }}
-                leftIcon={
+            {presets.map((p) => {
+              const isSelected = primary === p.color;
+              return (
+                <button
+                  key={p.name}
+                  type="button"
+                  className={`preset-btn ${isSelected ? "selected" : ""}`}
+                  onClick={() => {
+                    setPrimary(p.color);
+                    setShadow(p.shadow);
+                  }}
+                >
                   <span
                     className="preset-swatch"
-                    style={{ background: p.color, display: "inline-block" }}
+                    style={{ background: p.color }}
                   />
-                }
-                rightIcon={
-                  primary === p.color ? (
-                    <CandyGameIcon name="tick" size={14} color="currentColor" />
-                  ) : undefined
-                }
-                style={{ justifyContent: "flex-start", marginBottom: 6 }}
-              >
-                <span style={{ flex: 1, textAlign: "left", marginLeft: 4 }}>
-                  {p.name}
-                </span>
-              </CandyButton>
-            ))}
+                  <span className="preset-name">{p.name}</span>
+                  {isSelected && (
+                    <CandyGameIcon name="tick" size={16} color="currentColor" />
+                  )}
+                </button>
+              );
+            })}
           </div>
 
           <div className="color-control">
@@ -147,22 +147,25 @@ export function ThemeCustomizer() {
 
           <div className="color-control" style={{ margin: "14px 0 10px" }}>
             <span>Dark surface</span>
-            <CandySwitch
-              aria-label="Toggle dark mode surface"
-              checked={isDark}
-              onChange={setIsDark}
-            />
+            <div style={{ marginLeft: "auto" }}>
+              <CandySwitch
+                aria-label="Toggle dark surface preview"
+                checked={isDark}
+                onChange={setIsDark}
+              />
+            </div>
           </div>
 
-          <label className="range-label">
-            Corner radius <span>{radius}px</span>
-          </label>
+          <div className="range-label">
+            <label htmlFor="radius-slider">Corner radius</label>
+            <span>{radius}px</span>
+          </div>
           <CandySlider
             aria-label="Corner radius"
             min={6}
             max={24}
             value={radius}
-            onChange={(v) => setRadius(v)}
+            onChange={setRadius}
             color="blue"
           />
           <div className="range-extents">
@@ -170,15 +173,16 @@ export function ThemeCustomizer() {
             <span>Extra friendly</span>
           </div>
 
-          <label className="range-label" style={{ marginTop: 16 }}>
-            Button depth <span>{depth}px</span>
-          </label>
+          <div className="range-label">
+            <label htmlFor="depth-slider">Button depth</label>
+            <span>{depth}px</span>
+          </div>
           <CandySlider
             aria-label="Button depth"
             min={0}
             max={8}
             value={depth}
-            onChange={(v) => setDepth(v)}
+            onChange={setDepth}
             color="blue"
           />
           <div className="range-extents">
@@ -186,23 +190,21 @@ export function ThemeCustomizer() {
             <span>Chunky</span>
           </div>
 
-          <div style={{ marginTop: 22 }}>
+          <div style={{ marginTop: 24 }}>
             <CandyButton
               variant="cream"
               size="sm"
+              shape="rounded"
               fullWidth
-              leftIcon={
-                <CandyGameIcon name="change" size={14} color="currentColor" />
-              }
               onClick={() => {
-                setPrimary(presets[0].color);
-                setShadow(presets[0].shadow);
-                setRadius(18);
-                setDepth(5);
+                setPrimary("#2164d9");
+                setShadow("#12427a");
+                setRadius(16);
+                setDepth(4);
                 setIsDark(false);
               }}
             >
-              Reset to defaults
+              Reset to default
             </CandyButton>
           </div>
 
@@ -222,6 +224,7 @@ export function ThemeCustomizer() {
             className="theme-stage"
             style={{
               background: isDark ? "#0f172a" : "#edf4ff",
+              borderColor: isDark ? "#334155" : "#dae6fa",
               ...(variables as React.CSSProperties),
             }}
           >
@@ -241,6 +244,7 @@ export function ThemeCustomizer() {
                 <CandyButton
                   variant="blue"
                   size="lg"
+                  shape="rounded"
                   fullWidth
                   rightIcon={
                     <CandyGameIcon
@@ -275,28 +279,28 @@ export function ThemeCustomizer() {
             </CandyPanel>
           </div>
 
-          <CandyPanel theme="frosted" className="code-export">
+          <div className="code-export">
             <div className="code-head">
               <span>CSS VARIABLES</span>
               <CandyButton
-                variant="blue"
+                variant={copied ? "green" : "blue"}
                 size="xs"
                 onClick={copy}
                 leftIcon={
                   copied ? (
-                    <CandyGameIcon name="tick" size={12} color="#ffffff" />
+                    <CandyGameIcon name="tick" size={12} color="currentColor" />
                   ) : (
-                    <CandyGameIcon name="copy" size={12} color="#ffffff" />
+                    <CandyGameIcon name="copy" size={12} color="currentColor" />
                   )
                 }
               >
-                {copied ? "Copied" : "Copy CSS"}
+                {copied ? "Copied" : "Copy"}
               </CandyButton>
             </div>
             <pre>
               <code>{code}</code>
             </pre>
-          </CandyPanel>
+          </div>
         </div>
       </div>
     </section>

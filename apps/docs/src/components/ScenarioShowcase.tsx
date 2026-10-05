@@ -7,6 +7,7 @@ import {
   CandySlider,
   CandyPanel,
   CandyGameIcon,
+  CandyRating,
   CandyTabs,
   CandyTabList,
   CandyTab,
@@ -184,7 +185,11 @@ export function ScenarioShowcase() {
                       {d < 3 ? (
                         <CandyGameIcon name="tick" size={20} color="#10b981" />
                       ) : d === 3 ? (
-                        <CandyGameIcon name="coin" size={24} color="#f59e0b" />
+                        claimed ? (
+                          <CandyGameIcon name="tick" size={20} color="#10b981" />
+                        ) : (
+                          <CandyGameIcon name="coin" size={24} color="#f59e0b" />
+                        )
                       ) : (
                         <CandyGameIcon name="chest" size={22} color="#94a3b8" />
                       )}
@@ -257,11 +262,19 @@ export function ScenarioShowcase() {
                         n
                       )}
                     </span>
-                    <span
-                      style={{ fontSize: 10, color: "#f59e0b", marginTop: 2 }}
-                    >
-                      {n < 4 ? "★★★" : n === 4 ? "☆☆☆" : "—"}
-                    </span>
+                    <div style={{ display: "flex", gap: 2, marginTop: 4 }}>
+                      {n <= 4 ? (
+                        <CandyRating
+                          value={n < 4 ? 3 : 0}
+                          max={3}
+                          size="xs"
+                          readOnly
+                          sound={false}
+                        />
+                      ) : (
+                        <span style={{ fontSize: 10, color: "var(--candy-text-muted)" }}>—</span>
+                      )}
+                    </div>
                   </CandyButton>
                 ))}
               </div>
@@ -315,15 +328,23 @@ export function ScenarioShowcase() {
                   />
                 </div>
 
-                <label className="range-label">
-                  Master volume <span>{Math.round(soundVolume * 100)}%</span>
-                </label>
-                <CandySlider
-                  aria-label="Master volume"
-                  value={Math.round(soundVolume * 100)}
-                  onChange={(v) => setSoundVolume(v / 100)}
-                  color="blue"
-                />
+                <div style={{ display: "flex", flexDirection: "column", gap: 8, margin: "8px 0 12px" }}>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                    <span style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 14, fontWeight: 500 }}>
+                      <CandyGameIcon name="volume" size={18} color="#1761d1" />
+                      Master volume
+                    </span>
+                    <span style={{ fontSize: 13, color: "var(--candy-primary, #1761d1)", fontWeight: 600 }}>
+                      {Math.round(soundVolume * 100)}%
+                    </span>
+                  </div>
+                  <CandySlider
+                    aria-label="Master volume"
+                    value={Math.round(soundVolume * 100)}
+                    onChange={(v) => setSoundVolume(v / 100)}
+                    color="blue"
+                  />
+                </div>
 
                 <div className="control-line">
                   <span
