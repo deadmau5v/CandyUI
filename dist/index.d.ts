@@ -1,5 +1,7 @@
 import { default as default_2 } from 'react';
 
+export declare const CANDY_THEME_COLOR_PRESETS: string[];
+
 export declare const CandyAlert: default_2.ForwardRefExoticComponent<CandyAlertProps & default_2.RefAttributes<HTMLDivElement>>;
 
 export declare interface CandyAlertProps extends Omit<default_2.HTMLAttributes<HTMLDivElement>, "title"> {
@@ -16,7 +18,7 @@ export declare type CandyAlertTone = "success" | "info" | "warning" | "error";
 
 export declare const CandyAvatar: default_2.FC<CandyAvatarProps>;
 
-export declare type CandyAvatarCharacter = "smile" | "bear" | "cat" | "fox" | "rabbit" | "frog" | "crown" | "user";
+export declare type CandyAvatarCharacter = "bear" | "cat" | "fox" | "rabbit" | "frog" | "crown" | "user";
 
 export declare interface CandyAvatarProps {
     src?: string;
@@ -115,6 +117,9 @@ export declare interface CandyColorPickerProps extends Omit<default_2.InputHTMLA
     label?: default_2.ReactNode;
     size?: CandySize;
     hexLabel?: string;
+    presets?: string[] | false;
+    defaultOpen?: boolean;
+    sound?: boolean;
 }
 
 export declare type CandyConnection = "good" | "fair" | "poor" | "offline";
@@ -1009,8 +1014,6 @@ export declare interface CandyTextareaProps extends default_2.TextareaHTMLAttrib
     textareaStyle?: default_2.CSSProperties;
 }
 
-export declare type CandyTheme = "robot" | "fox" | "anime" | "burger" | "briefcase" | "crystal" | "cube" | "camera";
-
 export declare const CandyThemeCard: default_2.ForwardRefExoticComponent<CandyThemeCardProps & default_2.RefAttributes<HTMLButtonElement>>;
 
 export declare interface CandyThemeCardProps extends Omit<default_2.ButtonHTMLAttributes<HTMLButtonElement>, "title" | "onSelect" | "children"> {
@@ -1030,14 +1033,6 @@ export declare interface CandyThemeGridProps extends Omit<default_2.HTMLAttribut
     onChange?: (value: string) => void;
     disabled?: boolean;
     columns?: number;
-}
-
-export declare const CandyThemeIcon: default_2.ForwardRefExoticComponent<CandyThemeIconProps & default_2.RefAttributes<SVGSVGElement>>;
-
-export declare interface CandyThemeIconProps extends Omit<default_2.SVGAttributes<SVGSVGElement>, "children"> {
-    theme?: CandyTheme;
-    size?: number;
-    label?: string;
 }
 
 export declare interface CandyThemeOption {
@@ -1062,6 +1057,7 @@ export declare interface CandyToastProps {
 
 export declare const CandyToastProvider: default_2.FC<{
     children: default_2.ReactNode;
+    maxToasts?: number;
 }>;
 
 export declare const CandyTooltip: default_2.FC<CandyTooltipProps>;
@@ -1133,6 +1129,7 @@ export declare interface ToastItem {
     description?: string;
     icon?: default_2.ReactNode;
     variant?: CandyColor;
+    isLeaving?: boolean;
 }
 
 export declare const triggerCandyConfetti: (options?: ConfettiOptions) => void;

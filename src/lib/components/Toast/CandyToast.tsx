@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { CandyColor } from "../../types";
 import "./CandyToast.css";
 import { CandyGameIcon } from "../GameIcon/CandyGameIcon";
@@ -9,6 +9,7 @@ export interface ToastItem {
   description?: string;
   icon?: React.ReactNode;
   variant?: CandyColor;
+  isLeaving?: boolean;
 }
 
 export interface CandyToastProps {
@@ -21,7 +22,7 @@ export const CandyToast: React.FC<CandyToastProps> = ({ toast, onDismiss }) => {
 
   return (
     <div
-      className={`candy-toast candy-toast-${toast.variant || "blue"}${hasDesc ? " candy-toast-has-desc" : ""}`}
+      className={`candy-toast candy-toast-${toast.variant || "blue"}${hasDesc ? " candy-toast-has-desc" : ""}${toast.isLeaving ? " candy-toast-leaving" : ""}`}
       role="alert"
       tabIndex={0}
       aria-label={`Notification: ${toast.title}`}

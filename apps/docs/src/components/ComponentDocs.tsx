@@ -42,6 +42,7 @@ import {
 
 import { Character } from "./PlayfulArt";
 import { referenceCatalog, referenceSnippets, ReferenceComponentPreview } from "./ReferenceComponentDocs";
+import { ButtonReference } from "./ButtonReference";
 
 const catalog = [
   {
@@ -529,7 +530,7 @@ export function ComponentDocs() {
             <CandyBadge variant="green">REACT</CandyBadge>
           </div>
           <p className="docs-description">{doc.description}</p>
-          <div className="docs-preview">
+          <div className={`docs-preview${selected === "buttons" ? " docs-preview-buttons" : ""}`}>
             <span className="preview-caption">INTERACTIVE PREVIEW</span>
             <ReferenceComponentPreview id={selected} key={selected} />
             {selected === "buttons" && (
@@ -565,6 +566,7 @@ export function ComponentDocs() {
                 />
               </div>
             )}
+            {selected === "buttons" && <ButtonReference />}
             {selected === "badges" && (
               <div className="button-examples">
                 <CandyBadge variant="green">Ready to play</CandyBadge>
@@ -1340,6 +1342,9 @@ export function ComponentDocs() {
                   onChange={(val) => setVariant(val as CandyColor)}
                   options={[
                     "blue",
+                    "cyan",
+                    "red",
+                    "gray",
                     "green",
                     "yellow",
                     "pink",

@@ -7,9 +7,18 @@ import * as library from "../dist/candy-ui.js";
 const render = (component, props, children) =>
   renderToStaticMarkup(React.createElement(component, props, children));
 const button = render(library.CandyButton, {}, "Play");
-assert.match(button, /candy-btn-pill/);
+assert.match(button, /candy-btn-rounded/);
 assert.match(button, /candy-btn-blue/);
 assert.match(button, /type="button"/);
+assert.match(render(library.CandyButton, { shape: "pill" }, "Play"), /candy-btn-pill/);
+for (const variant of ["cyan", "red", "gray"]) {
+  assert.match(render(library.CandyButton, { variant }, "Play"), new RegExp(`candy-btn-${variant}`));
+}
+const pending = render(library.CandyButton, { loading: true, loadingLabel: "Loading" }, "Play");
+assert.match(pending, /disabled=""/);
+assert.match(pending, /aria-busy="true"/);
+assert.match(pending, /candy-btn-spinner/);
+assert.match(pending, /Loading/);
 assert.match(
   render(library.CandyButton, { shape: "rounded", disabled: true }, "Later"),
   /disabled=""/,

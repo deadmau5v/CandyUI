@@ -1,5 +1,8 @@
 .candy-btn-pink { --accent: var(--candy-pink); --accent-shadow: var(--candy-pink-shadow); --accent-text: var(--candy-pink-text); }
 .candy-btn-blue { --accent: var(--candy-primary); --accent-shadow: var(--candy-primary-shadow); --accent-text: var(--candy-primary-text); }
+.candy-btn-cyan { --accent: var(--candy-cyan); --accent-shadow: var(--candy-cyan-shadow); --accent-text: var(--candy-cyan-text); }
+.candy-btn-red { --accent: var(--candy-red); --accent-shadow: var(--candy-red-shadow); --accent-text: var(--candy-red-text); }
+.candy-btn-gray { --accent: var(--candy-gray); --accent-shadow: var(--candy-gray-shadow); --accent-text: var(--candy-gray-text); }
 .candy-btn-green { --accent: var(--candy-green); --accent-shadow: var(--candy-green-shadow); --accent-text: var(--candy-green-text); }
 .candy-btn-yellow { --accent: var(--candy-yellow); --accent-shadow: var(--candy-yellow-shadow); --accent-text: var(--candy-yellow-text); }
 .candy-btn-orange { --accent: var(--candy-orange); --accent-shadow: var(--candy-orange-shadow); --accent-text: var(--candy-orange-text); }
@@ -11,6 +14,10 @@
 
 .candy-btn {
   --candy-effective-depth: var(--candy-btn-depth, 3px);
+  --candy-btn-face: var(--accent, var(--candy-primary));
+  --candy-btn-highlight: 60%;
+  --candy-btn-shade: 7%;
+  --candy-btn-glow: 0px;
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -20,68 +27,68 @@
   min-height: 52px;
   height: 52px;
   padding: 0 24px;
-  gap: 9px;
-  border: 2.5px solid var(--candy-outline);
-  border-radius: var(--candy-radius-md);
-  background-color: var(--accent, var(--candy-primary));
-  background-image: linear-gradient(180deg, rgb(255 255 255 / 2%), transparent 55%, rgb(0 0 0 / 5%));
+  gap: 10px;
+  border: 3px solid var(--candy-outline);
+  border-radius: 20px;
+  background-color: var(--candy-btn-face);
+  background-image:
+    radial-gradient(ellipse 65% 100% at 50% 0%, rgb(255 255 255 / var(--candy-btn-highlight)), rgb(255 255 255 / 24%) 38%, transparent 78%),
+    linear-gradient(180deg, transparent 52%, rgb(0 0 0 / var(--candy-btn-shade)));
+  background-size: 100% 4px, 100% 100%;
+  background-position: center top;
+  background-repeat: no-repeat;
   color: var(--accent-text, var(--candy-primary-text));
   box-shadow:
-    inset 0 2px 0 rgb(255 255 255 / 45%),
-    inset 0 -2px 0 rgb(0 0 0 / 12%),
-    0 var(--candy-effective-depth) 0 var(--accent-shadow, var(--candy-primary-shadow));
-  font: 600 18px/1.2 var(--candy-font-family);
+    inset 0 -2px 0 rgb(0 0 0 / 10%),
+    0 var(--candy-effective-depth) 0 color-mix(in srgb, var(--candy-outline) 75%, var(--accent-shadow, var(--candy-primary-shadow))),
+    0 0 0 var(--candy-btn-glow) color-mix(in srgb, var(--accent, var(--candy-primary)) 24%, transparent);
+  font: 700 18px/1.2 var(--candy-font-family);
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-  transition: filter 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: background-color 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
 }
 
-.candy-btn:hover:not(:disabled) {
-  filter: brightness(1.05);
+@media (hover: hover) {
+  .candy-btn:hover:not(:disabled):not([aria-disabled="true"]) {
+    --candy-btn-face: color-mix(in srgb, var(--accent, var(--candy-primary)) 88%, black);
+  }
+  .candy-btn-outline:hover:not(:disabled):not([aria-disabled="true"]) {
+    --candy-btn-face: color-mix(in srgb, var(--accent) 16%, var(--candy-surface));
+  }
+  .candy-btn-soft:hover:not(:disabled):not([aria-disabled="true"]) {
+    --candy-btn-face: color-mix(in srgb, var(--accent) 26%, var(--candy-surface));
+  }
 }
 
-.candy-btn:active:not(:disabled) {
-  filter: brightness(0.94);
+.candy-btn:active:not(:disabled):not([aria-disabled="true"]) {
+  --candy-btn-face: color-mix(in srgb, var(--accent, var(--candy-primary)) 82%, black);
+}
+.candy-btn-outline:active:not(:disabled):not([aria-disabled="true"]),
+.candy-btn-soft:active:not(:disabled):not([aria-disabled="true"]) {
+  --candy-btn-face: color-mix(in srgb, var(--accent) 32%, var(--candy-surface));
 }
 
 .candy-btn:focus-visible {
-  outline: 3px solid var(--candy-focus);
-  outline-offset: 4px;
-}
-
-.candy-btn:disabled,
-.candy-btn[aria-disabled="true"] {
-  background: var(--candy-gray);
-  color: var(--candy-gray-shadow);
-  border-color: var(--candy-gray-dark);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 50%);
-  cursor: not-allowed;
-  transform: none;
-}
-
-.candy-btn-loading:disabled {
-  background: var(--accent);
-  color: var(--accent-text);
-  border-color: var(--candy-outline);
-  opacity: 0.8;
+  outline: 2px solid color-mix(in srgb, var(--candy-focus) 65%, var(--candy-surface));
+  outline-offset: 2px;
 }
 
 .candy-btn-outline {
-  background: var(--candy-surface);
-  color: var(--candy-text);
-  border-color: var(--accent-shadow, var(--candy-border));
+  --candy-btn-face: var(--candy-surface);
   --candy-effective-depth: 1px;
+  color: var(--candy-text);
+  border-color: var(--candy-border);
 }
 
 .candy-btn-soft {
-  background: color-mix(in srgb, var(--accent) 12%, var(--candy-surface));
+  --candy-btn-face: color-mix(in srgb, var(--accent) 14%, var(--candy-surface));
+  --candy-effective-depth: 1px;
   color: var(--candy-text);
   border-color: color-mix(in srgb, var(--accent) 40%, var(--candy-border));
-  --candy-effective-depth: 1px;
 }
 
 .candy-btn-ghost {
@@ -90,23 +97,52 @@
   box-shadow: none;
   --candy-effective-depth: 0px;
 }
-.candy-btn-ghost:hover:not(:disabled) { background: var(--candy-track); box-shadow: none; }
+.candy-btn-ghost:hover:not(:disabled):not([aria-disabled="true"]) { background: var(--candy-track); box-shadow: none; }
+
+/* State rules follow appearances so disabled outline/ghost buttons stay muted. */
+.candy-btn:disabled,
+.candy-btn[aria-disabled="true"] {
+  background: linear-gradient(180deg, var(--candy-gray-light), var(--candy-gray));
+  color: var(--candy-gray-shadow);
+  border-color: color-mix(in srgb, var(--candy-gray-dark) 55%, var(--candy-gray));
+  box-shadow: inset 0 2px 0 rgb(255 255 255 / 55%);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.candy-btn-loading:disabled {
+  background-color: var(--candy-btn-face);
+  background-image: linear-gradient(180deg, rgb(255 255 255 / 12%), transparent);
+  color: var(--accent-text);
+  border-color: var(--candy-outline);
+  cursor: progress;
+  opacity: 0.8;
+}
+.candy-btn-loading:is(.candy-btn-outline, .candy-btn-soft):disabled { color: var(--candy-text); border-color: var(--candy-border); }
+.candy-btn-loading.candy-btn-ghost:disabled { color: var(--candy-text); border-color: transparent; }
 
 .candy-btn-icon { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; line-height: 1; }
 .candy-btn-icon svg { display: block; }
+.candy-btn:disabled:not(.candy-btn-loading) .candy-btn-icon,
+.candy-btn[aria-disabled="true"] .candy-btn-icon { filter: grayscale(1); opacity: 0.5; }
 .candy-btn-xs { height: 32px; min-height: 32px; padding: 0 12px; gap: 5px; font-size: 13px; border-width: 2px; }
-.candy-btn-sm { height: 40px; min-height: 40px; padding: 0 16px; gap: 7px; font-size: 15px; border-width: 2px; }
-.candy-btn-lg { height: 64px; min-height: 64px; padding: 0 32px; gap: 10px; font-size: 21px; border-width: 3px; }
-.candy-btn-xl { height: 76px; min-height: 76px; padding: 0 40px; gap: 12px; font-size: 24px; border-width: 3px; }
-.candy-btn-rounded { border-radius: var(--candy-radius-md); }
-.candy-btn-rounded:is(.candy-btn-xs, .candy-btn-sm) { border-radius: var(--candy-radius-sm); }
-.candy-btn-rounded.candy-btn-lg { border-radius: var(--candy-radius-lg); }
-.candy-btn-rounded.candy-btn-xl { border-radius: var(--candy-radius-xl); }
+.candy-btn-sm { height: 40px; min-height: 40px; padding: 0 16px; gap: 7px; font-size: 15px; border-width: 2.5px; }
+.candy-btn-lg { height: 64px; min-height: 64px; padding: 0 30px; gap: 12px; font-size: 21px; }
+.candy-btn-xl { height: 76px; min-height: 76px; padding: 0 38px; gap: 14px; font-size: 24px; }
+.candy-btn-rounded { border-radius: 20px; }
+.candy-btn-rounded.candy-btn-xs { border-radius: 10px; }
+.candy-btn-rounded.candy-btn-sm { border-radius: 14px; }
+.candy-btn-rounded.candy-btn-lg { border-radius: 24px; }
+.candy-btn-rounded.candy-btn-xl { border-radius: 28px; }
 .candy-btn-pill { border-radius: var(--candy-radius-full); }
 .candy-btn-circle,
 .candy-btn-square { aspect-ratio: 1; padding: 0; flex-shrink: 0; }
 .candy-btn-circle { border-radius: var(--candy-radius-full); }
-.candy-btn-square { border-radius: var(--candy-radius-sm); }
+.candy-btn-square { border-radius: 16px; }
+.candy-btn-square.candy-btn-xs { border-radius: 10px; }
+.candy-btn-square.candy-btn-sm { border-radius: 12px; }
+.candy-btn-square.candy-btn-lg { border-radius: 20px; }
+.candy-btn-square.candy-btn-xl { border-radius: 24px; }
 :is(.candy-btn-circle, .candy-btn-square).candy-btn-xs { width: 32px; }
 :is(.candy-btn-circle, .candy-btn-square).candy-btn-sm { width: 40px; }
 :is(.candy-btn-circle, .candy-btn-square).candy-btn-md { width: 52px; }

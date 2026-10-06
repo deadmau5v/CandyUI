@@ -10,10 +10,14 @@ export default defineConfig({
     },
   },
   server: {
-    host: "127.0.0.1",
+    host: "0.0.0.0",
     port: 5173,
     open: false,
     // Atomic edits create transient files; watching them on Windows can throw EBUSY.
     watch: { ignored: ["**/*.tmpdir/**", "**/*.tmp"] },
+  },
+  preview: {
+    host: "0.0.0.0",
+    port: 4173,
   },
 });

@@ -23,7 +23,7 @@ export const CandyButton = forwardRef<HTMLButtonElement, CandyButtonProps>(
       children,
       variant = "blue",
       size = "md",
-      shape = "pill",
+      shape = "rounded",
       appearance = "solid",
       loading = false,
       loadingLabel,
@@ -41,9 +41,13 @@ export const CandyButton = forwardRef<HTMLButtonElement, CandyButtonProps>(
     ref,
   ) => {
     const { playSound } = useCandy();
+    const ariaDisabled = rest["aria-disabled"] === true || rest["aria-disabled"] === "true";
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-      if (disabled || loading) return;
+      if (disabled || loading || ariaDisabled) {
+        e.preventDefault();
+        return;
+      }
       if (sound) {
         playSound(sound);
       }

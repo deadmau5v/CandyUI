@@ -43,7 +43,7 @@ export const CandyIconButton = forwardRef<
         }}
         {...rest}
       >
-        {icon}
+        <span className="candy-btn-icon" aria-hidden="true">{icon}</span>
       </CandyButton>
     );
   },
